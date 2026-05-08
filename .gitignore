@@ -1,0 +1,18 @@
+# 敏感信息
+credentials/
+*.env
+*.token
+HEARTBEAT.md
+MEMORY.md
+
+# 系统文件
+.DS_Store
+.localized
+*.crdownload
+
+# IN3数据（大文件）
+IN3数据/
+
+# 临时文件
+/tmp/
+.openclaw/
