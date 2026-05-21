@@ -232,10 +232,25 @@ def is_nondup(a, b):
     if ('暗装' in ta and '嵌入式' in tb) or ('嵌入式' in ta and '暗装' in tb):
         return True, '暗装 vs 嵌入式'
     install_kw = ['暗装', '户外', '户外型', '户外架', '壁挂', '落地', '嵌墙', '挂墙', '明装', '嵌入式']
-    inst_a = set(k for k in install_kw if k in ta)
-    inst_b = set(k for k in install_kw if k in tb)
+    inst_a = set(k for k in install_kw if k in na)
+    inst_b = set(k for k in install_kw if k in nb)
+    # 两边都有安装方式但不同 → 非重复
     if inst_a and inst_b and inst_a != inst_b:
         return True, f'安装方式不同: {inst_a} vs {inst_b}'
+    # 一边有安装方式，另一边没有 → 非重复（如「非标箱（暗装）」vs「非标箱」）
+    if inst_a != inst_b:
+        # 去掉安装方式后名称一致 = 安装方式是唯一差异
+        def strip_install(name, inst_set):
+            for k in inst_set:
+                name = name.replace(k, '').replace('（', '').replace('）', '').strip()
+            return name
+        base_a = strip_install(na, inst_a)
+        base_b = strip_install(nb, inst_b)
+        if base_a == base_b:
+            if inst_a:
+                return True, f'有安装方式 vs 无安装方式: {inst_a}'
+            else:
+                return True, f'有安装方式 vs 无安装方式: {inst_b}'
 
     # --- 规则 #9: 方向不同 ---
     dirs = [('左操', '右操'), ('平进平出', '平进侧出'), ('上进', '下进'),
