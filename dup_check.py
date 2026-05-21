@@ -523,11 +523,13 @@ def classify_pairs(pairs):
                 confirmed.append((a, b, '命名不规范（名称仅符号差异）'))
                 continue
 
-            # 中文词语交集
-            na_words = set(re.findall(r'[\u4e00-\u9fff]{2,}', a['name']))
-            nb_words = set(re.findall(r'[\u4e00-\u9fff]{2,}', b['name']))
-            common = na_words & nb_words
-            if not common and len(na_words) > 0 and len(nb_words) > 0:
+            # 中文字符交集（字符级，避免「微型漏电断路器」vs「微型断路器」被误判）
+            chars_a = set(re.findall(r'[\u4e00-\u9fff]', a['name']))
+            chars_b = set(re.findall(r'[\u4e00-\u9fff]', b['name']))
+            common_chars = chars_a & chars_b
+            min_chars = min(len(chars_a), len(chars_b))
+            # 共享字符少于较小名称字符数的50% = 不相关
+            if min_chars > 0 and len(common_chars) / min_chars < 0.5:
                 nondup_count += 1
                 continue
 
