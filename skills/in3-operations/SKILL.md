@@ -19,15 +19,27 @@ IN3Bot（Bot 8）负责 IN3 系统的所有操作。其他 bot 通过 `sessions_
 ### 1. 物料重复检查
 
 **详细流程**: `IN3物料重复检查流程.md`（同目录）
+**分析工具**: `IN3数据/in3_dup_check.py` — 稳定 CLI 工具（旧版 `analyze_v3.py` / `compare_results.py` 已废弃）
+
+**工具用法**:
+```bash
+# 分析最新的物料主数据
+python3 IN3数据/in3_dup_check.py analyze IN3数据/物料主数据导出结果-2026-05-21.xlsx
+
+# 对比两次结果
+python3 IN3数据/in3_dup_check.py compare IN3数据/可疑重复物料-旧.xlsx IN3数据/可疑重复物料-新.xlsx
+
+# 自动模式：找最新文件，分析并对比
+python3 IN3数据/in3_dup_check.py auto
+```
 
 **简要步骤**:
 1. 登录 IN3 → 系统管理 → 主数据管理 → 搜索 → 物料列表 → 批量导出物料 → 确定
 2. 前往下载中心，等任务状态变为「已成功」后下载（约1-3分钟，非全屏等3分钟）
 3. **只点一次导出，只下载一次**，不要重复操作
-2. 读取"物料主数据"sheet（非"说明"sheet），共 114 列
-3. 筛选物料描述相同/高度相似的配对
-4. 规则分类 → 网上搜索验证 → 生成 Excel
-5. 与原始数据核对准确性后交付
+4. 运行 `python3 IN3数据/in3_dup_check.py auto` 自动分析并对比
+5. 或者分步运行 `analyze` + `compare`
+6. 与原始数据核对准确性后交付
 
 **关键列映射**: col2=编号, col6=名称, col7=描述, col9=类别, col11=子类别, col13=制造商, col14=来源, col22=单位, col16=提前期, col61=价格, col70=创建人, col72=创建日期, col73=修改人, col75=修改日期
 
