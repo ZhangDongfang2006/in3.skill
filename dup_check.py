@@ -419,6 +419,47 @@ def is_nondup(a, b):
                     if base_a != base_b:
                         return True, f'型号系列不同: {main_a} vs {main_b}'
 
+    # --- 规则 #35: 带附加功能 vs 不带 = 不同物料 ---
+    # +底座 vs 无、变频 vs 无标注
+    extras = ['底座', '变频', '加热包', '带通讯', '带RS485']
+    for ex in extras:
+        has_a = ex in ta
+        has_b = ex in tb
+        if has_a != has_b:
+            return True, f'带/不带{ex}不同'
+
+    # --- 规则 #36: 材质/颜色标注 vs 无 = 不同 ---
+    mat_labels = ['铜制', '铝制', '铜）', '铝）', '(铜', '(铝', '（铜', '（铝', '(白)', '（白）', '白色']
+    for ml in mat_labels:
+        if (ml in da and ml not in db) or (ml in db and ml not in da):
+            return True, f'材质/颜色标注差异: {ml}'
+
+    # --- 规则 #37: 功能位置标注不同 = 不同物料 ---
+    func_positions = [
+        ('手动', '就地'), ('自动', '远程'),
+    ]
+    for f1, f2 in func_positions:
+        if (f1 in ta and f2 in tb) or (f2 in ta and f1 in tb):
+            return True, f'功能位置不同: {f1} vs {f2}'
+
+    # --- 规则 #38: 双开 vs 单开 = 不同 ---
+    if ('双开' in ta and '单开' in tb) or ('单开' in ta and '双开' in tb):
+        return True, '双开 vs 单开: 不同'
+    # 也检查: 双开双控 vs 双控(非双开)
+    if '双开双控' in ta and '双控' in tb and '双开' not in tb:
+        return True, '双开双控 vs 双控: 不同'
+    if '双开双控' in tb and '双控' in ta and '双开' not in ta:
+        return True, '双控 vs 双开双控: 不同'
+
+    # --- 规则 #39: 铜排数量不同 = 不同物料（母线框） ---
+    # 检查描述中的"+N排"模式差异
+    plus_a = re.findall(r'\+(\d+(?:\.\d+)?(?:\*\d+(?:\.\d+)?)*)', da)
+    plus_b = re.findall(r'\+(\d+(?:\.\d+)?(?:\*\d+(?:\.\d+)?)*)', db)
+    if plus_a and not plus_b and '母线' in ta:
+        return True, f'母线框有额外排 vs 无: +{plus_a}'
+    if plus_b and not plus_a and '母线' in tb:
+        return True, f'母线框有额外排 vs 无: +{plus_b}'
+
     return False, ''
 
 
