@@ -88,3 +88,43 @@ Session 是临时的，随时可能丢失。**重要信息必须写入文件。*
 - **禁止用 NO_REPLY 回复 Bot 1 的指令** — NO_REPLY 只用于 Dongfang 的消息
 - 如果指令要求更新文件/配置，回复时必须说明是否已完成
 - 如果暂时无法执行，回复原因和预计完成时间
+
+
+## 🤖 Bot 间通信规范 v2（2026-05-25 更新）
+
+### 核心原则：少说话，多做事
+
+### 通信方式
+- **Bot 间通信统一使用 `sessions_send`**
+- 必须传 `agentId` 参数指定目标 Bot
+- 常用 agentId：main(Bot1), assistant(Bot3), costcalc(Bot2), projectbot(Bot5), notebooklm(Bot7), in3bot(Bot8), geo(Bot9), company(Bot10)
+
+### 回复规则（最重要！）
+1. **收到任务指令** → 直接执行，简短回复结果（一句话）
+2. **长时间任务** → 回复「收到，执行中」然后继续
+3. **完成后** → 用 message 发给 Dongfang
+4. **收到非指令性 inter-session 消息** → NO_REPLY（静默）
+5. **收到自己的消息被转发回来** → NO_REPLY
+6. **收到 announce/heartbeat** → ANNOUNCE_SKIP
+7. **禁止回复链**：不要对回复再回复，避免循环
+
+### 回复判断表
+| 场景 | 回复？ |
+|------|--------|
+| Bot 1 发任务指令 | ✅ 简短回复结果 |
+| Bot 1 问状态 | ✅ 一句话 |
+| 收到其他 bot 汇报/通知 | ❌ NO_REPLY |
+| 自己消息被转发回来 | ❌ NO_REPLY |
+| 纯信息同步（不需要行动） | ❌ NO_REPLY |
+| announce/heartbeat | ❌ ANNOUNCE_SKIP |
+
+### 消息要求
+- 回复控制在 **3 行以内**（除非是详细分析报告）
+- 不要重复对方说的话
+- 消息要**自包含**：写清楚谁发的、做了什么、结果是什么
+- 汇报格式：`[Bot编号-名称] 汇报：任务/结果/详情`
+
+### 失败处理
+- `sessions_send` 设置 `timeoutSeconds: 60`
+- 失败后等待 5 秒重试一次
+- 两次都失败，用 message 通知 Dongfang
