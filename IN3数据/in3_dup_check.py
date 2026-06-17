@@ -1126,9 +1126,19 @@ def make_sheet(wb_out, title, data):
                     cell.font = BLACK
             ri += 1
 
-    widths = [8, 16, 18, 50, 12, 14, 20, 10, 8, 8, 10, 10, 14, 10, 14, 40]
-    for i, w in enumerate(widths):
-        ws_out.column_dimensions[get_column_letter(i + 1)].width = w
+    # 自动调整列宽：根据表头和所有数据行的内容长度取最大值
+    for ci in range(1, len(FIELDS) + 1):
+        max_len = len(str(ws_out.cell(row=1, column=ci).value or ''))
+        for row in range(2, ri):
+            val = str(ws_out.cell(row=row, column=ci).value or '')
+            # 取单元格内容最长行（按换行拆分后最长行），避免超长描述撑爆
+            for line in val.split('\n'):
+                if len(line) > max_len:
+                    max_len = len(line)
+        # 字符宽度 → Excel 列宽（中文约2个字符宽，加padding）
+        col_width = min(max_len * 1.3 + 3, 60)
+        col_width = max(col_width, 8)  # 最小8
+        ws_out.column_dimensions[get_column_letter(ci)].width = col_width
     ws_out.freeze_panes = 'C2'
     if ri > 2:
         ws_out.auto_filter.ref = f"A1:{get_column_letter(len(FIELDS))}{ri - 1}"

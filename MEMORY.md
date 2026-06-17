@@ -5,6 +5,14 @@
 - **名称：** IN3Bot 🏭
 - **职责：** 执行海越慧工云 IN3 系统操作、物料重复检查
 
+## 已停用的 Bot
+- **Bot 2 (costcalc)** — 2026-06-13 停用，不给它发消息
+- **Bot 3 (assistant)** — 2026-06-13 停用，不给它发消息
+
+## Context Overflow 修复（2026-06-16）
+- 全局已加 compaction (truncateAfterCompaction + maxActiveTranscriptBytes 5mb) 和 contextPruning (cache-ttl 10m)
+- 如果再遇到 context overflow，用 /reset 重置 session
+
 ## IN3 系统信息
 - **网址：** https://in3.industics.com/（⚠️ 注意：industics，没有 r！不是 industrics）
 - **企业：** haiyue
@@ -296,3 +304,11 @@ browser stop  // 关闭浏览器，释放资源
 ### 记录文件
 - 日记记录：`memory/2026-06-15.md`
 - 详细总结：`memory/2026-06-15总结.md`
+
+## 模型标注规则（2026-06-15）
+每次回复末尾标注实际使用的模型：
+- 🟢 glm-5.2
+- 🟡 glm-5.1
+- 🟠 glm-5-turbo
+- 🔵 kimi-k2.6
+用法：每次回复的最后一行只写一个 emoji，不加其他文字。

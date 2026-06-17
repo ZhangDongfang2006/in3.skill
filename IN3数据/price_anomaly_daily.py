@@ -4,7 +4,7 @@
 - 读取宁波+湖北采购订单明细(当天导出的全量文件)
 - 筛选当天下单的采购记录
 - 与历史价格对比(该物料的历史采购均价)
-- 偏差≥40%（仅正偏离/涨价）标记异常
+- 偏差≥20%（仅正偏离/涨价）标记异常
 - 输出Excel报告 + 关联项目信息 + 采购申请人
 """
 
@@ -347,7 +347,7 @@ def find_latest_files():
 
 def main():
     target_date = date.today()
-    threshold = 40
+    threshold = 20
 
     # 命令行参数: [YYYY-MM-DD] [threshold]
     if len(sys.argv) > 1:
