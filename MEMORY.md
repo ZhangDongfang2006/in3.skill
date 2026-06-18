@@ -312,3 +312,8 @@ browser stop  // 关闭浏览器，释放资源
 - 🟠 glm-5-turbo
 - 🔵 kimi-k2.6
 用法：每次回复的最后一行只写一个 emoji，不加其他文字。
+## 发送文件经验（2026-06-18）
+- **message 发 Excel 文件必须用 `media` 参数**，不能用 `filename` 参数（`filename` 只发文字不发文件）
+- 正确用法：`media="/path/to/file.xlsx"` + `message="说明文字"`
+- 错误用法：`filename="xxx.xlsx"` 只会在消息里显示文件名文字
+- 操作网站时多用 screenshot（peekaboo）确认页面状态
