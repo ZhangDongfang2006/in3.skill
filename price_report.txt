@@ -1,0 +1,13 @@
+=== 每日采购价格异常检查 ===
+检查日期: 2026-06-18
+
+加载数据...
+宁波列标题: ['订单预警', '订单预警值', '采购订单号', '行号', '采购申请单号', '采购申请单行编号', '采购合同号', '销售订单编号', '销售订单名称', '合同编号']...
+宁波列映射: {'po': 2, 'sales_no': 7, 'sales_name': 8, 'contract_no': 9, 'contract_name': 10, 'supplier': 11, 'buyer': 15, 'material_id': 16, 'material_name': 17, 'material_desc': 18, 'qty': 32, 'price': 42, 'order_date': 49}
+宁波: 0 条记录, 0 条跳过
+湖北列标题: ['订单预警', '订单预警值', '采购订单号', '行号', '采购申请单号', '采购申请单行编号', '采购合同号', '销售订单编号', '销售订单名称', '合同编号']...
+湖北列映射: {'po': 2, 'sales_no': 7, 'sales_name': 8, 'contract_no': 9, 'contract_name': 10, 'supplier': 11, 'buyer': 15, 'material_id': 16, 'material_name': 17, 'material_desc': 18, 'qty': 32, 'price': 42, 'order_date': 49}
+湖北: 0 条记录, 0 条跳过
+
+总记录数: 0
+❌ 无数据
