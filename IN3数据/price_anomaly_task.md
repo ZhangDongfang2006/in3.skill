@@ -23,13 +23,19 @@
 ```bash
 cd /Users/zhangdongfang/.openclaw/workspace-in3bot && python3 IN3数据/price_anomaly_daily.py
 ```
-- 脚本自动筛选当天新增采购 vs 历史价格，偏离≥40%标记异常
-- 如果无异常，输出「无价格异常」
+- 增强版 v2：自动获取长江现货铜价，分三类分析
+- 铜排/电线 → 按当日铜价计算基准价（+10%/15%加工费）
+- 标准元器件/其他 → 按历史均价对比，偏离度从高到低
+- 螺丝/标准件/走线槽 → 自动跳过
+- 全部列出不筛选，Excel 含 3 个 Sheet
+- 新物料中的元器件（排除钢板/电热管/挡板等）→ 用 tavily_search 网上搜价对比
 
 ## Step 5：发送结果
-- 有异常：将生成的Excel cp到 /Users/zhangdongfang/.openclaw/media/，用 sessions_send 发给 agentId=company，sessionKey=agent:company:feishu:group:oc_498ec91554f3c3272cc6ae02ecf27557，让它发到飞书群
-- 无异常：同样发消息到飞书群告知今天无价格异常（不需要发文件）
-- 发送失败：用 message 发给 Dongfang（target: 8782649356, channel: telegram）告知失败原因
+## Step 5：发送结果
+- 将生成的Excel cp到 /Users/zhangdongfang/.openclaw/media/
+- 用 message 发给 Dongfang（target: 8782649356, channel: telegram, media=文件路径）
+- 同时用 sessions_send 发给飞书群（agentId=company, sessionKey=agent:company:feishu:group:oc_498ec91554f3c3272cc6ae02ecf27557），让 Bot 10 发到飞书群
+- 发送失败：用 message 通知 Dongfang
 
 ## 注意事项
 - 网址 https://in3.industics.com/（industics没有r）

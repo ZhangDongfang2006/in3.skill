@@ -199,6 +199,24 @@ if confirmed or pending:
 - 消息中说明：确认重复X对，待确认Y对（从N对候选中排除M对）
 - **无结果（确认重复0 + 待确认0）→ 不发消息**
 
+## Step 5：物料命名规范检查（当天新建/修改物料）
+
+在 Step 1 导出的物料主数据文件基础上，运行命名规范检查：
+
+```bash
+cd /Users/zhangdongfang/.openclaw/workspace-in3bot && python3 IN3数据/naming_check.py
+```
+
+脚本自动：
+- 筛选当天创建/修改的物料
+- 检查：乘号不规范(x/*)、名称含规格、口语俗称、全角字符、非标符号、多余空格、制造商空缺（排除辅材/紧固件/成品柜等）
+- 提前期不检查（14天仅建议）
+- 生成 Excel：IN3数据/命名规范检查-YYYYMMDD.xlsx
+
+- 如果有命名问题 → 将 Excel cp 到 /Users/zhangdongfang/.openclaw/media/，用 message 发给 Dongfang (target:8782649356, channel:telegram, media=文件路径)
+- 无问题 → 不发消息
+- 可以和查重结果合并到同一条消息发送
+
 ## 重要注意
 - ⚠️ 绝对不要重启 Gateway！
 - ⚠️ 网址是 industics（没有 r）！
