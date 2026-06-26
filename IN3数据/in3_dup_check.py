@@ -602,6 +602,33 @@ def is_nondup(a, b):
             if kv_dict_a[key] != kv_dict_b[key]:
                 return True, f'参数值不同: {key}={kv_dict_a[key]} vs {key}={kv_dict_b[key]}'
 
+    # --- 规则 #45: 型号末尾附件/接线后缀有vs无 = 非重复 (2026-06-26 Dongfang 确认) ---
+    # F=辅助触头, P=板前接线, R=板后接线, SD=信号接点, FM=遥信模块
+    # 等附件后缀，一方有一方没有 = 不同型号
+    # 检查型号描述末尾的单字母/双字母附件后缀
+    attach_suffixes = {
+        'F': '辅助触头', 'P': '板前接线', 'R': '板后接线',
+        'SD': '信号接点', 'FM': '遥信模块',
+    }
+    for suf, label in attach_suffixes.items():
+        # 检查 /3F vs /3, /4P vs /4 等模式（极数后跟附件代号）
+        has_suf_a = bool(re.search(r'/\d+' + suf + r'(?:\s|$|/|[\u4e00-\u9fff])', da))
+        has_suf_b = bool(re.search(r'/\d+' + suf + r'(?:\s|$|/|[\u4e00-\u9fff])', db))
+        if has_suf_a != has_suf_b:
+            return True, f'附件后缀{label}({suf})有vs无: 不同型号'
+        # 也检查 3F vs 3, 4P vs 4 等不带斜杠的模式（在型号描述中）
+        has_suf_a2 = bool(re.search(r'\d' + suf + r'(?:\s|$|/|[\u4e00-\u9fff,）)])', da))
+        has_suf_b2 = bool(re.search(r'\d' + suf + r'(?:\s|$|/|[\u4e00-\u9fff,）)])', db))
+        if has_suf_a2 != has_suf_b2:
+            return True, f'附件后缀{label}({suf})有vs无: 不同型号'
+        # 检查描述末尾独立的单字母后缀（如 "400A P" vs "400A"）
+        # P/F/R 作为末尾独立附件代号
+        if suf in ('F', 'P', 'R'):
+            has_end_a = bool(re.search(r'\b' + suf + r'\s*$', da.strip()))
+            has_end_b = bool(re.search(r'\b' + suf + r'\s*$', db.strip()))
+            if has_end_a != has_end_b:
+                return True, f'附件后缀{label}({suf})有vs无: 不同型号'
+
     return False, ''
 
 
