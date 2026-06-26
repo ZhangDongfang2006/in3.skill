@@ -393,7 +393,8 @@ def is_nondup(a, b):
 
     # --- 规则 #9: 方向不同 ---
     dirs = [('左操', '右操'), ('平进平出', '平进侧出'), ('上进', '下进'),
-            ('上进下出', '下进上出'), ('立式', '卧式'), ('侧进', '上进'), ('侧出', '下出')]
+            ('上进下出', '下进上出'), ('立式', '卧式'), ('侧进', '上进'), ('侧出', '下出'),
+            ('定向', '万向'), ('被动', '主动')]
     for d1, d2 in dirs:
         if (d1 in ta and d2 in tb) or (d2 in ta and d1 in tb):
             return True, f'方向不同: {d1} vs {d2}'
@@ -713,6 +714,67 @@ def is_nondup(a, b):
             # 如果额外部分包含任何有意义的功能词（长度>=2的中文词）
             if re.search(r'[\u4e00-\u9fff]{2,}', extra_part):
                 return True, f'描述额外信息: {extra_part[:30]}'
+
+    # --- 规则 #49: 高压元器件常见差异 (2026-06-26) ---
+    # 这些是88对待确认中发现的高频差异模式
+
+    # 49a: 开闭数量不同 (三开三闭 vs 五开五闭 vs 4开4闭 等)
+    sw_a = re.findall(r'(\d+)开(\d+)闭', da)
+    sw_b = re.findall(r'(\d+)开(\d+)闭', db)
+    if sw_a and sw_b and sw_a != sw_b:
+        return True, f'开闭数量不同: {sw_a} vs {sw_b}'
+
+    # 49b: 触臂材质 有vs无 (铜触臂/铝触臂/铜触头)
+    arm_kw = ['铜触臂', '铝触臂', '铜触头', '铝触头']
+    arm_a = [k for k in arm_kw if k in da]
+    arm_b = [k for k in arm_kw if k in db]
+    if arm_a != arm_b:
+        return True, f'触臂材质差异: {arm_a or "无"} vs {arm_b or "无"}'
+
+    # 49c: 局放要求 有vs无 (局放小于3pC 等)
+    pd_a = '局放' in da or '局放' in na
+    pd_b = '局放' in db or '局放' in nb
+    if pd_a != pd_b:
+        return True, f'局放要求: 有vs无'
+
+    # 49d: 安装位置互斥 (装中部/装柜后部/装柜前部 vs 左操/右操/正装)
+    pos_a = set(k for k in ['装中部', '装柜后部', '装柜前部', '装柜顶部'] if k in da)
+    pos_b = set(k for k in ['装中部', '装柜后部', '装柜前部', '装柜顶部'] if k in db)
+    if pos_a and pos_b and pos_a != pos_b:
+        return True, f'安装位置不同: {pos_a} vs {pos_b}'
+    # 一方有安装位置，另一方有操作方向（不是同一个维度）
+    if pos_a and not pos_b and any(k in db for k in ['左操', '右操', '正装']):
+        return True, f'安装位置vs操作方向: {pos_a} vs 操作方向'
+    if pos_b and not pos_a and any(k in da for k in ['左操', '右操', '正装']):
+        return True, f'安装位置vs操作方向: {pos_b} vs 操作方向'
+
+    # 49e: 母线侧接地 有vs无
+    bus_gnd_a = '母线侧接地' in da
+    bus_gnd_b = '母线侧接地' in db
+    if bus_gnd_a != bus_gnd_b:
+        return True, f'母线侧接地: 有vs无'
+
+    # 49f: 名称明确不同的产品类型（非辅材）
+    product_conflicts = [
+        ('APF', 'SVG'), ('百叶窗', '通风过滤'), ('变频器', '固态继电器'),
+        ('快拧头', '快插头'), ('被动', '主动'), ('定向脚轮', '万向脚轮'),
+        ('变光护目镜', '护目镜'),
+        ('双电源', '双投开关'), ('双电源', '隔离开关'),
+        ('电操附件', '塑壳断路器'), ('分闸锁', '欠电压'), ('欠电压脱扣器', '分闸锁'),
+        ('微型断路器', '浪涌保护器'), ('电能表', '电流表'),
+        ('消谐', '电压互感器'), ('转换开关', '智能操控装置'),
+    ]
+    for pa, pb in product_conflicts:
+        if (pa in na and pb in nb) or (pa in nb and pb in na):
+            return True, f'不同产品类型: {na} vs {nb}'
+
+    # 49g: 电缆阻燃前缀 ZC-/ZA-/ZA- 有vs无
+    flame_a = re.search(r'^(Z[ABC]-)', da)
+    flame_b = re.search(r'^(Z[ABC]-)', db)
+    if flame_a and not flame_b:
+        return True, f'阻燃等级: {flame_a.group(1)} vs 无'
+    if flame_b and not flame_a:
+        return True, f'阻燃等级: {flame_b.group(1)} vs 无'
 
     # --- 规则 #47: 型号解析器比较 (2026-06-26) ---
     # 基于品牌知识库解析型号，逐字段比较（壳架/分断/极数/安装/接线/脱扣器/附件）
