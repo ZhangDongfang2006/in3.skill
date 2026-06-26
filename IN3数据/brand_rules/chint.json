@@ -1,0 +1,429 @@
+{
+  "brand": "正泰",
+  "brand_en": "CHINT",
+  "updated_at": "2026-06-26",
+  "note": "正泰电器(CHINT)低压元器件型号命名规则，数据来源：正泰官网产品选型手册、企业标准Q/ZT 31-2021、经销商技术资料",
+  "series": [
+    {
+      "name": "NXB 微型断路器",
+      "series_code": "NXB",
+      "product_range": "1A-125A",
+      "description": "正泰NXB系列微型断路器(MCB)，涵盖NXB-40、NXB-63、NXB-63H、NXB-63G、NXB-80、NXB-125等子系列。NXB-63为最常用基础型号。符合GB/T 10963.1、IEC 60898-1标准。",
+      "rules": [
+        {
+          "position": "前缀NXB",
+          "meaning": "正泰微型断路器(MCB)系列标识",
+          "note": "N=正泰, XB=小型断路器"
+        },
+        {
+          "position": "NXB后数字",
+          "meaning": "壳架等级(A)",
+          "example": "40=40A, 63=63A, 80=80A, 125=125A"
+        },
+        {
+          "position": "壳架后字母H",
+          "meaning": "高分断型号",
+          "note": "NXB-63H, 分断能力高于标准型"
+        },
+        {
+          "position": "壳架后字母G",
+          "meaning": "工业型/高功能型",
+          "note": "NXB-63G, 符合IEC 60947-2标准"
+        },
+        {
+          "position": "极数标识",
+          "meaning": "1P, 1P+N, 2P, 3P, 3P+N, 4P"
+        },
+        {
+          "position": "脱扣曲线B",
+          "meaning": "B曲线：瞬时脱扣3In~5In",
+          "note": "仅部分型号, 电缆保护/照明"
+        },
+        {
+          "position": "脱扣曲线C",
+          "meaning": "C曲线：瞬时脱扣5In~10In",
+          "note": "最常用, 通用配电"
+        },
+        {
+          "position": "脱扣曲线D",
+          "meaning": "D曲线：瞬时脱扣10In~20In",
+          "note": "电动机/变压器高启动电流"
+        },
+        {
+          "position": "额定电流数字",
+          "meaning": "额定电流(A)",
+          "example": "1A-63A (NXB-63), 63A-125A (NXB-125)"
+        },
+        {
+          "position": "额定电压",
+          "meaning": "230V~(1P/1P+N), 400V~(2P-4P)"
+        },
+        {
+          "position": "分断能力",
+          "meaning": "6000A (NXB-63标准型), 10000A (2P/230V); NXB-125: Icu=10kA"
+        },
+        {
+          "position": "安装方式",
+          "meaning": "TH35-7.5型标准导轨安装"
+        },
+        {
+          "position": "型号格式",
+          "meaning": "NXB-{壳架} {极数} {曲线}{电流}A",
+          "example": "NXB-63 3P C32A"
+        }
+      ],
+      "rcbo_rules": {
+        "prefix": "NXBLE = NXB系列漏电断路器(RCBO)",
+        "models": "NXBLE-32, NXBLE-63, NXBLE-125",
+        "NXBLE-63Y": "带剩余电流显示的漏电断路器",
+        "NXL-63": "漏电保护附件（独立安装）"
+      },
+      "model_examples": [
+        {
+          "model": "NXB-63 3P C16A",
+          "explanation": "NXB系列63A壳架, 三极, C曲线, 额定电流16A"
+        },
+        {
+          "model": "NXB-63 4P D32A",
+          "explanation": "NXB系列63A壳架, 四极, D曲线, 额定电流32A"
+        },
+        {
+          "model": "NXB-125 3P C100A",
+          "explanation": "NXB系列125A壳架(塑壳型), 三极, C曲线, 100A"
+        },
+        {
+          "model": "NXB-63 1P+N C10A",
+          "explanation": "NXB系列63A壳架, 1P+N, C曲线, 10A"
+        },
+        {
+          "model": "NXBLE-63 3P C32A 30mA",
+          "explanation": "NXB漏电断路器63A, 三极, C曲线, 32A, 漏电30mA"
+        }
+      ]
+    },
+    {
+      "name": "NM1 塑壳断路器",
+      "series_code": "NM1",
+      "product_range": "10A-1250A",
+      "description": "正泰NM1系列塑料外壳式断路器(MCCB)，壳架电流从63A到1250A。是正泰最广泛使用的塑壳断路器系列。符合GB/T 14048.2、IEC 60947-2标准。",
+      "rules": [
+        {
+          "position": "前缀NM1",
+          "meaning": "正泰塑壳断路器(MCCB)系列标识",
+          "note": "N=正泰, M=塑壳(Moulded), 1=设计序号"
+        },
+        {
+          "position": "NM1后数字",
+          "meaning": "壳架电流等级(A)",
+          "example": "63=63A, 100=100A, 125=125A, 225=225A, 250=250A, 400=400A, 630=630A, 800=800A, 1250=1250A"
+        },
+        {
+          "position": "壳架后字母S",
+          "meaning": "标准分断(25-50kA)",
+          "note": "最常用, NM1-63S=25kA, NM1-250S=50kA"
+        },
+        {
+          "position": "壳架后字母H",
+          "meaning": "高分断(35-85kA)",
+          "note": "NM1-63H=35kA, NM1-125H=50kA, NM1-400H=65kA"
+        },
+        {
+          "position": "壳架后字母R",
+          "meaning": "甚高分断(50-100kA)",
+          "note": "NM1-125R=65kA"
+        },
+        {
+          "position": "壳架后字母C",
+          "meaning": "经济型分断"
+        },
+        {
+          "position": "斜杠后四位数字(第1位)",
+          "meaning": "极数：2=2P, 3=3P, 4=4P"
+        },
+        {
+          "position": "斜杠后四位数字(第2位)",
+          "meaning": "脱扣器类型：2=瞬时脱扣(电磁式), 3=复式脱扣(热磁式配电保护)"
+        },
+        {
+          "position": "斜杠后四位数字(第3-4位)",
+          "meaning": "附加功能：00=标准无附件"
+        },
+        {
+          "position": "额定电流",
+          "meaning": "脱扣器额定电流(A)",
+          "example": "NM1-63S/3300 32A=32A额定电流"
+        },
+        {
+          "position": "安装方式",
+          "meaning": "默认固定式, 垂直或水平安装均可"
+        },
+        {
+          "position": "末尾字母L",
+          "meaning": "带漏电保护功能",
+          "note": "如NM1-225L/300mA"
+        },
+        {
+          "position": "末尾字母TH",
+          "meaning": "耐高温型(85C环境)"
+        },
+        {
+          "position": "产品特点",
+          "meaning": "具有隔离功能，可作隔离开关使用"
+        }
+      ],
+      "订货号编码格式": {
+        "format": "NM1-{壳架}{分断}/{极数+脱扣代码} {额定电流}A",
+        "example": "NM1-63S/3300 32A",
+        "parse": "NM1=系列, 63=壳架63A, S=标准分断, /=分隔符, 33=3极复式脱扣, 00=标准无附件, 32A=额定电流"
+      },
+      "breaking_capacity_table": {
+        "NM1-63S": "25kA @400V",
+        "NM1-63H": "35kA @400V",
+        "NM1-125S": "35kA @400V",
+        "NM1-125H": "50kA @400V",
+        "NM1-125R": "65kA @400V",
+        "NM1-250S": "50kA @400V",
+        "NM1-400S": "50kA @400V",
+        "NM1-400H": "65kA @400V",
+        "NM1-630S": "50kA @400V",
+        "NM1-630H": "65kA @400V",
+        "NM1-800S": "50kA @400V",
+        "NM1-800H": "65kA @400V"
+      },
+      "model_examples": [
+        {
+          "model": "NM1-63S/3300 32A",
+          "explanation": "NM1系列, 63A壳架, 标准分断25kA, 三极热磁式脱扣, 额定电流32A"
+        },
+        {
+          "model": "NM1-125H/3300 100A",
+          "explanation": "NM1系列, 125A壳架, 高分断50kA, 三极热磁式脱扣, 额定电流100A"
+        },
+        {
+          "model": "NM1-250S/4300 200A",
+          "explanation": "NM1系列, 250A壳架, 标准分断50kA, 四极热磁式脱扣, 额定电流200A"
+        },
+        {
+          "model": "NM1-400H/3300 400A",
+          "explanation": "NM1系列, 400A壳架, 高分断65kA, 三极热磁式脱扣, 额定电流400A"
+        },
+        {
+          "model": "NM1-630S/3300 630A",
+          "explanation": "NM1系列, 630A壳架, 标准分断50kA, 三极热磁式脱扣, 额定电流630A"
+        }
+      ]
+    },
+    {
+      "name": "NA1 万能式断路器（框架断路器）",
+      "series_code": "NA1",
+      "product_range": "200A-6300A",
+      "description": "正泰NA1系列万能式(框架式)断路器(ACB)，额定工作电压至AC690V，额定电流至6300A。智能控制器(DW45型)具有过载长延时、短延时、瞬时、接地等保护功能。符合GB/T 14048.2、IEC 60947-2。",
+      "rules": [
+        {
+          "position": "前缀NA1",
+          "meaning": "正泰万能式断路器(ACB)系列标识",
+          "note": "N=正泰, A=万能式(Air), 1=设计序号, 对应国标DW45系列"
+        },
+        {
+          "position": "NA1后数字(壳架电流)",
+          "meaning": "壳架电流等级(A)",
+          "example": "1000=1000A, 2000=2000A, 3200=3200A, 4000=4000A, 6300=6300A"
+        },
+        {
+          "position": "壳架后字母X",
+          "meaning": "智能型(带智能控制器)",
+          "note": "NA1-2000X=智能型, 区别于NA1-2000普通型"
+        },
+        {
+          "position": "壳架后字母H",
+          "meaning": "高分断能力版本",
+          "example": "NA1-2000H=65kA分断"
+        },
+        {
+          "position": "壳架后字母P",
+          "meaning": "增强型(P系列)",
+          "note": "NA1P-2500/3200/4000/6300, 分断100-120kA"
+        },
+        {
+          "position": "壳架后字母M",
+          "meaning": "配M型智能控制器",
+          "note": "如NA1-2000-1600M中M表示M型智能控制器"
+        },
+        {
+          "position": "壳架后字母N",
+          "meaning": "标准分断能力版本",
+          "note": "NA1-2000N=50kA, NA1-3200N=65kA"
+        },
+        {
+          "position": "X后数字(额定电流)",
+          "meaning": "脱扣器额定电流(A)",
+          "example": "NA1-2000X-630=智能型630A; NA1-2000X-2000=2000A"
+        },
+        {
+          "position": "极数/3或/4",
+          "meaning": "极数标识",
+          "example": "/3=三极, /4=四极"
+        },
+        {
+          "position": "安装方式",
+          "meaning": "抽屉式(Inm=1000-6300A), 固定式(Inm=1000-4000A/3)",
+          "note": "1000-6300A均可抽屉式"
+        },
+        {
+          "position": "智能控制器类型",
+          "meaning": "内置智能控制器(相当于施耐德Micrologic)",
+          "note": "L型/标准型/高级型, 过载+短延时+瞬时+接地保护"
+        },
+        {
+          "position": "操作方式",
+          "meaning": "手动操作(省略), 电动操作(D)"
+        },
+        {
+          "position": "线圈电压",
+          "meaning": "操作机构控制电压",
+          "example": "AC220V, AC380V, DC110V, DC220V"
+        }
+      ],
+      "breaking_capacity_table": {
+        "NA1-1000/NA1-1000X": "Icu=42kA @400V, Ics=30kA",
+        "NA1-2000/NA1-2000X": "Icu=80kA @400V, Ics=65kA",
+        "NA1-2000N/NA1-2000XN": "Icu=50kA @400V",
+        "NA1-2000H/NA1-2000XH": "Icu=65kA @400V",
+        "NA1-3200/NA1-3200X": "Icu=80kA @400V, Ics=65kA",
+        "NA1-4000/NA1-4000X": "Icu=80kA @400V, Ics=65kA",
+        "NA1-6300/NA1-6300X": "Icu=120kA @400V, Ics=100kA",
+        "NA1-6300N/NA1-6300XN": "Icu=100kA @400V",
+        "NA1P-2500/3200/4000": "Icu=100kA @400V, Ics=80kA",
+        "NA1P-6300": "Icu=120kA @400V, Ics=100kA"
+      },
+      "model_examples": [
+        {
+          "model": "NA1-2000X-630 3P",
+          "explanation": "NA1万能式断路器, 2000A壳架智能型, 额定电流630A, 三极"
+        },
+        {
+          "model": "NA1-2000X-2000M/3P",
+          "explanation": "NA1万能式断路器, 2000A壳架智能型, 额定电流2000A, M型智能控制器, 三极"
+        },
+        {
+          "model": "NA1-3200-3200M/3",
+          "explanation": "NA1万能式断路器, 3200A壳架, 额定电流3200A, M型智能控制器, 三极"
+        },
+        {
+          "model": "NA1-6300-6300M/3P",
+          "explanation": "NA1万能式断路器, 6300A壳架, 额定电流6300A, M型智能控制器, 三极"
+        },
+        {
+          "model": "NA1-2000X-1600M/4P",
+          "explanation": "NA1万能式断路器, 2000A壳架智能型, 1600A, M型控制器, 四极, 电动抽屉式"
+        }
+      ]
+    },
+    {
+      "name": "CJX2 交流接触器",
+      "series_code": "CJX2",
+      "product_range": "9A-95A (AC-3)",
+      "description": "正泰CJX2系列交流接触器，适用于交流50/60Hz，额定工作电压至690V，在AC-3使用类别下额定工作电流至95A。可与热继电器(NR2系列)直接插接组成电磁起动器。符合GB/T 14048.4、IEC 60947-4-1。",
+      "rules": [
+        {
+          "position": "前缀CJX2",
+          "meaning": "交流接触器系列标识",
+          "note": "C=接触器(Contact), J=交流(AC), X=小型, 2=设计序号"
+        },
+        {
+          "position": "CJX2后两位数字(<=32A)",
+          "meaning": "额定工作电流(A) @AC-3 380V",
+          "example": "09=9A, 12=12A, 18=18A, 25=25A, 32=32A"
+        },
+        {
+          "position": "CJX2后两位数字(>=40A)",
+          "meaning": "额定工作电流(A) @AC-3 380V",
+          "example": "40=40A, 50=50A, 65=65A, 80=80A, 95=95A"
+        },
+        {
+          "position": "电流后两位辅助触头代码",
+          "meaning": "辅助触头配置(第一位=NO数量, 第二位=NC数量)",
+          "example": "10=1NO, 01=1NC, 11=1NO+1NC, 04=4NO(4极), 08=2NO+2NC(2P+2R)"
+        },
+        {
+          "position": "极数",
+          "meaning": "默认3极(3P), 可选4极(04/08代码)"
+        },
+        {
+          "position": "线圈电压",
+          "meaning": "在线圈上标注或另注，常见AC24V/36V/110V/220V/380V, DC24V等"
+        },
+        {
+          "position": "线圈电压后缀",
+          "meaning": "在订货号末尾标注电压",
+          "example": "CJX2-0910 220V = 9A, 1NO, 线圈220V"
+        },
+        {
+          "position": "末尾字母Z",
+          "meaning": "直流线圈操作型(CJX2-Z系列)",
+          "note": "CJX2-0910Z 220V=直流线圈接触器"
+        },
+        {
+          "position": "配装热继电器",
+          "meaning": "可直接插接NR2系列热继电器",
+          "example": "CJX2-09配NR2-25, CJX2-25配NR2-38, CJX2-32配NR2-60, CJX2-65配NR2-100"
+        }
+      ],
+      "motor_power_table": {
+        "CJX2-09": "9A, <=4kW @380V",
+        "CJX2-12": "12A, <=5.5kW",
+        "CJX2-18": "18A, <=7.5kW",
+        "CJX2-25": "25A, <=11kW",
+        "CJX2-32": "32A, <=15kW",
+        "CJX2-38": "38A, <=18.5kW",
+        "CJX2-40": "40A, <=22kW",
+        "CJX2-50": "50A, <=30kW",
+        "CJX2-65": "65A, <=37kW",
+        "CJX2-80": "80A, <=45kW",
+        "CJX2-95": "95A, <=45kW"
+      },
+      "model_examples": [
+        {
+          "model": "CJX2-0910 220V",
+          "explanation": "CJX2系列, 9A额定电流, 1常开辅助触头(10), 线圈AC220V"
+        },
+        {
+          "model": "CJX2-1210 380V",
+          "explanation": "CJX2系列, 12A额定电流, 1常开辅助触头, 线圈AC380V"
+        },
+        {
+          "model": "CJX2-0901 220V",
+          "explanation": "CJX2系列, 9A额定电流, 1常闭辅助触头(01), 线圈AC220V"
+        },
+        {
+          "model": "CJX2-3210 380V",
+          "explanation": "CJX2系列, 32A额定电流, 1常开辅助触头, 线圈AC380V"
+        },
+        {
+          "model": "CJX2-4011 220V",
+          "explanation": "CJX2系列, 40A额定电流, 1常开+1常闭辅助触头(11), 线圈AC220V"
+        },
+        {
+          "model": "CJX2-6511 380V",
+          "explanation": "CJX2系列, 65A额定电流, 1常开+1常闭辅助触头, 线圈AC380V"
+        },
+        {
+          "model": "CJX2-0910Z 24V",
+          "explanation": "CJX2系列直流操作型, 9A, 1常开, 线圈DC24V"
+        }
+      ]
+    }
+  ],
+  "new_series_note": {
+    "note": "正泰新锐NM5/NA5/NVB5系列为NM1/NA1/NXB的升级产品，型号命名更结构化",
+    "NM5_series": "N=正泰, M=塑壳, 5=新锐设计序号, 后接壳架+分断+脱扣类型+极数+电流",
+    "NM5_breaking": "F=36kA, Q=50kA, R=70kA(小壳架)/100kA(大壳架)",
+    "NM5_trip_type": "TM=热磁式配电, M=电磁式电机保护, EA/EAM=电子式基本/电机保护, EB/EBM=电子式高级/高级电机保护",
+    "NM5_poles": "3P=三极, 4A/4B/4C/4D=四极不同中性极处理方式",
+    "NM5_accessories": "AX=辅助触头, AL=报警触头, SHT=分励脱扣器",
+    "NA5_series": "N=正泰, A=万能式, 5=新锐, 壳架+分断+控制器类型+极数+电流",
+    "NA5_frame": "1600/2500/3200/4000/6300",
+    "NA5_breaking": "N=标准型, H=较高分断型",
+    "NA5_controller": "M=标准型, D=抽屉式, H=谐波型, S=物联型, V=电压型"
+  }
+}

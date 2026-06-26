@@ -1,0 +1,651 @@
+{
+  "brand": "施耐德",
+  "brand_en": "Schneider Electric",
+  "updated_at": "2026-06-26",
+  "note": "施耐德低压元器件型号命名规则，数据来源：施耐德官网FAQ、产品选型手册、经销商技术资料",
+  "series": [
+    {
+      "name": "WG负荷隔离开关（万高Wingoal）",
+      "series_code": "WG",
+      "product_range": "16A-2500A",
+      "description": "施耐德万高（天津）电气设备有限公司生产的负荷隔离开关",
+      "rules": [
+        {
+          "position": "前缀WG",
+          "meaning": "系列标识",
+          "example": "WG"
+        },
+        {
+          "position": "WG后第一个数字段",
+          "meaning": "额定电流(A)",
+          "example": "160,250,400,630,1000,1600,2500"
+        },
+        {
+          "position": "第一个/后数字",
+          "meaning": "额定电流(A)重复标注",
+          "example": "WG160/160"
+        },
+        {
+          "position": "第二个/后数字",
+          "meaning": "极数",
+          "example": "3=三极,3N=四极(N极),4=四极"
+        },
+        {
+          "position": "末尾字母R",
+          "meaning": "电动操作机构"
+        },
+        {
+          "position": "末尾字母W",
+          "meaning": "柜外操作(延长杆)",
+          "example": "330mm延长杆"
+        },
+        {
+          "position": "末尾字母F",
+          "meaning": "辅助触头(2NO+2NC)"
+        },
+        {
+          "position": "末尾无后缀",
+          "meaning": "柜内板前操作,无辅助触头(默认)"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "WG160/160/3F",
+          "explanation": "160A,三极,带辅助触头"
+        },
+        {
+          "model": "WG30320W13F",
+          "explanation": "320A,三极,延长杆330mm,带辅助触头"
+        },
+        {
+          "model": "WG10160W14F",
+          "explanation": "160A,四极,延长杆330mm,带辅助触头"
+        },
+        {
+          "model": "WG250/250/3R",
+          "explanation": "250A,三极,电动操作"
+        }
+      ]
+    },
+    {
+      "name": "Compact NSX 塑壳断路器",
+      "series_code": "NSX",
+      "product_range": "16A-800A",
+      "description": "施耐德高性能塑壳断路器,属于PacT Series",
+      "rules": [
+        {
+          "position": "前缀NSX",
+          "meaning": "系列标识"
+        },
+        {
+          "position": "NSX后数字(带m)",
+          "meaning": "壳架电流A, m=微型壳架",
+          "example": "100m,160m"
+        },
+        {
+          "position": "NSX后数字(无m)",
+          "meaning": "壳架电流A",
+          "example": "100,160,250,400,630,800"
+        },
+        {
+          "position": "壳架后字母E",
+          "meaning": "分断16kA @415V(仅NSXm)"
+        },
+        {
+          "position": "壳架后字母B",
+          "meaning": "分断25kA @415V(仅NSXm)"
+        },
+        {
+          "position": "壳架后字母F",
+          "meaning": "分断36kA @415V"
+        },
+        {
+          "position": "壳架后字母N",
+          "meaning": "分断50kA @415V"
+        },
+        {
+          "position": "壳架后字母H",
+          "meaning": "分断70kA @415V"
+        },
+        {
+          "position": "壳架后字母S",
+          "meaning": "分断100kA @415V"
+        },
+        {
+          "position": "壳架后字母L",
+          "meaning": "分断150kA @415V"
+        },
+        {
+          "position": "壳架后字母R",
+          "meaning": "分断200kA @415V"
+        },
+        {
+          "position": "壳架后HB1/HB2",
+          "meaning": "690V: HB1=75kA, HB2=100kA"
+        },
+        {
+          "position": "脱扣TM",
+          "meaning": "热磁脱扣单元"
+        },
+        {
+          "position": "脱扣MA",
+          "meaning": "热磁脱扣-电动机保护(仅短路)"
+        },
+        {
+          "position": "脱扣MIC X.Y",
+          "meaning": "电子脱扣Micrologic",
+          "example": "MIC2.2=基本, MIC5.2A=通信, MIC6.2E=高级"
+        },
+        {
+          "position": "额定电流数字",
+          "meaning": "脱扣器额定电流A",
+          "example": "16,25,32,40,50,63,80,100,160,250"
+        },
+        {
+          "position": "电流后字母D",
+          "meaning": "配电保护型"
+        },
+        {
+          "position": "极数3P",
+          "meaning": "三极(默认可不标)"
+        },
+        {
+          "position": "极数4P",
+          "meaning": "四极"
+        },
+        {
+          "position": "安装F",
+          "meaning": "固定式(默认可不标)"
+        },
+        {
+          "position": "安装P",
+          "meaning": "插入式"
+        },
+        {
+          "position": "安装D",
+          "meaning": "抽出式"
+        },
+        {
+          "position": "连接FC",
+          "meaning": "板前接线"
+        },
+        {
+          "position": "连接RC",
+          "meaning": "板后接线"
+        },
+        {
+          "position": "连接Evl",
+          "meaning": "Everlink专利接线"
+        }
+      ],
+      "order_code_example": "C10F3TM100 = NSX,壳架100A,36kA,3P,热磁100A",
+      "model_examples": [
+        {
+          "model": "NSX100F TM100D 3P",
+          "explanation": "100A壳架,36kA,热磁100A配电,三极"
+        },
+        {
+          "model": "NSX250N TM250D 3P",
+          "explanation": "250A壳架,50kA,热磁250A配电,三极"
+        },
+        {
+          "model": "NSX400F P",
+          "explanation": "400A壳架,36kA,插入式"
+        }
+      ]
+    },
+    {
+      "name": "EasyPact EZD 塑壳断路器",
+      "series_code": "EZD",
+      "product_range": "100A-630A",
+      "description": "Easy Series经济型塑壳断路器",
+      "rules": [
+        {
+          "position": "前缀EZD",
+          "meaning": "EasyPact EZD系列"
+        },
+        {
+          "position": "EZD后数字",
+          "meaning": "壳架电流A",
+          "example": "100,160,250,400,630"
+        },
+        {
+          "position": "壳架后字母E",
+          "meaning": "分断25kA"
+        },
+        {
+          "position": "壳架后字母M",
+          "meaning": "分断35kA"
+        },
+        {
+          "position": "壳架后字母S",
+          "meaning": "分断50kA"
+        },
+        {
+          "position": "脱扣MA",
+          "meaning": "电动机保护型(仅短路)"
+        },
+        {
+          "position": "极数3/4",
+          "meaning": "三极/四极"
+        },
+        {
+          "position": "额定电流(3位)",
+          "meaning": "脱扣器额定电流A"
+        },
+        {
+          "position": "末尾P",
+          "meaning": "插入式"
+        },
+        {
+          "position": "漏电EL",
+          "meaning": "漏电保护(跳闸)"
+        },
+        {
+          "position": "漏电ELA",
+          "meaning": "漏电保护(报警不跳闸)"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "EZD100E3015N",
+          "explanation": "EZD,100A,25kA,3P,15A"
+        },
+        {
+          "model": "EZD250M3015N",
+          "explanation": "EZD,250A,35kA,3P,15A"
+        }
+      ]
+    },
+    {
+      "name": "EasyPact CVS 塑壳断路器",
+      "series_code": "CVS",
+      "product_range": "100A-630A",
+      "description": "EasyPact CVS塑壳断路器,命名规则与NSX类似",
+      "rules": [
+        {
+          "position": "前缀CVS",
+          "meaning": "EasyPact CVS系列"
+        },
+        {
+          "position": "CVS后数字",
+          "meaning": "壳架电流A"
+        },
+        {
+          "position": "壳架后F/N/H",
+          "meaning": "分断: F=36kA, N=50kA, H=70kA"
+        },
+        {
+          "position": "脱扣TM",
+          "meaning": "热磁脱扣"
+        },
+        {
+          "position": "脱扣TMD",
+          "meaning": "热磁脱扣配电型"
+        },
+        {
+          "position": "极数3P/4P",
+          "meaning": "三极/四极"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "CVS100F TM100D 3P3D",
+          "explanation": "CVS,100A,36kA,热磁100A,3P"
+        },
+        {
+          "model": "CVS250N TMD 250A 3P",
+          "explanation": "CVS,250A,50kA,热磁250A,3P"
+        }
+      ]
+    },
+    {
+      "name": "iC65 微型断路器（Acti9系列）",
+      "series_code": "iC65",
+      "product_range": "0.5A-63A",
+      "description": "Acti9系列微型断路器MCB,施耐德第五代模数化配电系统",
+      "rules": [
+        {
+          "position": "前缀iC65",
+          "meaning": "i=智能化Acti9, C=断路器, 65=系列号"
+        },
+        {
+          "position": "iC65后字母N",
+          "meaning": "标准分断6kA @400V, Ics=100%Icn"
+        },
+        {
+          "position": "iC65后字母H",
+          "meaning": "高分断10kA @400V, Ics=75%Icn"
+        },
+        {
+          "position": "iC65后字母L",
+          "meaning": "超高分断15kA @400V, Ics=50%Icn"
+        },
+        {
+          "position": "曲线B",
+          "meaning": "3In~5In瞬时脱扣, 照明/电阻负载"
+        },
+        {
+          "position": "曲线C",
+          "meaning": "5In~10In瞬时脱扣, 通用配电(最常用)"
+        },
+        {
+          "position": "曲线D",
+          "meaning": "10In~20In瞬时脱扣, 电动机/变压器"
+        },
+        {
+          "position": "曲线K",
+          "meaning": "8In~12In瞬时脱扣, 电动机和变压器"
+        },
+        {
+          "position": "曲线I",
+          "meaning": "工业用高分断型"
+        },
+        {
+          "position": "极数1P",
+          "meaning": "单极,18mm"
+        },
+        {
+          "position": "极数1P+N",
+          "meaning": "1P+N同时切断,18mm"
+        },
+        {
+          "position": "极数2P",
+          "meaning": "两极,36mm"
+        },
+        {
+          "position": "极数3P",
+          "meaning": "三极,54mm"
+        },
+        {
+          "position": "极数4P",
+          "meaning": "四极,72mm"
+        },
+        {
+          "position": "额定电流",
+          "meaning": "额定电流A",
+          "example": "0.5,1,2,4,6,10,16,20,25,32,40,50,63"
+        }
+      ],
+      "acti9_product_code": {
+        "note": "Acti9产品号末三位=极数+额定电流",
+        "pole_codes": "1=1P,2=2P,3=3P,4=4P,6=1P+N",
+        "current_codes": "72=1.6A,01=2A,02=4A,73=6.3A,04=10A,06=16A,08=20A,10=25A,13=32A,16=40A,21=50A,25=63A"
+      },
+      "model_examples": [
+        {
+          "model": "iC65N C32 3P",
+          "explanation": "6kA,C曲线,32A,三极"
+        },
+        {
+          "model": "iC65H D16A 2P",
+          "explanation": "10kA,D曲线,16A,两极"
+        },
+        {
+          "model": "iC65N B25A 1P",
+          "explanation": "6kA,B曲线,25A,单极"
+        },
+        {
+          "model": "iC65L C63A 4P",
+          "explanation": "15kA,C曲线,63A,四极"
+        }
+      ]
+    },
+    {
+      "name": "Acti9 模数化配电系统（整体）",
+      "series_code": "Acti9",
+      "description": "施耐德第五代模数化配电系统,含多个子系列",
+      "rules": [
+        {
+          "position": "前缀A9",
+          "meaning": "Acti9系统产品编号前缀"
+        },
+        {
+          "position": "子系列iC65",
+          "meaning": "标准MCB 0.5-63A"
+        },
+        {
+          "position": "子系列iC60",
+          "meaning": "集成控制断路器Reflex系列"
+        },
+        {
+          "position": "子系列iDPN",
+          "meaning": "1P+N微型断路器18mm"
+        },
+        {
+          "position": "子系列C120",
+          "meaning": "大电流MCB 63-125A"
+        },
+        {
+          "position": "子系列iINT125",
+          "meaning": "隔离开关125A"
+        },
+        {
+          "position": "子系列Vigi iC65",
+          "meaning": "iC65漏电保护附件"
+        },
+        {
+          "position": "子系列iCT/iTL/iST",
+          "meaning": "控制元件(接触器/脉冲/定时开关)"
+        }
+      ]
+    },
+    {
+      "name": "MasterPact MT 框架断路器",
+      "series_code": "MT",
+      "product_range": "630A-6300A",
+      "description": "施耐德空气断路器ACB,高端配电保护",
+      "rules": [
+        {
+          "position": "前缀MT",
+          "meaning": "MasterPact MT空气断路器"
+        },
+        {
+          "position": "MT后数字",
+          "meaning": "壳架电流编码",
+          "example": "06=630A,08=800A,10=1000A,12=1250A,16=1600A,20=2000A,25=2500A,32=3200A,40=4000A,50=5000A,63=6300A"
+        },
+        {
+          "position": "壳架后N1",
+          "meaning": "分断50kA @415V"
+        },
+        {
+          "position": "壳架后N2",
+          "meaning": "分断50kA @415V(高型)"
+        },
+        {
+          "position": "壳架后H1",
+          "meaning": "分断65kA @415V"
+        },
+        {
+          "position": "壳架后H1b",
+          "meaning": "分断85kA @415V"
+        },
+        {
+          "position": "壳架后H2",
+          "meaning": "分断100kA @415V"
+        },
+        {
+          "position": "壳架后H3",
+          "meaning": "分断150kA @415V"
+        },
+        {
+          "position": "壳架后L1",
+          "meaning": "分断150kA @415V(限流型)"
+        },
+        {
+          "position": "壳架后NA/HA/HF",
+          "meaning": "隔离开关(无脱扣单元)"
+        }
+      ],
+      "trip_units": [
+        {
+          "unit": "MIC 2.0A",
+          "meaning": "基本配电保护"
+        },
+        {
+          "unit": "MIC 5.0A/5.0E",
+          "meaning": "高级配电+接地故障"
+        },
+        {
+          "unit": "MIC 6.0A/6.0E/6.0P",
+          "meaning": "最高级,带功率/电能质量"
+        },
+        {
+          "unit": "MIC X",
+          "meaning": "MTZ下一代控制单元"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "MT08H1 MIC6.0P 3P",
+          "explanation": "800A,65kA,Micrologic 6.0P,三极,抽出式"
+        },
+        {
+          "model": "MT16H1 3P",
+          "explanation": "1600A,65kA,三极"
+        },
+        {
+          "model": "MT06NA",
+          "explanation": "630A,隔离开关"
+        },
+        {
+          "model": "MT32H1 MIC2.0A 3P",
+          "explanation": "3200A,65kA,Micrologic 2.0A,三极"
+        }
+      ]
+    },
+    {
+      "name": "TeSys D 接触器（国产/进口）",
+      "series_code": "LC1D/LC2D",
+      "product_range": "9A-620A (AC-3) 或 20A-200A (电阻负载)",
+      "description": "施耐德TeSys D系列交流接触器,用于电机控制. 来源:施耐德官网FAQ FA408068",
+      "naming_template": "LC(1)(2)(3)[T](4)[A][T](5)(6)[C]",
+      "rules": [
+        {
+          "position": "第1段LC",
+          "meaning": "接触器产品(Contacteur)"
+        },
+        {
+          "position": "第2段数字1",
+          "meaning": "单个接触器",
+          "example": "LC1D=单个"
+        },
+        {
+          "position": "第2段数字2",
+          "meaning": "可逆接触器(正反转)",
+          "example": "LC2D=可逆"
+        },
+        {
+          "position": "第3段字母D",
+          "meaning": "TeSys D系列"
+        },
+        {
+          "position": "第3段字母F",
+          "meaning": "TeSys F系列"
+        },
+        {
+          "position": "第4段T",
+          "meaning": "4极接触器,主极4常开(3极无此项)"
+        },
+        {
+          "position": "第5段数字",
+          "meaning": "AC-3@440V最大工作电流(A)",
+          "example": "09=9A,12=12A,18=18A,25=25A,32=32A,38=38A,40=40A,50=50A,65=65A,80=80A,95=95A,115=115A,150=150A,170=170A,185=185A,205=205A,245=245A,300=300A,410=410A,475=475A,620=620A"
+        },
+        {
+          "position": "第5后加A",
+          "meaning": "Everlink内六角螺钉端子"
+        },
+        {
+          "position": "第6段T(4极)",
+          "meaning": "4极2NO2NC(3极无此项)"
+        },
+        {
+          "position": "第7段数字6",
+          "meaning": "环形端子(lug type)"
+        },
+        {
+          "position": "第7段数字3",
+          "meaning": "弹簧端子(在线圈电压代码前加3)"
+        },
+        {
+          "position": "第8段线圈电压",
+          "meaning": "线圈电压等级",
+          "example": "B=24V,CC=36V,E=48V,F=110V,M=220V,P=230V,U=240V,Q=380V,V=400V,R=440V,7=DC24V"
+        },
+        {
+          "position": "第9段频率",
+          "meaning": "线圈频率/类型",
+          "example": "7=AC50/60Hz,6=AC60Hz,5=AC50Hz,D=标准直流,L=低功耗直流"
+        },
+        {
+          "position": "第10段C",
+          "meaning": "国产(省略=进口)"
+        },
+        {
+          "position": "115~170A特殊",
+          "meaning": "在第5段后加00",
+          "example": "LC1D11500M7C"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "LC1D09M7C",
+          "explanation": "单个,TeSys D,9A,AC220V 50/60Hz,国产"
+        },
+        {
+          "model": "LC1D32BD",
+          "explanation": "单个,TeSys D,32A,AC110V 50/60Hz,进口"
+        },
+        {
+          "model": "LC1D25Q7C",
+          "explanation": "单个,TeSys D,25A,AC380V 50/60Hz,国产"
+        },
+        {
+          "model": "LC1D65M7C",
+          "explanation": "单个,TeSys D,65A,AC220V 50/60Hz,国产"
+        },
+        {
+          "model": "LC1D096M7C",
+          "explanation": "单个,TeSys D,9A,环形端子(6),AC220V 50/60Hz,国产"
+        },
+        {
+          "model": "LC1DT25M7C",
+          "explanation": "单个,TeSys D,4极(T),25A,AC220V 50/60Hz,国产"
+        },
+        {
+          "model": "LC1D15000M7C",
+          "explanation": "单个,TeSys D,150A(加00),AC220V 50/60Hz,国产"
+        },
+        {
+          "model": "LC2D25M7C",
+          "explanation": "可逆,TeSys D,25A,AC220V 50/60Hz,国产"
+        }
+      ]
+    }
+  ],
+  "breaking_capacity_summary": {
+    "note": "施耐德塑壳/框架断路器分断能力字母代码(400/415V)",
+    "E": "16kA",
+    "B": "25kA",
+    "F": "36kA",
+    "N": "50kA",
+    "H": "70kA",
+    "S": "100kA",
+    "L": "150kA",
+    "R": "200kA",
+    "H1": "65kA",
+    "H1b": "85kA",
+    "H2": "100kA",
+    "H3": "150kA"
+  },
+  "trip_curve_summary": {
+    "note": "微型断路器脱扣曲线(IEC 60898-1)",
+    "B": "3In < I <= 5In 照明/电阻负载",
+    "C": "5In < I <= 10In 通用配电(最常用)",
+    "D": "10In < I <= 20In 电动机/变压器",
+    "K": "8In < I <= 12In 电动机/变压器",
+    "Z": "2In < I <= 3In 半导体设备"
+  }
+}

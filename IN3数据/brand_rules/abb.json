@@ -1,0 +1,644 @@
+{
+  "brand": "ABB",
+  "brand_en": "ABB Ltd.",
+  "updated_at": "2026-06-26",
+  "note": "ABB低压元器件型号命名规则，数据来源：ABB官方产品选型手册、技术数据表、订货号编码说明文档",
+  "series": [
+    {
+      "name": "SACE Tmax XT 塑壳断路器",
+      "series_code": "Tmax XT",
+      "product_range": "16A-1600A (IEC), 10A-250A (UL)",
+      "description": "ABB新一代塑壳断路器，IEC标准下壳架等级XT1-XT7，覆盖配电保护、电机保护、发电机保护三大应用",
+      "rules": [
+        {
+          "position": "前缀XT",
+          "meaning": "Tmax XT系列标识，SACE品牌塑壳断路器"
+        },
+        {
+          "position": "XT后数字（IEC壳架号）",
+          "meaning": "壳架电流等级",
+          "example": "XT1=125A, XT2=160A, XT3=250A, XT4=250A, XT5=400A, XT6=630A, XT7=800A"
+        },
+        {
+          "position": "壳架号后字母B",
+          "meaning": "标准分断能力 25kA @415V (IEC)",
+          "note": "仅XT1-XT4"
+        },
+        {
+          "position": "壳架号后字母N",
+          "meaning": "分断能力 36kA @415V (IEC) / 18kA @600Y/347V (UL)"
+        },
+        {
+          "position": "壳架号后字母S",
+          "meaning": "分断能力 50kA @415V (IEC) / 22kA @600Y/347V (UL)"
+        },
+        {
+          "position": "壳架号后字母H",
+          "meaning": "分断能力 70kA @415V (IEC) / 25kA @600Y/347V (UL)"
+        },
+        {
+          "position": "壳架号后字母L",
+          "meaning": "分断能力 120kA @415V (IEC) / 35-50kA @480-600V (UL)"
+        },
+        {
+          "position": "壳架号后字母V",
+          "meaning": "分断能力 150kA @415V (IEC) / 42-65kA @480-600V (UL)",
+          "note": "限流型"
+        },
+        {
+          "position": "壳架号后字母X",
+          "meaning": "分断能力 150kA @415V (IEC) / 45-100kA @480-600V (UL)",
+          "note": "限流型，仅XT1-XT4"
+        },
+        {
+          "position": "分断能力后字母",
+          "meaning": "标准类型（可选）",
+          "example": "U=UL&IEC双标80%额定, Q=UL&IEC双标100%额定, C=UL&IEC双标80%+CCC, D=UL&IEC双标100%+CCC, E=仅IEC, I=IEC 50C环境"
+        },
+        {
+          "position": "脱扣器类型TMF",
+          "meaning": "热磁脱扣单元，固定热脱扣+固定磁脱扣（Thermal Magnetic Fixed）",
+          "note": "配电保护，不可调"
+        },
+        {
+          "position": "脱扣器类型TMD",
+          "meaning": "热磁脱扣单元，可调热脱扣+固定磁脱扣（Thermal Magnetic Adjustable）",
+          "note": "配电保护，热脱扣可调"
+        },
+        {
+          "position": "脱扣器类型TMA",
+          "meaning": "热磁脱扣单元，可调热脱扣+可调磁脱扣（Thermal Magnetic Adjustable both）"
+        },
+        {
+          "position": "脱扣器类型MA",
+          "meaning": "仅磁脱扣（Magnetic only），电动机保护型",
+          "note": "无热脱扣，仅短路保护"
+        },
+        {
+          "position": "脱扣器类型MF",
+          "meaning": "固定磁脱扣，电动机保护型"
+        },
+        {
+          "position": "脱扣器类型MI",
+          "meaning": "电子脱扣单元，电动机保护型"
+        },
+        {
+          "position": "脱扣器类型Ele/Ekip Dip",
+          "meaning": "Ekip Dip电子脱扣单元（配电保护）",
+          "note": "Ekip Dip LS/I=仅过载+短路, Ekip Dip LIG=过载+短路+接地故障"
+        },
+        {
+          "position": "额定电流数字",
+          "meaning": "脱扣器额定电流(A)",
+          "example": "TMD 080=80A, TMD 160=160A, TMD 250=250A"
+        },
+        {
+          "position": "极数3",
+          "meaning": "三极"
+        },
+        {
+          "position": "极数4",
+          "meaning": "四极（100%中性线）"
+        },
+        {
+          "position": "极数N",
+          "meaning": "四极（50%中性线）",
+          "note": "仅IEC，TMD/TMA超过100A可用"
+        },
+        {
+          "position": "安装方式",
+          "meaning": "默认固定式(Fixed)，部分可选插入式(Plug-in)"
+        },
+        {
+          "position": "订货号位置3",
+          "meaning": "壳架号：1=XT1, 2=XT2, 3=XT3, 4=XT4, 5=XT5, 6=XT6, 7=XT7"
+        },
+        {
+          "position": "订货号位置4",
+          "meaning": "分断能力代码：B/N/S/H/L/V/X"
+        },
+        {
+          "position": "订货号位置5",
+          "meaning": "标准类型：空白=UL&IEC, U=UL 80%, Q=UL 100%, C/D=加CCC, E=仅IEC, I=IEC 50C"
+        },
+        {
+          "position": "订货号位置6",
+          "meaning": "极数：2=2P, 3=3P, 4=4P(100%N), N=4P(50%N)"
+        },
+        {
+          "position": "订货号位置7,8,9",
+          "meaning": "额定电流编码",
+          "example": "016=16A, 080=80A, 125=125A, 250=250A"
+        },
+        {
+          "position": "订货号位置10",
+          "meaning": "脱扣器类型：D=TMF/TMD配电, 0=无/空, M=MA电机, I=MI电子电机, E=Ekip电子, F=MF"
+        },
+        {
+          "position": "订货号位置11",
+          "meaning": "前侧附件",
+          "example": "0=无, A=电机操作24VDC, D=电机操作220-250VAC/DC, E=380-440VAC"
+        },
+        {
+          "position": "订货号位置12-15",
+          "meaning": "其他选配（右侧附件、端子类型、操作机构等）"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "XT1 N TMD 100 3P",
+          "explanation": "XT1壳架125A, 36kA分断, TMD可调热磁脱扣100A, 三极"
+        },
+        {
+          "model": "XT2 S TMD 160 3P",
+          "explanation": "XT2壳架160A, 50kA分断, TMD可调热磁脱扣160A, 三极"
+        },
+        {
+          "model": "XT4 H TMA 250 4P",
+          "explanation": "XT4壳架250A, 70kA分断, TMA可调热磁脱扣250A, 四极"
+        },
+        {
+          "model": "XT1 N MA 50 3P",
+          "explanation": "XT1壳架125A, 36kA分断, MA仅磁脱扣50A电动机保护, 三极"
+        },
+        {
+          "model": "XT2 H Ele 100 3P",
+          "explanation": "XT2壳架160A, 70kA分断, Ekip电子脱扣100A, 三极"
+        }
+      ],
+      "compat_old_tmax": {
+        "note": "Tmax XT为Tmax (T1-T7)的升级替代系列，IEC命名对应：T1->XT1, T2->XT2, T3->XT3, T4->XT4, T5->XT5, T6->XT6, T7->XT7",
+        "old_format": "T1N TMF 100, T2X160 TMD 80A, T4S TMA 250, T5N TMA 400, T6S TMA 630, T7V TMA 800",
+        "old_frame": "T1=100A, T2=160A, T3=225A, T4=250A, T5=400A, T6=630A, T7=800A",
+        "old_breaking": "B=25kA, N=36kA, S=50kA, H=70kA, L=85kA, V=100kA",
+        "suffix_X": "增强型/加宽壳架（如T2X160表示160A壳架，区别于T2的100A）",
+        "suffix_terminal": "P=板前接线(Front), R=板后接线(Rear), U=通用接线",
+        "suffix_operator": "E=电动操作(Motor Operator)"
+      }
+    },
+    {
+      "name": "SACE Emax 框架断路器",
+      "series_code": "Emax",
+      "product_range": "800A-6300A",
+      "description": "ABB空气断路器(ACB)，经典Emax系列含E1-E6五个壳架，后续New Emax增加X1，Emax 2增加E1.2/E2.2/E4.2/E6.2。分固定式和抽出式两种安装方式。",
+      "rules": [
+        {
+          "position": "前缀SACE",
+          "meaning": "ABB低压电气品牌SACE"
+        },
+        {
+          "position": "Emax后字母/数字",
+          "meaning": "壳架等级",
+          "example": "E1=800A, E2=1250-2000A, E3=1250-3200A, E4=3200-4000A, E6=5000-6300A, X1=1000A(New Emax)"
+        },
+        {
+          "position": "壳架后字母B",
+          "meaning": "基本分断能力，40kA @400V",
+          "note": "仅E1/E2"
+        },
+        {
+          "position": "壳架后字母N",
+          "meaning": "普通分断能力，42-65kA @400V",
+          "example": "E1N=42kA, E2N=42kA"
+        },
+        {
+          "position": "壳架后字母S",
+          "meaning": "标准分断能力，65-75kA @400V",
+          "example": "E3S=65kA"
+        },
+        {
+          "position": "壳架后字母H",
+          "meaning": "高分断能力，75-100kA @400V",
+          "example": "E4H=85kA"
+        },
+        {
+          "position": "壳架后字母V",
+          "meaning": "甚高分断能力，100-130kA @400V"
+        },
+        {
+          "position": "壳架后字母L",
+          "meaning": "限流型分断能力，130kA @400V",
+          "note": "仅E1/E3/E4的L型"
+        },
+        {
+          "position": "壳架后字母C",
+          "meaning": "经济型分断，42kA"
+        },
+        {
+          "position": "安装方式F",
+          "meaning": "固定式(Fixed)"
+        },
+        {
+          "position": "安装方式W",
+          "meaning": "抽出式(Withdrawable)",
+          "note": "UL版用H=抽出式"
+        },
+        {
+          "position": "端子类型代码",
+          "meaning": "上端子+下端子类型组合",
+          "example": "H=后水平, V=后垂直, F=前, L=后平展, HR=后水平, FF=前后前接"
+        },
+        {
+          "position": "额定电流编码",
+          "meaning": "额定电流值",
+          "example": "02=250A, 08=800A, 10=1000A, 12=1250A, 16=1600A, 20=2000A, 25=2500A, 32=3200A, 40=4000A, 50=5000A, 63=6300A"
+        },
+        {
+          "position": "极数3P",
+          "meaning": "三极（订货号中数字1-6表示壳架大小）"
+        },
+        {
+          "position": "极数4P",
+          "meaning": "四极（订货号中字母A-F表示壳架大小+4P）"
+        },
+        {
+          "position": "脱扣单元PR121",
+          "meaning": "New Emax/Emax 2电子脱扣单元（基本型，过载L+短路I）"
+        },
+        {
+          "position": "脱扣单元PR122",
+          "meaning": "New Emax/Emax 2电子脱扣单元（通信型，带电流表功能）"
+        },
+        {
+          "position": "脱扣单元PR123",
+          "meaning": "New Emax/Emax 2电子脱扣单元（高级型，带电能质量监测）"
+        },
+        {
+          "position": "脱扣单元PR122/123后缀P",
+          "meaning": "带功率测量功能"
+        },
+        {
+          "position": "脱扣单元PR111/PR112/PR113",
+          "meaning": "Emax第一代电子脱扣单元(已停产)"
+        },
+        {
+          "position": "脱扣单元PR211/PR212/PR222",
+          "meaning": "Emax 2电子脱扣单元"
+        },
+        {
+          "position": "脱扣单元PR331",
+          "meaning": "电子脱扣单元（基本过载+短路保护）"
+        },
+        {
+          "position": "分励脱扣XF",
+          "meaning": "分励脱扣器"
+        },
+        {
+          "position": "欠压脱扣UVR",
+          "meaning": "欠压脱扣器"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "E1 N 800A 3P F",
+          "explanation": "Emax E1壳架800A, 42kA分断, 800A额定电流, 三极, 固定式"
+        },
+        {
+          "model": "E2 S 2000A 3P W",
+          "explanation": "Emax E2壳架2000A, 65kA分断, 2000A额定电流, 三极, 抽出式"
+        },
+        {
+          "model": "E3 H 2500A 4P",
+          "explanation": "Emax E3壳架, 75kA分断, 2500A额定电流, 四极"
+        },
+        {
+          "model": "E4 V 3200A 3P",
+          "explanation": "Emax E4壳架, 130kA分断, 3200A额定电流, 三极"
+        },
+        {
+          "model": "E6 H 6300A 3P",
+          "explanation": "Emax E6壳架6300A, 100kA分断, 6300A额定电流, 三极"
+        }
+      ]
+    },
+    {
+      "name": "SACE Formula 塑壳断路器",
+      "series_code": "Formula",
+      "product_range": "15A-630A",
+      "description": "ABB Formula系列是SACE品牌的紧凑型塑壳断路器，IEC标准下有A0、A1、A2、A3四个壳架框架。主要面向性价比市场。",
+      "rules": [
+        {
+          "position": "前缀A",
+          "meaning": "Formula系列壳架标识"
+        },
+        {
+          "position": "A后数字0",
+          "meaning": "A0框架，微型壳架，0.5-25A",
+          "note": "IEC版本"
+        },
+        {
+          "position": "A后数字1",
+          "meaning": "A1框架，125A壳架",
+          "example": "可配1P, 2P, 3P, 4P"
+        },
+        {
+          "position": "A后数字2",
+          "meaning": "A2框架，250A壳架"
+        },
+        {
+          "position": "A后数字3",
+          "meaning": "A3框架，630A壳架"
+        },
+        {
+          "position": "分断能力B",
+          "meaning": "分断能力18kA @415V"
+        },
+        {
+          "position": "分断能力C",
+          "meaning": "分断能力25kA @415V"
+        },
+        {
+          "position": "分断能力N",
+          "meaning": "分断能力36kA @415V",
+          "note": "A1/A2为36kA, A3为50kA"
+        },
+        {
+          "position": "分断能力S",
+          "meaning": "分断能力50kA @415V",
+          "note": "仅A3"
+        },
+        {
+          "position": "脱扣单元TMF",
+          "meaning": "固定热磁脱扣单元",
+          "note": "A1/A2/A3均有"
+        },
+        {
+          "position": "脱扣单元ELT LI",
+          "meaning": "电子脱扣单元，固定阈值，仅过载L+短路I保护",
+          "note": "仅A3"
+        },
+        {
+          "position": "极数",
+          "meaning": "1P(A0/A1/A2), 2P(A0/A1/A2), 3P(全系列), 4P(A1/A2/A3)"
+        },
+        {
+          "position": "安装方式",
+          "meaning": "默认固定式，标准前接线端子"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "A1 125 TMF In=80A 3P",
+          "explanation": "Formula A1框架125A, TMF固定热磁脱扣80A, 三极"
+        },
+        {
+          "model": "A2 250 TMF In=200A 3P",
+          "explanation": "Formula A2框架250A, TMF固定热磁脱扣200A, 三极"
+        },
+        {
+          "model": "A3 630 TMF In=400A 4P",
+          "explanation": "Formula A3框架630A, TMF固定热磁脱扣400A, 四极"
+        },
+        {
+          "model": "A3 630 ELT LI In=500A 3P",
+          "explanation": "Formula A3框架630A, ELT电子脱扣500A, 三极"
+        }
+      ]
+    },
+    {
+      "name": "S200/S200P/S280/S290/S800 微型断路器",
+      "series_code": "S200系列",
+      "product_range": "0.5A-125A",
+      "description": "ABB微型断路器(MCB)系列，UL 1077/UL 489标准。S200为基础型6kA，S200P为高分断型10kA，S200M为电机保护型，S280/S290为大电流型80-125A，S800为IEC高分断型36-50kA。",
+      "rules": [
+        {
+          "position": "前缀S",
+          "meaning": "S系列微型断路器"
+        },
+        {
+          "position": "S后数字200",
+          "meaning": "标准型微型断路器，6kA分断",
+          "note": "UL 1077标准"
+        },
+        {
+          "position": "S后数字200P",
+          "meaning": "高分断型微型断路器，10kA分断(<=25A), 6kA(32-63A)"
+        },
+        {
+          "position": "S后数字200M",
+          "meaning": "电机保护型微型断路器，6kA分断",
+          "note": "K曲线"
+        },
+        {
+          "position": "S后数字200MR",
+          "meaning": "直流电机保护型，10kA DC分断"
+        },
+        {
+          "position": "S后数字200MUC",
+          "meaning": "直流通用型，C/K/Z曲线"
+        },
+        {
+          "position": "S后数字280",
+          "meaning": "大电流型80-100A，6kA分断",
+          "note": "C/D曲线"
+        },
+        {
+          "position": "S后数字290",
+          "meaning": "大电流型80-125A，6kA分断",
+          "note": "C/D曲线"
+        },
+        {
+          "position": "S后数字800N",
+          "meaning": "IEC高分断型10-125A，36kA分断 @415V",
+          "note": "IEC 60947-2"
+        },
+        {
+          "position": "S后数字800S",
+          "meaning": "IEC高分断型10-125A，50kA分断 @415V"
+        },
+        {
+          "position": "S后数字500",
+          "meaning": "扩展分断型，18-30kA @240V"
+        },
+        {
+          "position": "脱扣曲线B",
+          "meaning": "B曲线：瞬时脱扣3In~5In",
+          "note": "适用于电缆保护、照明"
+        },
+        {
+          "position": "脱扣曲线C",
+          "meaning": "C曲线：瞬时脱扣5In~10In",
+          "note": "最常用, 通用配电"
+        },
+        {
+          "position": "脱扣曲线D",
+          "meaning": "D曲线：瞬时脱扣10In~20In",
+          "note": "适用于电动机、变压器"
+        },
+        {
+          "position": "脱扣曲线K",
+          "meaning": "K曲线：瞬时脱扣8In~12In",
+          "note": "电机保护专用"
+        },
+        {
+          "position": "脱扣曲线Z",
+          "meaning": "Z曲线：瞬时脱扣2In~3In",
+          "note": "半导体保护"
+        },
+        {
+          "position": "订货号第二位1/2/3/4",
+          "meaning": "极数：1=1P, 2=2P, 3=3P, 4=4P",
+          "example": "S201=1P, S203=3P"
+        },
+        {
+          "position": "订货号后缀NA",
+          "meaning": "切换中性极(Switching Neutral)",
+          "note": "1P+N型"
+        },
+        {
+          "position": "订货号后数字",
+          "meaning": "额定电流(A)",
+          "example": "S203-B16=3P, B曲线, 16A"
+        },
+        {
+          "position": "安装方式",
+          "meaning": "35mm DIN导轨安装"
+        }
+      ],
+      "accessory_codes": {
+        "S2-A1": "分励脱扣器 12-60VAC/DC",
+        "S2-A2": "分励脱扣器 110-415VAC/110-250VDC",
+        "S2C-H11": "辅助触头 1NO+1NC",
+        "S2C-H20": "辅助触头 2NO",
+        "S2C-H02": "辅助触头 2NC"
+      },
+      "model_examples": [
+        {
+          "model": "S200-B16 1P",
+          "explanation": "S200标准型6kA, B曲线, 16A, 单极"
+        },
+        {
+          "model": "S200P-C32 3P",
+          "explanation": "S200P高分断型10kA, C曲线, 32A, 三极"
+        },
+        {
+          "model": "S200M-K10 2P",
+          "explanation": "S200M电机保护型, K曲线, 10A, 两极"
+        },
+        {
+          "model": "S800N-C63 3P",
+          "explanation": "S800N IEC高分断36kA, C曲线, 63A, 三极"
+        },
+        {
+          "model": "S290-D100 3P",
+          "explanation": "S290大电流型, D曲线, 100A, 三极"
+        }
+      ]
+    },
+    {
+      "name": "ABB接触器（A系列/AF系列）",
+      "series_code": "A/AF/AX",
+      "product_range": "9A-2650A (AC-3)",
+      "description": "ABB接触器系列包含传统A系列（交流线圈操作）、AF系列（宽电压电子线圈操作，支持AC/DC）和AX/AE系列。AF系列是主力产品，覆盖AF09至AF2650。",
+      "rules": [
+        {
+          "position": "前缀A",
+          "meaning": "ABB传统交流接触器（A系列）"
+        },
+        {
+          "position": "前缀AF",
+          "meaning": "ABB电子线圈交流/直流接触器（AF系列），宽电压范围"
+        },
+        {
+          "position": "前缀AX",
+          "meaning": "ABB AX系列接触器"
+        },
+        {
+          "position": "前缀AE",
+          "meaning": "ABB直流操作接触器"
+        },
+        {
+          "position": "AF后数字",
+          "meaning": "接触器额定电流(A) @AC-3",
+          "example": "AF09=9A, AF30=30A, AF50=50A, AF95=95A, AF145=145A, AF210=210A, AF400=400A, AF750=750A, AF1250=1250A, AF2650=2650A"
+        },
+        {
+          "position": "A系列电流",
+          "meaning": "A9=9A, A16=16A, A26=26A, A30=30A, A40=40A, A50=50A, A65=65A, A75=75A, A95=95A, A110=110A, A145=145A, A185=185A, A210=210A, A260=260A, A300=300A"
+        },
+        {
+          "position": "极数",
+          "meaning": "默认3极（三极接触器），部分型号有4极"
+        },
+        {
+          "position": "AF线圈电压后缀(AC/DC)",
+          "meaning": "电子线圈电压范围代码",
+          "example": "68=24-60VDC, 69=20-60VDC, 70=48-130VAC/DC, 71=100-250VAC/DC, 72=250-500VAC/DC"
+        },
+        {
+          "position": "A系列AC线圈电压代码",
+          "meaning": "交流线圈电压",
+          "example": "24=24VAC, 81=26V, 60=60VAC, 100=100V, 110=110VAC, 115=115VAC, 200=200VAC, 75=200-220VAC, 220=220VAC, 230=230-240VAC, 380=380-400VAC, 440=440VAC, 480=480VAC"
+        },
+        {
+          "position": "A系列DC线圈电压代码",
+          "meaning": "直流线圈电压",
+          "example": "16=28VDC, 17=32VDC, 18=42VDC, 28=110VDC, 29=125VDC, 36=220VDC"
+        },
+        {
+          "position": "辅助触头",
+          "meaning": "可侧装辅助触头块，1NO+1NC, 2NO+2NC等"
+        },
+        {
+          "position": "Z后缀（AF线圈）",
+          "meaning": "带印刷电路板(PCB)的电子线圈",
+          "note": "AF1350-AF2650需要PCB"
+        },
+        {
+          "position": "尺寸代号",
+          "meaning": "不同额定电流对应不同物理尺寸",
+          "example": "尺寸00(A9-A16), 尺寸0(A26-A30), 尺寸1(A40-A75), 尺寸2(A95-A110), 尺寸3(A145-A185), 尺寸4(A210-A300)"
+        }
+      ],
+      "model_examples": [
+        {
+          "model": "AF50-30-11 100-250VAC/DC",
+          "explanation": "AF系列接触器50A, 30号尺寸, 1NO+1NC辅助触头, 宽电压100-250VAC/DC线圈"
+        },
+        {
+          "model": "AF95 220VAC",
+          "explanation": "AF系列接触器95A, 220VAC线圈"
+        },
+        {
+          "model": "AF400-30-10",
+          "explanation": "AF系列接触器400A, 30号尺寸, 1NO辅助触头"
+        },
+        {
+          "model": "A26 220VAC 50Hz",
+          "explanation": "A系列传统接触器26A, 220VAC 50Hz线圈"
+        },
+        {
+          "model": "AF2050 ZAF1650",
+          "explanation": "AF系列接触器2050A, ZAF1650=1650号尺寸带PCB电子线圈"
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "trip_unit_types": {
+      "TMF": "热磁脱扣-固定(Fixed), 不可调",
+      "TMD": "热磁脱扣-可调热脱扣+固定磁脱扣",
+      "TMA": "热磁脱扣-热磁均可调",
+      "MA": "仅磁脱扣(Magnetic only), 电机保护",
+      "MF": "固定磁脱扣, 电机保护",
+      "MI": "电子脱扣-电动机保护",
+      "Ele/Ekip Dip": "Ekip电子脱扣-配电保护",
+      "ELT LI": "电子脱扣-固定阈值过载+短路"
+    },
+    "breaking_capacity_codes": {
+      "B": "标准分断(25-40kA)",
+      "N": "普通分断(36-42kA)",
+      "S": "标准分断(50-65kA)",
+      "H": "高分断(65-100kA)",
+      "L": "限流型(85-130kA)",
+      "V": "甚高分断(100-150kA)",
+      "X": "极高分断(45-150kA)"
+    },
+    "terminal_types": {
+      "F": "板前接线(Front)",
+      "R": "板后接线(Rear)",
+      "U": "通用接线(Universal)",
+      "P": "插入式(Plug-in)"
+    }
+  }
+}

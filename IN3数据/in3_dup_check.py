@@ -46,6 +46,83 @@ COL = {
 # 排除的物料类别
 EXCLUDE_CATS = {'成品柜', '外购成套', '管道配件', '气动配件', '外包服务'}
 
+# ─── 品牌型号命名规则知识库 ─────────────────────────────────────────────────
+# 从 brand_naming_rules/naming_rules.json 加载，用于规则 #46
+_BRAND_RULES_PATH = Path(__file__).parent / 'brand_naming_rules' / 'naming_rules.json'
+BRAND_NAMING_RULES = {}
+if _BRAND_RULES_PATH.exists():
+    try:
+        with open(_BRAND_RULES_PATH, 'r', encoding='utf-8') as _f:
+            BRAND_NAMING_RULES = json.load(_f)
+    except (json.JSONDecodeError, OSError):
+        pass  # 文件损坏时不阻塞，规则#46降级为不生效
+
+# 提取跨品牌的附件/安装/接线后缀字典（短代号→含义），用于后缀差异检测
+# 只提取短代号（1-4字符），因为长代号（如"分励脱扣器"）已有中文规则覆盖
+_SUFFIX_CODES = {}  # {'F': {'meaning': '辅助触头', 'type': '附件'}, ...}
+_INSTALL_CODES = {}  # {'P': {'meaning': '插入式', 'type': '安装'}, ...}
+_CONNECTION_CODES = {}  # {'RC': {'meaning': '板后接线', 'type': '接线'}, ...}
+
+def _extract_suffix_codes():
+    """从品牌规则JSON中提取所有短代号后缀（附件/安装/接线/脱扣器）"""
+    suffixes = {}
+    installs = {}
+    connects = {}
+    trip_units = {}
+    for _brand, _data in BRAND_NAMING_RULES.items():
+        if _brand == '说明' or not isinstance(_data, dict) or '系列' not in _data:
+            continue
+        for _series_name, _series_data in _data['系列'].items():
+            if not isinstance(_series_data, dict):
+                continue
+            # 附件代号
+            for _code, _desc in _series_data.get('附件代号', {}).items():
+                _c = _code.strip()
+                if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
+                    suffixes.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '附件'})
+            # 安装方式
+            for _code, _desc in _series_data.get('安装方式', {}).items():
+                _c = _code.strip()
+                if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
+                    installs.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '安装'})
+            # 接线方式
+            for _code, _desc in _series_data.get('接线方式', {}).items():
+                _c = _code.strip()
+                if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
+                    connects.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '接线'})
+            # 脱扣器类型（TM/TMF/TMD/MA/LSI/LSIG等）
+            for _code, _desc in _series_data.get('脱扣器类型', {}).items():
+                _c = _code.strip().replace('-', '')  # TM-D → TMD
+                if 2 <= len(_c) <= 6 and _c.isascii() and _c.isupper():
+                    trip_units.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '脱扣器'})
+    return suffixes, installs, connects, trip_units
+
+_SUFFIX_CODES, _INSTALL_CODES, _CONNECTION_CODES, _TRIP_UNIT_CODES = _extract_suffix_codes()
+
+# 保留硬编码作为兜底（即使JSON文件丢失也能工作）
+_FALLBACK_SUFFIXES = {
+    'F': '辅助触头', 'P': '板前接线/插入式', 'R': '板后接线',
+    'SD': '信号接点', 'FM': '遥信模块',
+    'W': '抽出式', 'D': '抽出式',
+    'OF': '辅助触头', 'MX': '分励脱扣器', 'MN': '欠压脱扣器',
+    'SDE': '故障信号接点', 'MT': '电动操作',
+    'EF': '加长前接线', 'ES': '加长扩展前接线',
+    'EL': '漏电保护', 'RC': '板后接线', 'FC': '板前接线',
+    'AL': '辅助触头', 'AX': '报警触头', 'SHT': '分励脱扣器',
+    'UVT': '欠压脱扣器', 'MG': '电动操作',
+    'TMF': '热磁脱扣器(配电)', 'TMD': '热磁脱扣器(可调)',
+    'TMA': '热磁脱扣器(可调)', 'MA': '单磁脱扣器',
+    'MF': '单磁脱扣器(电机)',
+    'LI': '电子脱扣器(长延时+瞬时)',
+    'LSI': '电子脱扣器(三段保护)',
+    'LSIG': '电子脱扣器(含接地)',
+}
+# 合并：JSON规则优先，兜底补充
+_ALL_SUFFIX_CODES = {**_FALLBACK_SUFFIXES, **{k: v['meaning'] for k, v in _SUFFIX_CODES.items()},
+                    **{k: v['meaning'] for k, v in _INSTALL_CODES.items()},
+                    **{k: v['meaning'] for k, v in _CONNECTION_CODES.items()},
+                    **{k: v['meaning'] for k, v in _TRIP_UNIT_CODES.items()}}
+
 # Excel 输出字段
 FIELDS = [
     ('标记', 'label'), ('物料编号', 'code'), ('物料名称', 'name'),
@@ -602,34 +679,100 @@ def is_nondup(a, b):
             if kv_dict_a[key] != kv_dict_b[key]:
                 return True, f'参数值不同: {key}={kv_dict_a[key]} vs {key}={kv_dict_b[key]}'
 
-    # --- 规则 #45: 型号末尾附件/接线后缀有vs无 = 非重复 (2026-06-26 Dongfang 确认) ---
-    # F=辅助触头, P=板前接线, R=板后接线, SD=信号接点, FM=遥信模块
-    # 等附件后缀，一方有一方没有 = 不同型号
-    # 检查型号描述末尾的单字母/双字母附件后缀
-    attach_suffixes = {
-        'F': '辅助触头', 'P': '板前接线', 'R': '板后接线',
-        'SD': '信号接点', 'FM': '遥信模块',
-    }
-    for suf, label in attach_suffixes.items():
-        # 检查 /3F vs /3, /4P vs /4 等模式（极数后跟附件代号）
-        has_suf_a = bool(re.search(r'/\d+' + suf + r'(?:\s|$|/|[\u4e00-\u9fff])', da))
-        has_suf_b = bool(re.search(r'/\d+' + suf + r'(?:\s|$|/|[\u4e00-\u9fff])', db))
-        if has_suf_a != has_suf_b:
-            return True, f'附件后缀{label}({suf})有vs无: 不同型号'
-        # 也检查 3F vs 3, 4P vs 4 等不带斜杠的模式（在型号描述中）
-        has_suf_a2 = bool(re.search(r'\d' + suf + r'(?:\s|$|/|[\u4e00-\u9fff,）)])', da))
-        has_suf_b2 = bool(re.search(r'\d' + suf + r'(?:\s|$|/|[\u4e00-\u9fff,）)])', db))
-        if has_suf_a2 != has_suf_b2:
-            return True, f'附件后缀{label}({suf})有vs无: 不同型号'
-        # 检查描述末尾独立的单字母后缀（如 "400A P" vs "400A"）
-        # P/F/R 作为末尾独立附件代号
-        if suf in ('F', 'P', 'R'):
-            has_end_a = bool(re.search(r'\b' + suf + r'\s*$', da.strip()))
-            has_end_b = bool(re.search(r'\b' + suf + r'\s*$', db.strip()))
-            if has_end_a != has_end_b:
-                return True, f'附件后缀{label}({suf})有vs无: 不同型号'
+    # --- 规则 #45 (已被规则 #46 替代，保留向后兼容) ---
+    # 原规则#45的逻辑已升级为规则#46（品牌命名规则知识库驱动）
+
+    # --- 规则 #46: 品牌命名规则知识库驱动后缀检测 (2026-06-26) ---
+    # 基于11品牌51系列的实际选型手册数据，检测附件/安装/接线后缀差异
+    # 替代旧规则#45的硬编码5个后缀，现在覆盖所有已知的品牌后缀代号
+    result = _detect_suffix_diff(da, db, ta, tb)
+    if result:
+        return True, result
 
     return False, ''
+
+
+def _detect_suffix_diff(da, db, ta, tb):
+    """
+    基于品牌命名规则知识库，检测描述中的附件/安装/接线后缀差异。
+    返回非空字符串表示判定为非重复（含原因），返回空字符串表示未检测到差异。
+
+    核心原则：后缀差异 = 一方有某附件/安装/接线代号，另一方没有。
+    但必须排除极数标注（3P/4P/3D）、分断能力代号（F/N/H/S）、
+    脱扣器代号（TM/MA/TMF）、壳架代号（XT1/XT2 等）等非附件上下文。
+    """
+    # 统一大小写
+    da_u, db_u = da.upper(), db.upper()
+    combined_a = da_u + ' ' + ta.upper()
+    combined_b = db_u + ' ' + tb.upper()
+
+    # 排除极数上下文中的 P/D：\dP 或 \dD（如 3P, 4P, 3D）不是后缀
+    # 但 /3F 中 F 不是极数（极数是 P），所以 /3F 中的 F 是附件后缀
+    pole_pattern = re.compile(r'\d[PD](?:[\s/,.\u4e00-\u9fff]$)')
+
+    # 排除分断能力代号上下文：在型号核心部分中的 F/N/H/S/B/C/L/M/R/V/W/E/X
+
+    for code, meaning in _ALL_SUFFIX_CODES.items():
+        if len(code) == 1:
+            # ── 单字母后缀（F/P/R/W/D等）──
+            # 只检测以下安全模式：
+            # 1) /数字+字母 末尾（如 /3F、/160/3F）
+            # 2) 描述末尾独立字母（如 "400A P"）
+            # 3) 空格分隔的独立字母（如 "NSX250N 3P OF"）
+
+            # 模式A: /N+字母 在描述末尾位置 (如 /160/3F 中 F)
+            pat_a = r'/\d+' + re.escape(code) + r'(?:\s|$|/|[\u4e00-\u9fff])'
+            has_a_a = bool(re.search(pat_a, combined_a))
+            has_a_b = bool(re.search(pat_a, combined_b))
+            if has_a_a != has_a_b:
+                return f'后缀{meaning}({code})有vs无: 不同型号'
+
+            # 模式B: 描述末尾独立字母 (如 "...400A P")
+            # 必须排除极数（\dP 在末尾不算）
+            pat_b = r'(?:\s|^)' + re.escape(code) + r'\s*$'
+            has_b_a = bool(re.search(pat_b, da_u.strip()))
+            has_b_b = bool(re.search(pat_b, db_u.strip()))
+            if has_b_a != has_b_b:
+                # 额外检查：排除极数误触发（如描述末尾的 3P）
+                if code == 'P':
+                    # 检查匹配位置前面是不是数字（极数）
+                    if has_b_a and re.search(r'\dP\s*$', da):
+                        continue  # 极数P，跳过
+                    if has_b_b and re.search(r'\dP\s*$', db):
+                        continue
+                if code == 'D':
+                    if has_b_a and re.search(r'\dD\s*$', da):
+                        continue
+                    if has_b_b and re.search(r'\dD\s*$', db):
+                        continue
+                return f'后缀{meaning}({code})有vs无: 不同型号'
+
+            # 模式C: 空格分隔的独立字母，且不在极数上下文中
+            # 只对已知附件后缀 F/R/W/D（不是P，P太容易误触发）
+            if code in ('F', 'R', 'W', 'D'):
+                pat_c = r'(?:\s|^)' + re.escape(code) + r'(?:\s|$|[,，)）])'
+                has_c_a = bool(re.search(pat_c, combined_a))
+                has_c_b = bool(re.search(pat_c, combined_b))
+                if has_c_a != has_c_b:
+                    return f'后缀{meaning}({code})有vs无: 不同型号'
+
+        elif len(code) == 2:
+            # ── 双字母后缀（OF/SD/MX/MN/EL/RC/FC/EF/ES/AL/AX 等）──
+            pat = r'(?:\s|^|/)' + re.escape(code) + r'(?:\s|$|/|[,，)）])'
+            has_a = bool(re.search(pat, combined_a))
+            has_b = bool(re.search(pat, combined_b))
+            if has_a != has_b:
+                return f'{meaning}({code})有vs无: 不同型号'
+
+        elif len(code) >= 3:
+            # ── 3+字母后缀（SDE/UVT/SHT/MOE/RHD/IFM/COM 等）──
+            pat = r'(?:\s|^|/)' + re.escape(code) + r'(?:\s|$|/|[,，)）])'
+            has_a = bool(re.search(pat, combined_a))
+            has_b = bool(re.search(pat, combined_b))
+            if has_a != has_b:
+                return f'{meaning}({code})有vs无: 不同型号'
+
+    return ''
 
 
 def desc_numbers_match(a, b):

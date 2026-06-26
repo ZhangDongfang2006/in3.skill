@@ -1,0 +1,157 @@
+{
+  "brand": "上海人民电器",
+  "brand_en": "Shanghai People Electric / PEOPLE",
+  "brand_cn": "上海人民电器厂(上联)",
+  "updated": "2026-06-26",
+  "note": "基于上海人民电器官方产品手册PDF(RMW1系列)及市场产品数据整理。注意: 上海人民电器(上联) ≠ 人民电器集团(乐清), 前者产品以R开头(RMW1/RMM1/RMC1), 后者产品以R开头(RD系列)。DW45为国标框架断路器统一命名。",
+  "series": [
+    {
+      "name": "DW45/RMW1系列智能型万能式断路器",
+      "series_code": "DW45/RMW1",
+      "type": "ACB",
+      "pattern": "RMW1-[壳架等级]/[极数][分断代号]",
+      "example": "RMW1-2000/3, RMW1-3200/3, RMW1-6300",
+      "note": "DW45为国标万能式断路器型号，上海人民电器厂的工厂代号/产品型号为RMW1。RMW1(DW45)是九十年代开发的产品，额定电流630~6300A。另有RMW2(升级版)、RMCW1(高版本)。",
+      "rules": [
+        {
+          "position": "RMW",
+          "meaning": "上海人民电器万能式断路器系列代号",
+          "note": "R=人民(People), MW=万能式(Motorized/万能式)。工厂内部型号"
+        },
+        {
+          "position": "DW45",
+          "meaning": "国标万能式断路器统一型号(全国统一设计序号45)",
+          "note": "DW=万能式(框架)断路器国标分类代号。45为设计序号，多个厂家共用此序号"
+        },
+        {
+          "position": "-后数字(壳架等级)",
+          "meaning": "壳架等级额定电流(A)",
+          "note": "常用: 630, 1000, 1250, 1600, 2000, 2500, 3200, 4000, 5000, 6300A"
+        },
+        {
+          "position": "/后极数",
+          "meaning": "断路器极数",
+          "options": {
+            "3": "3极",
+            "4": "4极"
+          }
+        },
+        {
+          "position": "分断代号",
+          "meaning": "分断能力等级",
+          "options": {
+            "S": "标准分断型",
+            "H": "高分断型"
+          }
+        },
+        {
+          "position": "安装方式",
+          "meaning": "安装方式",
+          "options": {
+            "固定式": "固定式安装",
+            "抽屉式": "抽屉式安装"
+          }
+        },
+        {
+          "position": "脱扣器种类",
+          "meaning": "智能脱扣器类型",
+          "options": {
+            "BSE3": "基本型脱扣器(长延时+短路瞬时)",
+            "bse3": "基本型脱扣器(长延时+短延时+瞬时)"
+          },
+          "note": "智能型脱扣器具有电流表/电压表显示、通信接口(Modbus)"
+        }
+      ]
+    },
+    {
+      "name": "RMM1系列塑料外壳式断路器",
+      "series_code": "RMM1",
+      "type": "MCCB",
+      "pattern": "RMM1-[壳架等级][分断等级]/[脱扣器代号][极数]",
+      "example": "RMM1-100H/3300, RMM1-250S/3300, RMM1-630M/3300",
+      "note": "上海人民电器塑壳断路器系列。子系列: RMM1=标准型, RMM1L=漏电保护型, RMM2=第二代, RMM3=第三代。",
+      "rules": [
+        {
+          "position": "RMM",
+          "meaning": "上海人民电器塑壳断路器系列代号",
+          "note": "R=人民, MM=塑壳(Moulded-case)"
+        },
+        {
+          "position": "世代序号",
+          "meaning": "产品世代",
+          "options": {
+            "1": "RMM1 第一代",
+            "2": "RMM2 第二代",
+            "3": "RMM3 第三代"
+          }
+        },
+        {
+          "position": "-后数字(壳架等级)",
+          "meaning": "壳架等级额定电流(A)",
+          "note": "63, 100, 125, 160, 250, 400, 630, 800A"
+        },
+        {
+          "position": "分断能力等级字母",
+          "meaning": "分断能力等级",
+          "options": {
+            "S": "标准型(约25~35kA)",
+            "H": "高分断型(约50~65kA)"
+          }
+        },
+        {
+          "position": "子系列后缀L",
+          "meaning": "带剩余电流保护(漏电)",
+          "options": {
+            "无": "标准型",
+            "L": "漏电保护型"
+          }
+        },
+        {
+          "position": "/后脱扣器代号",
+          "meaning": "内部附件配置(同CM1/CDM系列4位规则)",
+          "note": "3300=3极过载+短路保护, 4300=4极"
+        }
+      ]
+    },
+    {
+      "name": "CJX1系列交流接触器(上海人民版)",
+      "series_code": "CJX1",
+      "type": "AC Contactor",
+      "pattern": "CJX1-[额定电流][辅助触头代号]",
+      "example": "CJX1-9 22, CJX1-475 22",
+      "note": "上海人民电器厂也生产CJX1系列交流接触器，为国家标准统一命名。等效于西门子3TB系列。型号规则与德力西/常熟/正泰CJX1完全一致。",
+      "rules": [
+        {
+          "position": "CJX1",
+          "meaning": "交流接触器X1系列(国标统一命名)"
+        },
+        {
+          "position": "-后数字(额定电流)",
+          "meaning": "AC-3/380V额定工作电流(A)",
+          "note": "9~475A"
+        },
+        {
+          "position": "辅助触头代号",
+          "meaning": "辅助触头配置",
+          "options": {
+            "22": "2NO+2NC(标准)"
+          }
+        }
+      ]
+    },
+    {
+      "name": "RMVS1系列隔离开关",
+      "series_code": "RMVS1",
+      "type": "Isolator",
+      "pattern": "RMVS1-[壳架等级]",
+      "note": "上海人民电器隔离开关系列。"
+    },
+    {
+      "name": "RMC1/RMC2系列",
+      "series_code": "RMC",
+      "type": "MCCB",
+      "pattern": "RMC1-[壳架等级]...",
+      "note": "上海人民电器另一塑壳断路器系列。RMC1=第一代, RMC2=第二代。"
+    }
+  ]
+}
