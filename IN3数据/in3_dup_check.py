@@ -690,6 +690,30 @@ def is_nondup(a, b):
     # --- 规则 #45 (已被规则 #46 替代，保留向后兼容) ---
     # 原规则#45的逻辑已升级为规则#46（品牌命名规则知识库驱动）
 
+    # --- 规则 #48: 描述额外功能段差异 (2026-06-26) ---
+    # 一方描述比另一方多了额外的功能/配置标注 = 非重复
+    # 如 "iC65N C63A带SD接点" vs "iC65N C63A"
+    # 如 "3VA1M400 F/3P 配置相间隔板" vs "3VA1M400 F/3P"
+    # 如 "QSA-400/3 400A(柜外操作)" vs "QSA-400/3 400A"
+    # 方法：较短描述是较长描述的前缀，且差异部分包含中文功能词
+    extra_kw = ['带SD', 'SD接点', '带OF', '带MX', '带MN', '配置相间隔板', '相间隔板',
+                '柜外操作', '煤改电', '老练试验', '老炼', '切电容', '带防跳',
+                '合闸闭锁', '灭弧室', '底部摩擦接地', '6kA', '10kA', '15kA',
+                'NA', '带电显示', '加热器', '通讯', '电动操作', '侧装',
+                '带报警', '带辅助', '防潮', '防腐', '三防']
+    # 检查是否一方是另一方的前缀
+    short_desc = da if len(da) < len(db) else db
+    long_desc = db if len(da) < len(db) else da
+    if long_desc.startswith(short_desc):
+        extra_part = long_desc[len(short_desc):].strip().strip('（）() ')
+        if extra_part:
+            for kw in extra_kw:
+                if kw in extra_part:
+                    return True, f'额外功能标注差异: {extra_part[:30]}'
+            # 如果额外部分包含任何有意义的功能词（长度>=2的中文词）
+            if re.search(r'[\u4e00-\u9fff]{2,}', extra_part):
+                return True, f'描述额外信息: {extra_part[:30]}'
+
     # --- 规则 #47: 型号解析器比较 (2026-06-26) ---
     # 基于品牌知识库解析型号，逐字段比较（壳架/分断/极数/安装/接线/脱扣器/附件）
     _pa = _parse_model(da, na)
