@@ -70,31 +70,39 @@ def _extract_suffix_codes():
     connects = {}
     trip_units = {}
     for _brand, _data in BRAND_NAMING_RULES.items():
-        if _brand == '说明' or not isinstance(_data, dict) or '系列' not in _data:
+        if _brand == '说明' or not isinstance(_data, dict):
             continue
-        for _series_name, _series_data in _data['系列'].items():
+        for _series_name, _series_data in _data.get('系列', {}).items():
             if not isinstance(_series_data, dict):
                 continue
             # 附件代号
-            for _code, _desc in _series_data.get('附件代号', {}).items():
-                _c = _code.strip()
-                if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
-                    suffixes.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '附件'})
+            _att = _series_data.get('附件代号', {})
+            if isinstance(_att, dict):
+                for _code, _desc in _att.items():
+                    _c = str(_code).strip()
+                    if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
+                        suffixes.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '附件'})
             # 安装方式
-            for _code, _desc in _series_data.get('安装方式', {}).items():
-                _c = _code.strip()
-                if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
-                    installs.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '安装'})
+            _inst = _series_data.get('安装方式', {})
+            if isinstance(_inst, dict):
+                for _code, _desc in _inst.items():
+                    _c = str(_code).strip()
+                    if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
+                        installs.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '安装'})
             # 接线方式
-            for _code, _desc in _series_data.get('接线方式', {}).items():
-                _c = _code.strip()
-                if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
-                    connects.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '接线'})
-            # 脱扣器类型（TM/TMF/TMD/MA/LSI/LSIG等）
-            for _code, _desc in _series_data.get('脱扣器类型', {}).items():
-                _c = _code.strip().replace('-', '')  # TM-D → TMD
-                if 2 <= len(_c) <= 6 and _c.isascii() and _c.isupper():
-                    trip_units.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '脱扣器'})
+            _conn = _series_data.get('接线方式', {})
+            if isinstance(_conn, dict):
+                for _code, _desc in _conn.items():
+                    _c = str(_code).strip()
+                    if 1 <= len(_c) <= 4 and _c.isascii() and _c.isupper():
+                        connects.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '接线'})
+            # 脱扣器类型
+            _trip = _series_data.get('脱扣器类型', {})
+            if isinstance(_trip, dict):
+                for _code, _desc in _trip.items():
+                    _c = str(_code).strip().replace('-', '')
+                    if 2 <= len(_c) <= 6 and _c.isascii() and _c.isupper():
+                        trip_units.setdefault(_c, {'meaning': str(_desc)[:30], 'type': '脱扣器'})
     return suffixes, installs, connects, trip_units
 
 _SUFFIX_CODES, _INSTALL_CODES, _CONNECTION_CODES, _TRIP_UNIT_CODES = _extract_suffix_codes()
