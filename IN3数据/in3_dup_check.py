@@ -690,6 +690,14 @@ def is_nondup(a, b):
     # --- 规则 #45 (已被规则 #46 替代，保留向后兼容) ---
     # 原规则#45的逻辑已升级为规则#46（品牌命名规则知识库驱动）
 
+    # --- 规则 #47: 型号解析器比较 (2026-06-26) ---
+    # 基于品牌知识库解析型号，逐字段比较（壳架/分断/极数/安装/接线/脱扣器/附件）
+    _pa = _parse_model(da, na)
+    _pb = _parse_model(db, nb)
+    _r47 = _compare_parsed(_pa, _pb)
+    if _r47[0]:
+        return True, f'[规则#47] {_r47[1]}'
+
     # --- 规则 #46: 品牌命名规则知识库驱动后缀检测 (2026-06-26) ---
     # 基于11品牌51系列的实际选型手册数据，检测附件/安装/接线后缀差异
     # 替代旧规则#45的硬编码5个后缀，现在覆盖所有已知的品牌后缀代号
@@ -788,6 +796,235 @@ def desc_numbers_match(a, b):
     nums_a = sorted(set(re.findall(r'\d+(?:\.\d+)?', a['desc'] + ' ' + a['name'])))
     nums_b = sorted(set(re.findall(r'\d+(?:\.\d+)?', b['desc'] + ' ' + b['name'])))
     return nums_a == nums_b
+
+
+# ─── 型号解析器（规则 #47）────────────────────────────────────────────────────
+# 基于品牌命名规则JSON，解析物料描述中的型号字段
+# 两个物料如果解析结果中任一字段不同 = 非重复
+
+def _build_series_index():
+    """构建 {系列前缀 → (品牌, 系列名, 系列数据)} 的索引"""
+    index = {}
+    for brand, data in BRAND_NAMING_RULES.items():
+        if brand == '说明' or not isinstance(data, dict):
+            continue
+        for series_name, series_data in data.get('系列', {}).items():
+            if not isinstance(series_data, dict):
+                continue
+            sn = series_name.upper()
+            # 主前缀：系列名中的纯字母部分 (NSX, CDM, NDM, CM, BM, NM, RMM, TGM...)
+            for m in re.finditer(r'([A-Z]{2,})', sn):
+                key = m.group(1)
+                if len(key) >= 2 and key not in ('MAX', 'TMAX', 'EMAX', 'ACTI'):
+                    if key not in index or len(key) > len(str(index[key][0])):
+                        index[key] = (series_name, brand, series_data)
+            
+            # 从壳架等级提取子前缀 (如 'Tmax XT' 的壳架 'XT1(125A)' → XT)
+            frames = series_data.get('壳架等级', [])
+            if isinstance(frames, list):
+                for fr in frames:
+                    m2 = re.match(r'^([A-Z]{2,})', str(fr).upper())
+                    if m2:
+                        key = m2.group(1)
+                        if key not in index:
+                            index[key] = (series_name, brand, series_data)
+            
+            # 特殊处理
+            if 'XT' in sn and 'XT' not in index:
+                index['XT'] = (series_name, brand, series_data)
+            if 'IC65' in sn:
+                for k in ['IC', 'IC65', 'IC60']:
+                    if k not in index:
+                        index[k] = (series_name, brand, series_data)
+            if 'LC' in sn and 'LC1' in sn:
+                if 'LC1' not in index:
+                    index['LC1'] = (series_name, brand, series_data)
+    return index
+
+_SERIES_INDEX = _build_series_index()
+
+def _parse_model(desc, name=''):
+    """
+    解析物料描述，提取结构化型号信息。
+    返回 dict: {series, frame, breaking_cap, poles, install, connection, trip_unit, attachments}
+    """
+    text = (desc + ' ' + name).upper().strip()
+    result = {
+        'series': '', 'frame': '', 'breaking_cap': '',
+        'poles': '', 'install': '', 'connection': '',
+        'trip_unit': '', 'attachments': set()
+    }
+
+    # 1. 识别系列（优先匹配最长前缀）
+    matched_series = None
+    matched_brand = None
+    matched_data = None
+    matched_len = 0
+    for prefix, (sname, brand, sdata) in _SERIES_INDEX.items():
+        if text.startswith(prefix) and len(prefix) > matched_len:
+            after = text[len(prefix):len(prefix)+1] if len(text) > len(prefix) else ''
+            if after == '' or after.isdigit() or after in ('-', '/', ' ', '\t'):
+                matched_series = sname
+                matched_brand = brand
+                matched_data = sdata
+                matched_len = len(prefix)
+                result['series'] = prefix
+
+    # 对于 CM3/CDM3/NDM3 等，前缀索引只匹配到CM/CDM/NDM
+    # 需要把系列编号也纳入，避免壳架数字提取错误
+    if result['series'] and matched_data:
+        sn = matched_series.upper()
+        sn_num = re.match(r'^[A-Z]+(\d+)', sn)
+        if sn_num:
+            series_num = sn_num.group(1)
+            remaining_after = text[len(result['series']):]
+            if remaining_after.startswith(series_num):
+                result['series'] = result['series'] + series_num
+
+    if not matched_data:
+        return result
+
+    # 2. 提取壳架电流
+    remaining = text[len(result['series']):].lstrip('- /\t')
+    # 壳架数字是剩余文本中第一个2-4位数字（跳过可能的单数字系列编号）
+    # 但系列编号已在上面处理（CM3的3已被纳入series），所以直接匹配
+    fm = re.match(r'(\d{2,4})', remaining)
+    if fm:
+        result['frame'] = fm.group(1)
+    else:
+        # 可能有字母在前 (如 XT2H160 → 剩余 2H160)
+        fm2 = re.match(r'[A-Z0-9]*?(\d{2,4})', remaining)
+        if fm2:
+            result['frame'] = fm2.group(1)
+        else:
+            all_nums = re.findall(r'\b(\d{2,4})\b', remaining)
+            if all_nums:
+                result['frame'] = max(all_nums, key=lambda x: (len(x), int(x)))
+
+    # 3. 提取分断能力代号
+    if isinstance(matched_data.get('分断能力代号'), dict):
+        for code in matched_data['分断能力代号']:
+            code_u = code.upper()
+            found = False
+            # 模式1: 壳架数字后紧跟分断字母 (NSX100F → F, CDM3-100C → C)
+            if result['frame']:
+                pat = re.escape(result['frame']) + r'\s*([A-Z])'
+                m = re.search(pat, text)
+                if m and m.group(1) == code_u:
+                    result['breaking_cap'] = code
+                    found = True
+                    break
+            # 模式2: 系列前缀的数字部分后紧跟分断字母 (XT2H160 → H, XT5S400 → S)
+            # 如 XT2H160，前缀XT，后面是 2H160，H是分断
+            m2 = re.search(result['series'] + r'(\d)([A-Z])', text)
+            if m2 and m2.group(2) == code_u:
+                # 确认这不是壳架数字的一部分
+                # 检查这个字母后面是否跟更多数字(壳架电流)
+                after_letter = text[m2.end():m2.end()+3] if m2.end() < len(text) else ''
+                if re.match(r'\d', after_letter):
+                    result['breaking_cap'] = code
+                    found = True
+                    break
+            # 模式3: -数字后紧跟分断字母 (-100S/3300 → S)
+            if not found:
+                m3 = re.search(r'\-\s*\d+\s*([A-Z])', text)
+                if m3 and m3.group(1) == code_u:
+                    result['breaking_cap'] = code
+                    break
+
+    # 4. 提取极数
+    pole_match = re.findall(r'(\d)P', text)
+    if pole_match:
+        result['poles'] = '/'.join(sorted(set(pole_match)))
+    # 也检查 3P3D 等复合形式
+    pole3d = re.search(r'(\d)P(\d)D', text)
+    if pole3d:
+        result['poles'] = f'{pole3d.group(1)}P{pole3d.group(2)}D'
+
+    # 5. 提取安装方式
+    if isinstance(matched_data.get('安装方式'), dict):
+        for code in matched_data['安装方式']:
+            if len(code) == 1 and code.isalpha():
+                # 检查描述末尾或空格后的单字母
+                if re.search(r'(?:\s|^|/)' + code + r'(?:\s|$)', text):
+                    result['install'] = code
+                    break
+
+    # 6. 提取接线方式
+    if isinstance(matched_data.get('接线方式'), dict):
+        for code in matched_data['接线方式']:
+            if len(code) >= 1 and code.isalpha():
+                if re.search(r'(?:\s|^|/)' + re.escape(code) + r'(?:\s|$|/)', text):
+                    result['connection'] = code
+                    break
+
+    # 7. 提取脱扣器类型
+    if isinstance(matched_data.get('脱扣器类型'), dict):
+        # 按长度降序匹配（先匹配长的，如TMF优先于TM）
+        for code in sorted(matched_data['脱扣器类型'].keys(), key=lambda x: len(x.replace('-', '')), reverse=True):
+            code_clean = code.replace('-', '').upper()
+            # 在描述中搜索（空格分隔或行首行尾）
+            if re.search(r'(?:\s|^|/)' + re.escape(code_clean) + r'(?:\s|$|/|[,，)）.])', text):
+                result['trip_unit'] = code_clean
+                break
+
+    # 8. 提取附件代号
+    if isinstance(matched_data.get('附件代号'), dict):
+        for code in matched_data['附件代号']:
+            if len(code) >= 2:
+                if re.search(r'\b' + re.escape(code) + r'\b', text):
+                    result['attachments'].add(code)
+
+    return result
+
+def _compare_parsed(pa, pb):
+    """
+    比较两个解析结果，返回 (is_nondup: bool, reason: str)
+    只在双方都能识别系列时才比较。
+    """
+    if not pa['series'] or not pb['series']:
+        return False, ''  # 无法解析，交给其他规则
+
+    # 不同系列 → 不比较（交给其他规则）
+    if pa['series'] != pb['series']:
+        return False, ''
+
+    # 同系列，逐字段比较
+    # 壳架不同
+    if pa['frame'] and pb['frame'] and pa['frame'] != pb['frame']:
+        return True, f'壳架不同: {pa["series"]}{pa["frame"]} vs {pb["series"]}{pb["frame"]}'
+
+    # 分断能力不同
+    if pa['breaking_cap'] and pb['breaking_cap'] and pa['breaking_cap'] != pb['breaking_cap']:
+        return True, f'分断能力不同: {pa["breaking_cap"]} vs {pb["breaking_cap"]}'
+
+    # 极数不同
+    if pa['poles'] and pb['poles'] and pa['poles'] != pb['poles']:
+        return True, f'极数不同: {pa["poles"]} vs {pb["poles"]}'
+
+    # 安装方式不同
+    if pa['install'] and pb['install'] and pa['install'] != pb['install']:
+        return True, f'安装方式不同: {pa["install"]} vs {pb["install"]}'
+
+    # 接线方式不同
+    if pa['connection'] and pb['connection'] and pa['connection'] != pb['connection']:
+        return True, f'接线方式不同: {pa["connection"]} vs {pb["connection"]}'
+
+    # 脱扣器不同
+    if pa['trip_unit'] and pb['trip_unit'] and pa['trip_unit'] != pb['trip_unit']:
+        return True, f'脱扣器不同: {pa["trip_unit"]} vs {pb["trip_unit"]}'
+
+    # 附件差异（一方有另一方没有）
+    att_diff = pa['attachments'] ^ pb['attachments']
+    if att_diff:
+        only_a = pa['attachments'] - pb['attachments']
+        only_b = pb['attachments'] - pa['attachments']
+        if only_a:
+            return True, f'附件差异: 一方有{only_a}'
+        if only_b:
+            return True, f'附件差异: 一方有{only_b}'
+
+    return False, ''
 
 
 # ─── 语义配对辅助函数 ────────────────────────────────────────────────────────
