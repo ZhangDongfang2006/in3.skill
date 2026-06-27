@@ -46,6 +46,57 @@ COL = {
 # 排除的物料类别
 EXCLUDE_CATS = {'成品柜', '外购成套', '管道配件', '气动配件', '外包服务'}
 
+# ─── 名称同义词组（用于跨名称配对） ─────────────────────────────────────────
+# 同一组内的名称互为同义词，配对后可进入确认/待人工确认
+NAME_SYNONYMS = [
+    {'弹垫', '弹簧垫片', '弹簧垫圈'},
+    {'电度表', '电能表'},
+    {'角钢', '角铁'},
+    {'螺母', '螺帽'},
+    {'接触器', '交流接触器'},
+    {'断路器', '塑壳断路器'},
+    {'汇流零线排', '汇流端子'},
+    {'终端电能计量表', '电能表', '电度表'},
+    {'转换开关', '万能转换开关'},
+    {'螺丝', '螺钉'},
+]
+
+# 构建反向索引: name → synonym_group_id
+_NAME_TO_SYN_GROUP = {}
+for _i, _grp in enumerate(NAME_SYNONYMS):
+    for _name in _grp:
+        _NAME_TO_SYN_GROUP[_name] = _i
+
+
+def _are_synonyms(name_a, name_b):
+    """判断两个物料名称是否为同义词"""
+    # 精确匹配
+    ga = _NAME_TO_SYN_GROUP.get(name_a)
+    gb = _NAME_TO_SYN_GROUP.get(name_b)
+    if ga is not None and gb is not None and ga == gb:
+        return True
+    # 包含匹配：名称A包含名称B 或反之（如"不锈钢弹垫"包含"弹垫"）
+    for _grp in NAME_SYNONYMS:
+        # 找出组内名称在 A 和 B 中的匹配
+        a_match = any(_s in name_a for _s in _grp)
+        b_match = any(_s in name_b for _s in _grp)
+        # 同组名称修饰差异（如"不锈钢弹垫" vs "不锈钢弹簧垫片"）
+        # 需要进一步检查：去掉共同前缀/后缀后是否是同义词
+        if a_match and b_match:
+            # 验证不是不同组的词同时出现
+            # 找A匹配的具体词和B匹配的具体词
+            for _wa in _grp:
+                if _wa in name_a:
+                    for _wb in _grp:
+                        if _wb in name_b and _wa != _wb:
+                            # 确保前缀一致（如都是"不锈钢"开头）
+                            # 去掉同义词部分后的前缀应该相同
+                            prefix_a = name_a.replace(_wa, '').strip()
+                            prefix_b = name_b.replace(_wb, '').strip()
+                            if prefix_a == prefix_b:
+                                return True
+    return False
+
 # ─── 品牌型号命名规则知识库 ─────────────────────────────────────────────────
 # 从 brand_naming_rules/naming_rules.json 加载，用于规则 #46
 _BRAND_RULES_PATH = Path(__file__).parent / 'brand_naming_rules' / 'naming_rules.json'
@@ -567,25 +618,29 @@ def is_nondup(a, b):
         ma_low = main_a.lower().replace('-', '').replace('/', '')
         mb_low = main_b.lower().replace('-', '').replace('/', '')
         if ma_low != mb_low:
-            pre_a = re.match(r'^([a-zA-Z]+)', main_a)
-            pre_b = re.match(r'^([a-zA-Z]+)', main_b)
-            if pre_a and pre_b:
-                pa_s, pb_s = pre_a.group(1).lower(), pre_b.group(1).lower()
-                rest_a, rest_b = main_a[len(pre_a.group(1)):], main_b[len(pre_b.group(1)):]
-                if pa_s == pb_s:
-                    nums_a = re.findall(r'\d+', rest_a)
-                    nums_b = re.findall(r'\d+', rest_b)
-                    if nums_a != nums_b:
-                        return True, f'型号数字不同: {main_a} vs {main_b}'
-                    lets_a = re.findall(r'[a-zA-Z]+', rest_a)
-                    lets_b = re.findall(r'[a-zA-Z]+', rest_b)
-                    if lets_a and lets_b and lets_a != lets_b:
-                        return True, f'型号字母不同: {main_a} vs {main_b}'
-                else:
-                    base_a = re.sub(r'\d+', '', pa_s)
-                    base_b = re.sub(r'\d+', '', pb_s)
-                    if base_a != base_b:
-                        return True, f'型号系列不同: {main_a} vs {main_b}'
+            # 如果描述的 ultra 归一化完全一致，说明只是空格/格式差异，不判为不同
+            if ultra(da) == ultra(db):
+                pass  # 跳过型号差异检查
+            else:
+                pre_a = re.match(r'^([a-zA-Z]+)', main_a)
+                pre_b = re.match(r'^([a-zA-Z]+)', main_b)
+                if pre_a and pre_b:
+                    pa_s, pb_s = pre_a.group(1).lower(), pre_b.group(1).lower()
+                    rest_a, rest_b = main_a[len(pre_a.group(1)):], main_b[len(pre_b.group(1)):]
+                    if pa_s == pb_s:
+                        nums_a = re.findall(r'\d+', rest_a)
+                        nums_b = re.findall(r'\d+', rest_b)
+                        if nums_a != nums_b:
+                            return True, f'型号数字不同: {main_a} vs {main_b}'
+                        lets_a = re.findall(r'[a-zA-Z]+', rest_a)
+                        lets_b = re.findall(r'[a-zA-Z]+', rest_b)
+                        if lets_a and lets_b and lets_a != lets_b:
+                            return True, f'型号字母不同: {main_a} vs {main_b}'
+                    else:
+                        base_a = re.sub(r'\d+', '', pa_s)
+                        base_b = re.sub(r'\d+', '', pb_s)
+                        if base_a != base_b:
+                            return True, f'型号系列不同: {main_a} vs {main_b}'
 
     # --- 规则 #35: 带附加功能 vs 不带 = 不同物料 ---
     # +底座 vs 无、变频 vs 无标注
@@ -790,6 +845,41 @@ def is_nondup(a, b):
     result = _detect_suffix_diff(da, db, ta, tb)
     if result:
         return True, result
+
+    # --- 规则 #50: 名称语义不同的产品（2026-06-27 Dongfang 反馈） ---
+    # 这些名称虽然部分相似但完全不同产品
+    semantic_diff_pairs = [
+        ('传感器支架', '气缸固定座'), ('传感器支架', '气缸'),
+        ('铜排包扣', '绝缘子包扣'), ('铜排包扣', '电缆头包扣'),
+        ('绝缘子包扣', '电缆头包扣'),
+        ('低压电缆四指套', '低压电缆'),
+        ('型材', '三角板'),
+        ('油漆', '塑粉'), ('油漆', '自喷漆'), ('塑粉', '自喷漆'),
+        ('玻璃', '小母线端子'),
+        ('金属波纹管', '钢丝加强软管'),
+    ]
+    for s1, s2 in semantic_diff_pairs:
+        if (s1 in na and s2 in nb) or (s2 in na and s1 in nb):
+            return True, f'不同产品: {s1} vs {s2}'
+
+    # --- 规则 #51: 一方有颜色, 另一方无颜色标注 = 非重复（2026-06-27） ---
+    # 如 FY1-D 黄 vs FY1-D, RVV 3×1.5 白 vs RVV 3×1.5
+    # 仅在连接片、线缆、标识牌等类别下生效
+    color_only_words = ['黄', '红', '绿', '蓝', '白', '黑', '橙', '灰']
+    cw_a_only = [c for c in color_only_words if c in (na + da) and c not in (nb + db)]
+    cw_b_only = [c for c in color_only_words if c in (nb + db) and c not in (na + da)]
+    if (cw_a_only or cw_b_only):
+        # 检查是否在适用类别
+        applicable = any(k in na + nb for k in ['连接片', '护套线', '护线套', '导线', '电缆'])
+        if applicable:
+            color = (cw_a_only[0] if cw_a_only else cw_b_only[0])
+            return True, f'颜色标注差异: {color}'
+
+    # --- 规则 #52: 配套件 vs 主件 = 非重复（2026-06-27） ---
+    # 如 行程开关-护套 vs 行程开关
+    if ('-护套' in na and '护套' not in nb and '行程开关' in nb) or \
+       ('-护套' in nb and '护套' not in na and '行程开关' in na):
+        return True, '配套件 vs 主件'
 
     return False, ''
 
@@ -1276,6 +1366,32 @@ def find_pairs(materials):
                                 c1 += 1
     print(f"  层1(同名+描述ultra): {c1} 对")
 
+    # ---- 层1.5: 同义词名称 + 描述ultra一致 ----
+    c15 = 0
+    # 按 (类别, 子类别, ultra(描述)) 建索引
+    desc_group_idx = defaultdict(list)
+    for m in materials:
+        ud = ultra(m['desc'])
+        if ud:
+            desc_group_idx[(m['cat'], m['subcat'], ud)].append(m)
+    for (cat, subcat, ud), grp in desc_group_idx.items():
+        if len(grp) < 2:
+            continue
+        # 在同一描述组内找名称互为同义词的配对
+        for i in range(len(grp)):
+            for j in range(i + 1, len(grp)):
+                a, b = grp[i], grp[j]
+                if a['name'] == b['name']:
+                    continue  # 同名的已在层1处理
+                if not _are_synonyms(a['name'], b['name']):
+                    continue
+                pk = tuple(sorted([a['code'], b['code']]))
+                if pk not in seen:
+                    seen.add(pk)
+                    pairs.append((a, b))
+                    c15 += 1
+    print(f"  层1.5(同义词+描述一致): {c15} 对")
+
     # ---- 层2: 同子类别 + 核心词包含 + 名称编号交集 ----
     c2 = 0
     for (cat, subcat), grp in by_cat_sub.items():
@@ -1540,7 +1656,8 @@ def classify_pairs(pairs):
                 ('轻轨', '重轨'), ('盲板', '凸面'), ('管夹', '垫片'),
                 ('车轮', '手轮'), ('驱动大头', '驱动链条'), ('驱动器', '顶升'),
                 ('大门', '加热包'), ('绝缘靴', '绝缘手套'),
-                ('电度表', '电能表'), ('电压', '电流'), ('两孔', '三孔'),
+                # 注意: 电度表/电能表 是同义词，不在此排除
+                ('电压', '电流'), ('两孔', '三孔'),
                 ('简易版', '全功能'),
             ]
             if any((t1 in a['name'] and t2 in b['name']) or (t2 in a['name'] and t1 in b['name'])
@@ -1554,6 +1671,15 @@ def classify_pairs(pairs):
                    for s1, s2 in shape_pairs_chk):
                 nondup_count += 1
                 continue
+
+            # 同义词检查：名称虽不同但为同义词 + 描述一致 = 确认重复
+            if _are_synonyms(a['name'], b['name']):
+                if ultra(a['desc']) == ultra(b['desc']):
+                    confirmed.append((a, b, f'确认重复（同义词: {a["name"]}={b["name"]})'))
+                    continue
+                else:
+                    review.append((a, b, f'同义词待确认: {a["name"]}={b["name"]}'))
+                    continue
 
             review.append((a, b, '名称不同但描述一致'))
             continue
@@ -1832,6 +1958,75 @@ def cmd_analyze(args):
     return output
 
 
+def cmd_analyze_incremental(args):
+    """增量分析模式：只查当天新建/修改物料 vs 全量历史"""
+    import datetime
+    materials = load_materials(args.input)
+    print(f"\n📅 增量模式：筛选当天新建/修改物料")
+
+    # 从文件名提取日期
+    m = re.search(r'(\d{4}-\d{2}-\d{2})', os.path.basename(args.input))
+    if m:
+        target_date = m.group(1)
+    else:
+        target_date = datetime.date.today().strftime('%Y-%m-%d')
+    print(f"   目标日期: {target_date}")
+
+    # 筛选当天新建/修改的物料
+    # IN3 导出日期格式可能是 YYYY/MM/DD 或 YYYY-MM-DD
+    target_date_alt = target_date.replace('-', '/')
+    today_materials = []
+    old_materials = []
+    for mat in materials:
+        create_date = str(mat.get('create_date', ''))[:10]
+        modify_date = str(mat.get('modify_date', ''))[:10]
+        if target_date in create_date or target_date in modify_date or \
+           target_date_alt in create_date or target_date_alt in modify_date:
+            today_materials.append(mat)
+        else:
+            old_materials.append(mat)
+
+    print(f"   当天新建/修改: {len(today_materials)} 条")
+    print(f"   历史物料: {len(old_materials)} 条")
+
+    if not today_materials:
+        print("\n✅ 当天无新建/修改物料，跳过查重")
+        return None
+
+    # 对当天物料与全量历史做配对检查
+    # 方法：把当天物料和历史物料放一起跑配对，但只保留至少一方是当天物料的配对
+    all_materials = materials  # 全量，确保同组配对能正常工作
+    pairs = find_pairs(all_materials)
+
+    # 过滤：只保留至少一方是当天物料的配对
+    today_codes = {m['code'] for m in today_materials}
+    filtered_pairs = []
+    for a, b in pairs:
+        if a['code'] in today_codes or b['code'] in today_codes:
+            filtered_pairs.append((a, b))
+
+    print(f"📊 候选配对（含当天物料）: {len(filtered_pairs)} 对")
+
+    confirmed, review, nondup_count, skipped_processed = classify_pairs(filtered_pairs)
+
+    print(f"\n📈 分类结果:")
+    print(f"  ⏭️ 已处理（跳过）: {skipped_processed}")
+    print(f"  ❌ 非重复（已排除）: {nondup_count}")
+    print(f"  ✅ 确认重复: {len(confirmed)}")
+    print(f"  ❓ 待人工确认: {len(review)}")
+
+    output = args.output
+    if not output:
+        output = os.path.join(os.path.dirname(args.input) or '.', f'增量查重结果-{target_date}.xlsx')
+        print(f"   自动输出路径: {output}")
+
+    if confirmed or review:
+        generate_excel(confirmed, review, output)
+    else:
+        print("✅ 无重复，不生成文件")
+    return output if (confirmed or review) else None
+
+
 def cmd_compare(args):
     """对比命令"""
     output = args.output
@@ -1854,6 +2049,11 @@ def cmd_auto(args):
         sys.exit(1)
 
     print(f"📦 最新导出文件: {os.path.basename(latest_export)}")
+
+    if getattr(args, 'incremental', False):
+        print("🔍 增量模式启动")
+        output = cmd_analyze_incremental(argparse.Namespace(input=latest_export, output=None))
+        return output
 
     # 先分析
     output = cmd_analyze(argparse.Namespace(input=latest_export, output=None))
@@ -1899,6 +2099,7 @@ def main():
     # auto
     p_auto = sub.add_parser('auto', help='自动分析+对比')
     p_auto.add_argument('--dir', default='IN3数据', help='数据目录（默认 IN3数据）')
+    p_auto.add_argument('--incremental', action='store_true', help='增量模式：只查当天新建/修改物料')
 
     args = parser.parse_args()
 
