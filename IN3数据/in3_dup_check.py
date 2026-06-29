@@ -881,6 +881,20 @@ def is_nondup(a, b):
        ('-护套' in nb and '护套' not in na and '行程开关' in na):
         return True, '配套件 vs 主件'
 
+    # --- 规则 #53: Acti9 vs Acti9 Pro = 非重复（2026-06-29） ---
+    # Acti9 Pro 是施耐德第五代升级产品线，与 Acti9 型号相同但产品号/参数不同
+    # 一方描述含 'Pro' 且另一方不含，且都是施耐德 iC65/iC60/iDPN/C120 等 Acti9 系列产品
+    acti9_models = ['iC65N', 'iC65H', 'iC65L', 'iC60N', 'iC60H', 'iC65N-S', 'iC65H-S',
+                    'iDPNa', 'iDPNN', 'iDPNH', 'iDPNK2', 'C120H', 'C120L', 'iINT125',
+                    'Vigi iC65', 'Vigi iDPN', 'iID', 'iCT', 'iTL', 'RCA', 'ARA']
+    has_acti9_a = any(m in ta for m in acti9_models)
+    has_acti9_b = any(m in tb for m in acti9_models)
+    if has_acti9_a and has_acti9_b:
+        pro_a = bool(re.search(r'\bPro\b', ta))
+        pro_b = bool(re.search(r'\bPro\b', tb))
+        if pro_a != pro_b:
+            return True, 'Acti9 vs Acti9 Pro（不同产品线/世代）'
+
     return False, ''
 
 

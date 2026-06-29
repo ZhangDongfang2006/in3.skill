@@ -9,6 +9,33 @@
 - **Bot 2 (costcalc)** — 2026-06-13 停用，不给它发消息
 - **Bot 3 (assistant)** — 2026-06-13 停用，不给它发消息
 
+## 文件路径
+- **工作文件夹：** `/Users/zhangdongfang/.openclaw/workspace-in3bot/`
+- **共享文件夹（shared-windows）：** `/Users/zhangdongfang/shared-windows/` — Dongfang 的主要文件共享位置，包含项目资料、样本、招投标等
+
+## 施耐德 Acti9 产品目录学习（2026-06-29）
+- **来源文件：** `shared-windows/样本/A9 样本 (1).pdf`（328页）
+- **品牌：** 施耐德电气（Schneider Electric）
+- **产品线：** Acti9 — 第五代终端配电产品目录 2025
+- **主要内容：**
+  1. **小型断路器（MCB）：** iC65N/N-S/H/H-S/L 系列、iC60N DT 双端子、iC65L MA 单磁式、C60 UL489、C60N/H 海事专用、iDPNa/iDPNa-S/iDPNN/iDPNN-S/iDPNH/iDPNK2、C120H/H-S/L/L-S 高额定电流
+  2. **直流小型断路器：** iC65N/H/L DC 系列、C120H DC、iC125F/E DC 系列
+  3. **导轨式熔断器座：** A9SFUSE
+  4. **隔离开关：** iINT125、iINT125-S
+  5. **剩余电流动作保护（RCD）：** Vigi iC65/iDPN 系列、iID 电磁式（A/B类）、iDPNa Vigi+/iDPNN Vigi+ 等
+  6. **电气和机械附件：** 脱扣附件（MN/MNs/MX/OF/SD）、iCNV 自恢复过欠压保护器、指示附件
+  7. **控制类产品：** iCT 接触器、iCT+ LED 照明电子开关、iTL 脉冲开关、RCA 远程控制附件、ARA 自动重合控制附件
+  8. **Reflex iC60N/H 集成控制断路器**
+  9. **梳状母排/配电模块：** Multiclip、Distribloc 63A
+  10. **工业防水插头插座：** 16A-125A 全系列
+  11. **技术参考资料：** 脱扣曲线、限流曲线、级联表、保护选择性表、温度降容系数表
+- **命名规则关键：**
+  - 产品号格式如 A9F04120 = iC60N 1P C20A（A9=Acti9系列，F=断路器，04=1P，1=C曲线，20=20A）
+  - 断路器分断能力等级：N=6kA、H=10kA、L=15kA
+  - 脱扣曲线：B（照明）、C（配电）、D（动力）
+  - 后缀含义：-S=紧凑型、DT=双端子、MA=单磁式、DC=直流、Vigi+=带漏电保护
+- **用途：** 可作为物料查重和命名规范检查的品牌型号参考知识库
+
 ## Context Overflow 修复（2026-06-16）
 - 全局已加 compaction (truncateAfterCompaction + maxActiveTranscriptBytes 5mb) 和 contextPruning (cache-ttl 10m)
 - 如果再遇到 context overflow，用 /reset 重置 session
@@ -19,6 +46,16 @@
 - **账号：** 18392180970
 - **密码：** Start12345@
 - **旧账号（备用）：** haiyue / bftest，密码 Ind@123456
+
+## 最新任务记录
+
+### 每日采购价格分析（2026-06-29）
+- **任务执行**：17:05-17:10完成
+- **分析日期**：2026-06-27
+- **关键发现**：钢板类价格异常偏高（偏离86%-90%），接触器采购价低于市场价格（-21%至-29%）
+- **网上比价**：完成3个元器件类物料的网上比价（断路器附件、接触器CJX2s-5011、接触器CJX2S-8011）
+- **报告生成**：Excel包含4个Sheet，已发送Telegram和飞书群
+- **异常处理**：钢板类需核实供应商报价，接触器采购策略合理
 
 ## 经验教训（重要！）
 
@@ -137,6 +174,10 @@ browser stop  // 关闭浏览器，释放资源
    - 只检查当天新增采购的价格偏离，不做历史交叉比对
    - 发送失败则通知 Dongfang
    - 分析脚本：`IN3数据/price_anomaly_daily.py`
+   - **⚠️ 必须包含宁波+湖北两个工厂数据（2026-06-29 Dongfang 强调）**
+   - cron 执行时必须确认两个工厂文件都已下载完成后才运行分析
+   - 如果湖北文件未就绪，等待后再执行，不能只出宁波数据
+   - IN3 切换工厂：登录后页面上方工厂选择栏，选「湖北」后重新导出
 5. **物料查重 cron（2026-06-27 调整）** —
    - 每日增量查重: Cron ID `66c676e3-d106-4d66-9b2e-5f3dd4c39b09`，17:30（周一~周六）
    - 每周全量排查: Cron ID `92ddfa50-80b8-4ed1-8c0d-bdf0235345a5`，15:00（周六）
