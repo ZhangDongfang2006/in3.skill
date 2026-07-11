@@ -60,6 +60,7 @@
 ## 经验教训（重要！）
 
 ### 核心原则
+1. **查重任务必须汇报（Dongfang 2026-07-11 确认）** — 每次查重任务执行完后，**即使0重复0待确认也必须发消息告诉 Dongfang**，让他确认任务执行了。不能「无问题不发消息」
 1. **下班规则（Dongfang 新规）** — 当 Dongfang 说「今天工作结束」「收工」「下班了」时，必须：① 检查未完成任务并汇报；② 有代码/文件变更的 git add/commit/push 上传 GitHub；③ 用 sessions_send 通知主控（agent:main:main）自己的状态
 1. **主动汇报** — 任何任务超过 5 分钟必须用 message 主动汇报进度，每完成一个关键步骤就汇报一次，绝对不能等 Dongfang 来问
 2. **记录每天经验** — 每次操作发现的新问题、新技巧、新坑，必须记录到 MEMORY.md 和 memory/YYYY-MM-DD.md
@@ -86,23 +87,28 @@
 
 **Step 1: 登录**
 ```
-browser start → browser open https://in3.industics.com/ label=in3 → 等待加载
-如果页面已填好账号密码，直接点登录按钮
-如果出现「账号绑定确定」弹窗，点确定关闭
+browser start
+browser navigate url=https://in3.industics.com/home
 ```
+⚠️ 网址是 industics（没有 r！）
+如果页面已填好账号密码，直接点登录按钮
+如果出现「账号绑定确定」弹窗，用 evaluate 点确定关闭
 
-**Step 2: 导航到采购订单管理**
+**Step 2: 导航到采购订单管理（直接用 URL，不走菜单！）**
+```
+browser navigate url=https://in3.industics.com/purchase/po/list
+```
+⚠️ 如果 URL 变化导致 404，fallback 用 DOM 选择器：
 ```javascript
-// 方法1：左侧菜单（推荐）
 // 先点击左侧「采购管理」展开子菜单
 document.querySelectorAll('li.el-menu-item') → 找 textContent='采购管理' 的 → click()
 // 再点击子菜单「采购订单管理(ME20)」
 document.querySelectorAll('.vertical-menu-item') → 找 textContent='采购订单管理(ME20)' 的 → click()
 ```
-⚠️ 关键发现：
+⚠️ 菜单导航相关选择器（备用，仅在 URL 直达失败时使用）：
 - 左侧一级菜单用 `.el-menu-item` 选择器
 - 子菜单用 `.vertical-menu-item`（单数）选择器，不是 `.vertical-menu-items`（复数）
-- 搜索框输入方式有问题（会修改 placeholder 而不是 value），不要用搜索框跳转
+- 搜索框不要用（会修改 placeholder 而不是 value）
 
 **Step 3: 配置筛选条件**
 ```javascript
@@ -142,11 +148,12 @@ document.querySelectorAll('.el-select-dropdown__item') → 找 textContent 包�
 ⚠️ 关键发现：切换工厂后页面会跳回首页（/home），需要重新执行 Step 2~4
 
 **Step 6: 从下载中心下载文件**
+```
+browser navigate url=https://in3.industics.com/download/center
+```
+等导出完成（约2-3分钟）后刷新页面：
 ```javascript
-// 导航到下载中心（左侧菜单 → 下载中心）
-document.querySelectorAll('.el-menu-item') → 找 '下载中心' → click()
-// 等导出完成（约2-3分钟）后刷新页面
-button textContent='刷新' → click()
+[...document.querySelectorAll('button')].find(b => b.textContent.trim() === '刷新').click();
 ```
 - 提取下载链接：`document.querySelectorAll('a[href*="tos-cdn"]')`，找任务名称='采购订单明细导出' + 今日日期
 - 下载 URL 格式：`https://tos-cdn-01.industics.com/...`（⚠️ industics 没有 r！）
@@ -184,10 +191,10 @@ browser stop  // 关闭浏览器，释放资源
    - 增量模式：`in3_dup_check.py auto --incremental`，只查当天新建/修改 vs 全量历史
    - 全量模式：`in3_dup_check.py auto`，所有物料交叉比对
    - agentId: in3bot，delivery: telegram to 8782649356
-6. **命名规范检查 cron** —
-   - Cron ID: `20235245-52bc-4503-b831-8365dc0db296`，17:45（周一~周六）
-   - 独立于查重任务运行
-   - 脚本：`IN3数据/naming_check.py`
+6. **命名规范检查（2026-07-11 重组）** —
+   - **已合并到增量查重 cron** (`66c676e3`, 17:30)，Step 3 调 naming_check.py
+   - 原 cron `20235245` (17:45) **已禁用** — 原因：LLM 自己选文件导致用错昨天数据
+   - naming_check.py 自动找最新物料文件，不要手动指定
 
 ### 物料重复检查经验
 1. **⚠️ 核心规则（Dongfang 多次强调）** — 型号中不一致的数字或字母代表元器件特征（颜色、尺寸、方向、电流、电压等），只要型号中有任何数字/字母不同 = 非重复！不应进入待人工确认表

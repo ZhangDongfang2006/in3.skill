@@ -1,5 +1,67 @@
 # IN3 物料重复检查流程
 
+## ⚠️ 必读：IN3 浏览器操作速查（每次任务开始前必看）
+
+### 正确网址（绝对不能拼错！）
+- **IN3 地址：** `https://in3.industics.com`（⚠️ industics，**没有 r**！）
+- CDN 下载域名：`https://tos-cdn-01.industics.com/...`
+- 拼错会导致 404 或连接超时！
+
+### 关键页面直达 URL（不要走菜单导航！）
+| 页面 | URL |
+|------|-----|
+| 工作台/首页 | `https://in3.industics.com/home` |
+| 物料档案管理 | `https://in3.industics.com/mdm/masterdata/search` |
+| 物料列表（搜索后） | `https://in3.industics.com/mdm/masterdata/list` |
+| 下载中心 | `https://in3.industics.com/download/center` |
+
+**核心原则：直接 navigate 到目标 URL，不要尝试通过菜单点击导航。** IN3 是 Vue SPA，三级菜单结构复杂且不稳定，菜单导航经常失败浪费大量步骤。
+
+### 登录步骤
+```
+browser start
+browser navigate url=https://in3.industics.com/home
+```
+- 企业默认 `***ACCOUNT***`，账号 `18392180970`，密码 `Start12345@` 通常已预填
+- 如需手填：用 evaluate 设置 input value 后触发表单提交
+- 确认已进入正式平台（宁波海越电器制造有限公司 - 宁波工厂）
+
+### 物料档案管理页面操作（固定 DOM 选择器）
+
+进入页面后，用 evaluate 执行以下操作（不要用 aria ref 点击，IN3 前端组件特殊）：
+
+```javascript
+// 1. 取消勾选「过滤成品/虚拟件」
+document.querySelectorAll('input[type=checkbox]')[2].click();
+
+// 2. 点击搜索按钮（加载物料列表）
+[...document.querySelectorAll('button')].find(b => b.textContent.trim() === '搜索').click();
+
+// 3. 点击「批量导出物料」按钮（只点一次！）
+[...document.querySelectorAll('button')].find(b => b.textContent.trim() === '批量导出物料').click();
+```
+
+### 下载中心操作
+```javascript
+// 导航到下载中心
+browser navigate url=https://in3.industics.com/download/center
+
+// 刷新任务列表
+[...document.querySelectorAll('button')].find(b => b.textContent.trim() === '刷新').click();
+
+// 获取下载链接（找最新的物料主数据导出）
+document.querySelectorAll('a[href*="tos-cdn"]')
+```
+
+### 常见问题处理
+- 弹窗「账号绑定确定」→ evaluate: `[...document.querySelectorAll('button')].find(b => b.textContent.includes('确定')).click()`
+- 弹窗「通知」抽屉 → evaluate: `document.querySelector('.el-drawer__close-btn').click()`
+- 页面没反应 → 等待 2 秒后重试，不要疯狂点击
+- CDN 下载失败 → 检查 URL 拼写（industics 不是 industrics）
+- 404 页面 → URL 拼错了，检查是否有多余的 r
+
+---
+
 ## 一、流程概览
 
 ```
@@ -9,19 +71,21 @@
 ## 二、详细步骤
 
 ### Step 1：登录 IN3 系统
-- 打开浏览器访问 https://in3.industrics.com/home
-- 企业选 `***ACCOUNT***`，账号 `18392180970`，密码 `Start12345@`
-- 页面默认已填好账号密码，直接点登录即可
+- `browser start` → `browser navigate url=https://in3.industics.com/home`
+- 企业 `***ACCOUNT***`，账号 `18392180970`，密码 `Start12345@`
+- 页面通常已预填好，直接点登录
 - 确认已进入正式平台（宁波海越电器制造有限公司 - 宁波工厂）
 
 ### Step 2：批量导出物料主数据
-- 导航：系统管理 → 主数据管理 → 物料档案管理（MM01）→ 取消勾选「过滤成品/虚拟件」→ 点击搜索 → 批量导出物料
-- **⚠️ 必须取消勾选「过滤成品/虚拟件」**，否则导出数据不完整！checkbox 用 evaluate 操作：`document.querySelectorAll('input[type=checkbox]')[2].click()`
-- 导出前先检查下载中心是否已有今日导出文件，避免重复
-- **只点一次**批量导出，不要重复点击
-- 前往下载中心（任务栏），观察任务状态
+- **直接 navigate 到物料档案管理：** `browser navigate url=https://in3.industics.com/mdm/masterdata/search`
+- 取消勾选「过滤成品/虚拟件」→ 用 evaluate: `document.querySelectorAll('input[type=checkbox]')[2].click()`
+- 点击搜索 → 用 evaluate: `[...document.querySelectorAll('button')].find(b => b.textContent.trim() === '搜索').click()`
+- 点击「批量导出物料」→ 用 evaluate（只点一次！）：`[...document.querySelectorAll('button')].find(b => b.textContent.trim() === '批量导出物料').click()`
+- **不要走菜单导航！**（系统管理 → 主数据管理 → 物料档案管理 这条路径不稳定，经常迷路）
+- 导出前可先检查下载中心是否已有今日导出文件，避免重复
+- 前往下载中心：`browser navigate url=https://in3.industics.com/download/center`
 - **等任务状态变为「已成功」后立即下载**（一般1-3分钟），不需要一直等
-- 如果页面看不到任务状态（非全屏），等 **3分钟** 后再去下载
+- 如果页面看不到任务状态（非全屏），等 **3分钟** 后再检查
 - **只下载一次**，不要重复下载
 - 保存到工作区 `IN3数据/` 目录
 
