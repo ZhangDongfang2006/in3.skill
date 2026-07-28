@@ -634,7 +634,9 @@ def is_nondup(a, b):
                             return True, f'型号数字不同: {main_a} vs {main_b}'
                         lets_a = re.findall(r'[a-zA-Z]+', rest_a)
                         lets_b = re.findall(r'[a-zA-Z]+', rest_b)
-                        if lets_a and lets_b and lets_a != lets_b:
+                        # Dongfang 2026-07-25: 型号中任何字母差异(含一方有另一方无) = 非重复
+                        # 如 FZRN25-12D vs FZRN25-12 (D=带接地)
+                        if lets_a != lets_b:
                             return True, f'型号字母不同: {main_a} vs {main_b}'
                     else:
                         base_a = re.sub(r'\d+', '', pa_s)
