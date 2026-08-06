@@ -170,6 +170,28 @@ browser stop  // 关闭浏览器，释放资源
 - 页面没反应 → 等待2秒后重试，不要疯狂点击
 - CDN下载失败 → 检查 URL 拼写（industics 不是 industrics）
 
+### IN3 路由变更（2026-08-06 确认）
+- **旧路由** `/purchase/po/list` 已 404
+- **新路由** `/spm/purchase-order/list`
+- **导航方式**：不能直接 navigate URL，必须菜单导航：
+  1. evaluate 点击 `.el-menu-item` 中 textContent='采购管理' 的元素
+  2. 等1秒，evaluate 在 `.menu-groups-container` 中找 `.menu-item-name` textContent='采购订单管理'，click 其 `.third-menu-item` 父元素
+  3. 等2秒，URL 变为 `/spm/purchase-order/list`
+- **工厂切换方法**（2026-08-06 Dongfang 确认）：
+  - ⚠️ **首页没有切换工厂的选项！** 必须先进入下级菜单（如采购管理、销售管理等）后，才能看到工厂选择器
+  1. 先菜单导航进入采购管理等下级页面
+  2. evaluate 点击 `input[placeholder='请选择工厂']`
+  3. 等1秒，evaluate 在 `.el-select-dropdown__list li` 或 `.el-scrollbar__view li` 中找 textContent 含「湖北」的，click()
+  4. 切换后页面跳回 `/home`，需重新菜单导航到采购订单管理
+- **工厂名称**：宁波工厂 / 孝昌工厂（湖北）
+
+### 采购价格分析 cron 拆分（2026-08-06）
+- **原 cron** `1ef6dc86` 拆成 2 个：
+  - **Job 1** `daily-price-export`（1ef6dc86）19:00 — 只导出宁波+湖北，600s
+  - **Job 2** `daily-price-analyze-send`（32266fc6）19:20 — 下载+分析+发送，900s
+- **拆分原因**：单次 cron 7步完不成，snapshot 超大，工厂选择器卡住
+- **关键改进**：Job 1 全程用 evaluate 操作 DOM，不用 snapshot；导航走菜单不走 URL
+
 ### 定时任务配置（2026-06-27 更新）
 1. **delivery 必须明确指定** — 用 `channel: "telegram"`, `to: "8782649356"`, `accountId: "bot8"`，不要用 `channel: "last"` 自动解析
 2. **企业名必须核实** — haiyue 是正式环境，bftest 是测试环境，不要写错
