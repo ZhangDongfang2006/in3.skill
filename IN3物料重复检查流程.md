@@ -13,7 +13,7 @@
 | 工作台/首页 | `https://in3.industics.com/home` |
 | 物料档案管理 | `https://in3.industics.com/mdm/masterdata/search` |
 | 物料列表（搜索后） | `https://in3.industics.com/mdm/masterdata/list` |
-| 下载中心 | `https://in3.industics.com/download/center` |
+| 下载中心 | `https://in3.industics.com/tc/list`（⚠️ 2026-08-15 确认，旧路由 `/download/center` 已 404） |
 
 **核心原则：直接 navigate 到目标 URL，不要尝试通过菜单点击导航。** IN3 是 Vue SPA，三级菜单结构复杂且不稳定，菜单导航经常失败浪费大量步骤。
 
@@ -43,8 +43,8 @@ document.querySelectorAll('input[type=checkbox]')[2].click();
 
 ### 下载中心操作
 ```javascript
-// 导航到下载中心
-browser navigate url=https://in3.industics.com/download/center
+// 导航到下载中心（⚠️ 2026-08-15 确认新路由，旧 /download/center 已 404）
+browser navigate url=https://in3.industics.com/tc/list
 
 // 刷新任务列表
 [...document.querySelectorAll('button')].find(b => b.textContent.trim() === '刷新').click();

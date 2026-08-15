@@ -27,7 +27,7 @@ IN3 是海越的制造管理运营平台，Bot 8 负责在该系统上执行各�
 - **完整流程文档**：`IN3物料重复检查流程.md`（文档开头有「IN3 浏览器操作速查」，每次任务前必读）
 - 核心导航原则：**直接 navigate 到目标 URL，不走菜单**
   - 物料档案管理：`https://in3.industics.com/mdm/masterdata/search`
-  - 下载中心：`https://in3.industics.com/download/center`
+  - 下载中心：`https://in3.industics.com/tc/list`（⚠️ 2026-08-15 确认，旧路由 `/download/center` 已 404）
   - ⚠️ 网址是 industics（没有 r！）
 - **网上搜索验证**：对规则无法判断的配对，逐条网上搜索确认
 - 规则持续优化中，每次收到反馈后更新

@@ -173,6 +173,7 @@ browser stop  // 关闭浏览器，释放资源
 ### IN3 路由变更（2026-08-06 确认）
 - **旧路由** `/purchase/po/list` 已 404
 - **新路由** `/spm/purchase-order/list`
+- **下载中心路由变更（2026-08-15 确认）**：旧路由 `/download/center` 已 404，新路由 `/tc/list`（完整 URL: `https://in3.industics.com/tc/list?current_page=1&page_size=20`），已在流程文档和 AGENTS.md 中更新
 - **导航方式**：不能直接 navigate URL，必须菜单导航：
   1. evaluate 点击 `.el-menu-item` 中 textContent='采购管理' 的元素
   2. 等1秒，evaluate 在 `.menu-groups-container` 中找 `.menu-item-name` textContent='采购订单管理'，click 其 `.third-menu-item` 父元素
@@ -313,6 +314,7 @@ browser stop  // 关闭浏览器，释放资源
 
 ## 物料重复检查近期结果
 - 2026-06-08：0对确认重复，0对待确认（17228条记录），规则优化效果显著
+- 2026-08-15（周六全量）：确认重复 7 对，待人工确认 31 对（18639条记录）。确认重复含：塑壳断路器/触摸屏空格差异、水平母线框完全相同、互感器格式差异、同义词对（万能转换开关=转换开关、电度表=电能表）。报告已发送 Telegram
 
 ## 采购价格异常经验（2026-06-15）
 - 公司选择器无法展开时，可用最近一次的历史数据文件代替导出
