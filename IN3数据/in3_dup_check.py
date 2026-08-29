@@ -279,6 +279,14 @@ def is_nondup(a, b):
     ta, tb = da + ' ' + na, db + ' ' + nb
     ma, mb = a['manufacturer'], b['manufacturer']
 
+    # --- 规则 #0c: 精度等级后缀 S 差异 = 非重复（Dongfang 2026-08-29 确认）---
+    # 0.5 vs 0.5S、0.2 vs 0.2S：S 代表不同功能/绕组配置，不是格式差异
+    _prec_pat = re.compile(r'(?<![\d.])(\d\.\d{1,2})(S?)(?![\d.])', re.I)
+    prec_a = {m[0] + m[1].upper() for m in _prec_pat.findall(da)}
+    prec_b = {m[0] + m[1].upper() for m in _prec_pat.findall(db)}
+    if prec_a and prec_b and prec_a != prec_b:
+        return True, f'精度等级后缀差异: {sorted(prec_a)} vs {sorted(prec_b)}（S代表不同功能）'
+
     # --- 规则 #0a: 工作服/服装类直接跳过不算重复 ---
     clothing_kw = ['工作服', '保安服', '厂服', '制服']
     if any(k in na for k in clothing_kw) or any(k in nb for k in clothing_kw):
