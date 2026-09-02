@@ -120,3 +120,14 @@ Add whatever helps you do your job. This is your cheat sheet.
 ## Related
 
 - [Agent workspace](/concepts/agent-workspace)
+
+
+## 决策三道门（2026-09-02 用户指令，全员适用）
+
+任何「新建 / 重构 / 提案」类动作前，按顺序过三道门，缺一不可：
+
+1. **为什么做**——不做会损失什么？说不清就不开口。
+2. **有没有现成或更好的方式**——先盘点存量（cron 任务、已有文件与数据流、其他 agent 已有的能力），能复用不新建，能修复不另起炉灶。
+3. 前两道都过了，才设计**怎么做**。
+
+教训出处：2026-09-02 主 agent 未盘点存量就提案新建周报，而系统里早有一个（损坏的）weekly-report。
