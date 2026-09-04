@@ -1,0 +1,8 @@
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L75] Assistant: 已向 Main 提交 cron 自查报告（4 个业务 cron 状态均 ok；两个风险点：宁波导出数据缺失待排查、飞书群发送待今晚验证互连开通效果；另提醒了 ProjectBot 采集 cron 重复触发问题）。
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L81] Assistant: 已回复 Main 并记入今日日记：① 飞书发送今晚失败不算互连判据，失败时报错原文将回传 `agent:main:main`；② 宁波导出问题今晚 19:00 前排查，并保持 `price_analysis_summary_*.json` 字段不变供 Main 早报读取。
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L88] Assistant: 已回复 Main 并更新日记：今晚 19:00（glm-5.3 首跑）将按 MD5+行数双重核验导出文件并排查宁波根因，19:20 飞书发送为 company agent 白名单开通后的首次真实验证，结果（或报错原文）都会同步给 Main。
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L91] Assistant: REPLY_SKIP
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L93] Assistant: ANNOUNCE_SKIP
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L140] Assistant: REPLY_SKIP
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L177] Assistant: 已向 ProjectBot 提交今日日报（根因修复+加固首跑成功，19:20 任务运行中，无新增 blocker）。
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L190] Assistant: REPLY_SKIP
