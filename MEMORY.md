@@ -94,11 +94,13 @@ browser navigate url=https://in3.industics.com/home
 如果页面已填好账号密码，直接点登录按钮
 如果出现「账号绑定确定」弹窗，用 evaluate 点确定关闭
 
-**Step 2: 导航到采购订单管理（直接用 URL，不走菜单！）**
+**Step 2: 导航到采购订单管理（⚠️ 2026-08-06 路由变更：必须菜单导航，不能直接 URL！）**
 ```
-browser navigate url=https://in3.industics.com/purchase/po/list
+1. evaluate 点击 .el-menu-item 中 textContent='采购管理' 的元素
+2. 等1秒，evaluate 在 .menu-groups-container 中找 .menu-item-name textContent='采购订单管理'，click 其 .third-menu-item 父元素
+3. 等2秒，URL 应变为 /spm/purchase-order/list
 ```
-⚠️ 如果 URL 变化导致 404，fallback 用 DOM 选择器：
+（旧路由 `/purchase/po/list` 已 404，直接 navigate 会迷路）
 ```javascript
 // 先点击左侧「采购管理」展开子菜单
 document.querySelectorAll('li.el-menu-item') → 找 textContent='采购管理' 的 → click()
@@ -149,8 +151,9 @@ document.querySelectorAll('.el-select-dropdown__item') → 找 textContent 包�
 
 **Step 6: 从下载中心下载文件**
 ```
-browser navigate url=https://in3.industics.com/download/center
+browser navigate url=https://in3.industics.com/tc/list
 ```
+（⚠️ 旧路由 /download/center 已 404，2026-08-15 确认）
 等导出完成（约2-3分钟）后刷新页面：
 ```javascript
 [...document.querySelectorAll('button')].find(b => b.textContent.trim() === '刷新').click();

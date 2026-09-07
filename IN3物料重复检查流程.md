@@ -83,7 +83,7 @@ document.querySelectorAll('a[href*="tos-cdn"]')
 - 点击「批量导出物料」→ 用 evaluate（只点一次！）：`[...document.querySelectorAll('button')].find(b => b.textContent.trim() === '批量导出物料').click()`
 - **不要走菜单导航！**（系统管理 → 主数据管理 → 物料档案管理 这条路径不稳定，经常迷路）
 - 导出前可先检查下载中心是否已有今日导出文件，避免重复
-- 前往下载中心：`browser navigate url=https://in3.industics.com/download/center`
+- 前往下载中心：`browser navigate url=https://in3.industics.com/tc/list`（⚠️ 旧路由 /download/center 已 404）
 - **等任务状态变为「已成功」后立即下载**（一般1-3分钟），不需要一直等
 - 如果页面看不到任务状态（非全屏），等 **3分钟** 后再检查
 - **只下载一次**，不要重复下载

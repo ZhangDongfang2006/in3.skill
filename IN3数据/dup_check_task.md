@@ -2,14 +2,14 @@
 
 ## Step 1：登录 IN3 并导出物料
 
-1. 用 browser action=open 打开 https://in3.industrics.com/
+1. 用 browser action=open 打开 https://in3.industics.com/
 2. 如果页面跳转到工作台，说明已登录，直接操作
 3. 如果显示登录页，输入账号登录（企业：haiyue，账号：18392180970，密码：Start12345@）
 4. 进入 系统管理 → 主数据管理 → 物料档案管理
 5. ⚠️ 必须取消勾选「过滤成品/虚拟件」！用 `document.querySelectorAll('input[type=checkbox]')[2].click()` 切换
 6. 点击搜索按钮，等物料列表加载
 7. 点击「批量导出物料」按钮（只点一次！）
-8. 到下载中心（https://in3.industrics.com/tc/list）等状态为「已成功」后获取下载链接
+8. 到下载中心（https://in3.industics.com/tc/list）等状态为「已成功」后获取下载链接
 9. 用 curl 下载文件到 IN3数据/ 目录
 
 注意：
