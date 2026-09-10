@@ -204,6 +204,7 @@ browser stop  // 关闭浏览器，释放资源
    - Cron ID: `1ef6dc86-6501-447b-9677-14e7b88d4f9f`，每天19:00（周一到周六）（7/14从17:00改为19:00）
    - 流程：直接批量导出全量（不筛选日期）→ 下载 → 脚本筛选当天新增 vs 历史 → 偏离≥40%标记异常 → 通过 company bot 发 Excel 到飞书采购群
    - 飞书采购群 sessionKey: `agent:company:feishu:group:oc_498ec91554f3c3272cc6ae02ecf27557`
+   - **⚠️ 2026-09-10 起已停发该飞书群（Dongfang 拍板）**：bot 被移出群+报 230002，Dongfang 选停发；cron Step 4 已改为仅发 Telegram，勿再向该 sessionKey 发送报告（恢复需 Dongfang 重新发话+拉回 bot）
    - 只检查当天新增采购的价格偏离，不做历史交叉比对
    - 发送失败则通知 Dongfang
    - 分析脚本：`IN3数据/price_anomaly_daily.py`
@@ -376,3 +377,13 @@ browser stop  // 关闭浏览器，释放资源
 - **△符号允许在描述中使用** — Dongfang 2026-08-03 确认：△（三角形符号）从非标符号列表中移除，允许出现在物料描述中
 - **颜色字作为词汇组成部分不报** — Dongfang 2026-08-03 确认："镀白锌""镀彩锌""红外""黑壳""绿灯指示"等，颜色字是词汇一部分（表面处理工艺/技术方式/颜色修饰功能件）的不算单纯标色，不警告。只有颜色字单独出现才警告
 - **每次 Dongfang 的规则反馈必须记录** — 写入 MEMORY.md + 命名规范检查脚本，确保下次不重复犯错
+
+## 2026-09 第一周硬教训（排障/运维铁律，全部实战验证）
+- **cron lastStatus=ok / errs=0 ≠ 业务成功**：agent 可能正常收尾但任务失败（0905/0907/0908 三例）。判断成败必须读该 run 的最终文本（sessions_history 该 cron 会话最后一条 assistant 消息）
+- **探活铁律**：多路径矩阵（默认 DNS / 绕代理 / 显式 IP）+ 验响应体（114B 占位页≠应用）；**先验探活工具自身**——错拼域名（industrics 多 r）有自己的 DNS 指向死边缘，会制造"平台宕机"假象（0905 乌龙根因）
+- **/home 卡「加载中」标准恢复**（0903 起多次实战）：reload×2 无效 → 直接 navigate `https://in3.industics.com/spm/purchase-order/list`（真实 SPA 路由）→ 恢复后必须过 Step 2.5/5.5 工厂硬核验才可导出。已固化进 daily-price-export prompt
+- **工厂残留**：每次导出会话都残留上次运行的工厂选择（0901-0909 连续实测），Step 2.5/5.5 硬核验不可跳过；湖北核验看公司字段（孝昌工厂名不含"湖北"）
+- **防串厂双核验**：两文件 MD5 必须不同 + 下载中心任务名不区分工厂时用导出顺序（宁波先湖北后）+ 供应商集合 Jaccard 归属（同厂≈1.0，交叉≈0.2）
+- **openpyxl 坑**：read_only 读 IN3 导出会得假维度（1x1「订单预警」）→ reset_dimensions() 或改用 pandas；Jaccard 核验用 pandas 常规模式
+- **一次性任务可靠性**：command payload 嵌套 `openclaw cron run` 有静默失败样本（9/5 干净样本；9/9 疑似冷启动竞态距网关重启仅 60s）——关键链路改用 agentTurn 型或关键节点手动触发；**对 disabled job force-run 只 enqueue 不执行**（先查 enabled）
+- **消息落款**：纯颜色 🟢=主力正常 / 🟡=用了备胎，不写版本号（2026-09-08 用户指令，详见 AGENTS.md）
