@@ -80,6 +80,8 @@
 11. **采购数据分析** — 不要用子代理下载文件，主 session 直接操作更高效
 12. **⚠️ 任务完成后必须关闭浏览器** — 每次 IN3 操作完成后用 `browser stop` 关闭浏览器，避免资源占用
 13. **每次导出必须重新导出全部数据** — 即使昨天导出过，今天也要重新导出，确保数据最新
+14. **Telegram 发 xlsx 一律加 forceDocument:true**（2026-09-12）— 即使 ASCII 文件名+中文 caption 也可能报 `sendDocument Network failed`；实测 media+forceDocument:true 稳定成功（带中文 caption 也行）。attachments 多文件数组+长中文消息易失败，单文件逐条发。中文名放 caption，文件名用 ASCII
+15. **IN3 导出 xlsx 数据在「物料主数据」sheet** — 表头带 `*` 前缀（`*物料编号`），说明 sheet dimension 是假数据；按 sheetnames 定位后 lstrip('*') 匹配表头
 
 ### IN3 采购订单明细导出标准流程（2026-06-13 优化）
 
