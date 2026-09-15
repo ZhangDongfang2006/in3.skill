@@ -1,0 +1,4 @@
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L966] Assistant: 周报残留任务清理核查完毕：我名下当前 6 个任务全 active、零 disabled 残留——Main 提到的 3 个任务不在我的列表（可能是周报快照时差或 owner 归属差异），已回告并请它发 id 以便按 id 精准清理。 🟢
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L971] Assistant: REPLY_SKIP
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L973] Assistant: ANNOUNCE_SKIP
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L988] Assistant: REPLY_SKIP

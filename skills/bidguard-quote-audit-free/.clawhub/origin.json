@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "registry": "https://clawhub.ai",
+  "slug": "bidguard-quote-audit-free",
+  "ownerHandle": "chenqg618",
+  "installedAt": 1789451359118,
+  "artifact": {
+    "kind": "archive",
+    "sha256": "87e1b6231ee248f0c2d1da0ed62ba11f39b55bc63191025fe59417247111e0c8",
+    "integrity": "sha256-h+G2Ix7iSPDC0doO1iuhHzm1W8YxkQJf5ZQXJHER4Mg="
+  },
+  "skillFile": {
+    "path": "SKILL.md",
+    "sha256": "96d3e6f306f9caf65828676db786fd7fe96a3e5e5a91cba08754a064a63f4d36"
+  },
+  "fileTreeSha256": "sha256:d46d062abc192b1565619d84d5c3250c95f6c091e51bc6e6e1899ea1ef4424cc",
+  "installedVersion": "1.0.8"
+}

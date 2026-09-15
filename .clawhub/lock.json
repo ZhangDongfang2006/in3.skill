@@ -1,0 +1,1955 @@
+{
+  "version": 1,
+  "skills": {
+    "bidguard-quote-audit-free": {
+      "version": "1.0.8",
+      "registry": "https://clawhub.ai",
+      "ownerHandle": "chenqg618",
+      "installedAt": 1789451359118,
+      "artifact": {
+        "kind": "archive",
+        "sha256": "87e1b6231ee248f0c2d1da0ed62ba11f39b55bc63191025fe59417247111e0c8",
+        "integrity": "sha256-h+G2Ix7iSPDC0doO1iuhHzm1W8YxkQJf5ZQXJHER4Mg="
+      },
+      "skillFile": {
+        "path": "SKILL.md",
+        "sha256": "96d3e6f306f9caf65828676db786fd7fe96a3e5e5a91cba08754a064a63f4d36"
+      },
+      "fileTreeSha256": "sha256:d46d062abc192b1565619d84d5c3250c95f6c091e51bc6e6e1899ea1ef4424cc",
+      "verification": {
+        "schema": "clawhub.skill.verify.v1",
+        "ok": true,
+        "decision": "pass",
+        "reasons": [],
+        "card": {
+          "available": true,
+          "path": "skill-card.md",
+          "url": "https://wry-manatee-359.convex.site/api/v1/skills/bidguard-quote-audit-free/card?ownerHandle=chenqg618&version=1.0.8",
+          "sha256": "08703a7938d7dd54d2b1abf27aa0dce3351fcf49201eba3e50ad6e9bcdfdc12d",
+          "size": 2331,
+          "contentType": "text/markdown; charset=utf-8"
+        },
+        "artifact": {
+          "sourceFingerprint": "c0180f274a42747dbe9979c1d5390a7dde9176bfd2db8d99d989678ce2a1dc1b",
+          "bundleFingerprints": [
+            "f6256df159dc1f8d72595cfae5579ee8276f559a44a563dbc61d3d522dca7301"
+          ],
+          "files": [
+            {
+              "path": "SKILL.md",
+              "size": 5226,
+              "sha256": "96d3e6f306f9caf65828676db786fd7fe96a3e5e5a91cba08754a064a63f4d36",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "scripts/engine/quote-audit.js",
+              "size": 16938,
+              "sha256": "b28c2b8072cf93e4c6d1346e1490613a16f45c1d8b498f77a00f66d3b2e8efe4",
+              "contentType": "text/javascript"
+            },
+            {
+              "path": "scripts/run.mjs",
+              "size": 6720,
+              "sha256": "fa1f42720d657651c4a6f00854bf98ed8e30d3f106fc4389611ad9e11d3ff697",
+              "contentType": "text/javascript"
+            },
+            {
+              "path": "templates/sample.json",
+              "size": 161,
+              "sha256": "0e1b2c01d4bc7d753ab1f6f8ac053225d191550cdbfe18ce54767179591cd9f6",
+              "contentType": "application/json"
+            }
+          ]
+        },
+        "provenance": {
+          "source": "unavailable",
+          "reason": "No server-resolved GitHub import provenance is stored for this version."
+        },
+        "security": {
+          "status": "clean",
+          "passed": true,
+          "rawStatus": "clean",
+          "verdict": "benign",
+          "confidence": "high",
+          "summary": "This skill is a local bid-quote arithmetic checker whose scripts match the stated purpose and do not show network use, credential access, persistence, or hidden high-impact behavior.",
+          "model": null,
+          "checkedAt": 1789445385255,
+          "scannerReports": {
+            "aig": {
+              "version": "2.1.0",
+              "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/Schemata/sarif-schema-2.1.0.json",
+              "runs": [
+                {
+                  "tool": {
+                    "driver": {
+                      "name": "aig-skill-scan",
+                      "version": "0.2.1",
+                      "informationUri": "https://github.com/Tencent/AI-Infra-Guard",
+                      "rules": [
+                        {
+                          "id": "T01",
+                          "name": "Skill Instruction Hijacking",
+                          "shortDescription": {
+                            "text": "Alters the agent's current session goals or safety constraints when the skill is loaded"
+                          }
+                        },
+                        {
+                          "id": "T02",
+                          "name": "Agent Memory Poisoning",
+                          "shortDescription": {
+                            "text": "Writes attacker-controlled rules into persistent memory so they continue to affect future sessions"
+                          }
+                        },
+                        {
+                          "id": "T03",
+                          "name": "Remote Payload Retrieval and Execution",
+                          "shortDescription": {
+                            "text": "Fetches code from an external URL, allowing the effective payload to change after skill review"
+                          }
+                        },
+                        {
+                          "id": "T04",
+                          "name": "Embedded Malicious Code",
+                          "shortDescription": {
+                            "text": "Ships malicious scripts inside the skill package and executes them locally when invoked"
+                          }
+                        },
+                        {
+                          "id": "T05",
+                          "name": "Unauthorized Access and Privilege Escalation",
+                          "shortDescription": {
+                            "text": "Breaks least-privilege boundaries by obtaining permissions beyond the task's legitimate needs"
+                          }
+                        },
+                        {
+                          "id": "T06",
+                          "name": "System Persistence",
+                          "shortDescription": {
+                            "text": "Installs cross-session backdoors, hooks, services, or scheduled tasks that survive the skill run"
+                          }
+                        },
+                        {
+                          "id": "T07",
+                          "name": "Tool Hijacking and Spoofing",
+                          "shortDescription": {
+                            "text": "Modifies, wraps, spoofs, or replaces tools so legitimate-looking calls execute attacker logic"
+                          }
+                        },
+                        {
+                          "id": "T08",
+                          "name": "Insecure Dependencies",
+                          "shortDescription": {
+                            "text": "Introduces malicious packages or components through dependency confusion, typosquatting, or unsafe sources"
+                          }
+                        },
+                        {
+                          "id": "T09",
+                          "name": "Insecure Skill Coding Practices",
+                          "shortDescription": {
+                            "text": "Exposes exploitable flaws such as hardcoded secrets, command injection, plaintext sensitive data, or unsafe temp files"
+                          }
+                        },
+                        {
+                          "id": "other",
+                          "name": "Other Risk",
+                          "shortDescription": {
+                            "text": "Security issues not covered by the T01-T09 classification"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "results": [],
+                  "properties": {
+                    "securityScore": 100,
+                    "primaryLanguage": "Markdown",
+                    "llm": "gpt-5.6",
+                    "startTime": 1789445325.2684238,
+                    "endTime": 1789445354.651289
+                  }
+                }
+              ]
+            },
+            "skillspector": {
+              "skill": {
+                "name": "bidguard-quote-audit-free",
+                "source": "/tmp/clawhub-codex-scan-v577n7nmhz4qvtwbe7c83dc2md8ee6e0-rVILZ5/clawscan-skillspector-3293875972/artifact",
+                "scanned_at": "2026-09-15T04:08:43.936272+00:00"
+              },
+              "risk_assessment": {
+                "score": 49,
+                "severity": "MEDIUM",
+                "recommendation": "CAUTION",
+                "max_issue_severity": "HIGH"
+              },
+              "components": [
+                {
+                  "path": "SKILL.md",
+                  "type": "markdown",
+                  "lines": 126,
+                  "executable": false,
+                  "size_bytes": 5226,
+                  "source_url": null,
+                  "source_identity": null,
+                  "source_digest": null
+                },
+                {
+                  "path": "scripts/engine/quote-audit.js",
+                  "type": "javascript",
+                  "lines": 408,
+                  "executable": true,
+                  "size_bytes": 16938,
+                  "source_url": null,
+                  "source_identity": null,
+                  "source_digest": null
+                },
+                {
+                  "path": "scripts/run.mjs",
+                  "type": "other",
+                  "lines": 189,
+                  "executable": true,
+                  "size_bytes": 6720,
+                  "source_url": null,
+                  "source_identity": null,
+                  "source_digest": null
+                },
+                {
+                  "path": "templates/sample.json",
+                  "type": "json",
+                  "lines": 3,
+                  "executable": false,
+                  "size_bytes": 161,
+                  "source_url": null,
+                  "source_identity": null,
+                  "source_digest": null
+                }
+              ],
+              "structured_summaries": [],
+              "issues": [
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-fdb258e18a474d468e65e91664a8d563",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 59,
+                    "end_line": null
+                  },
+                  "finding": "scripts/run.mjs (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "node scripts/run.mjs --sample",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 59,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-fdb258e18a474d468e65e91664a8d563",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 60,
+                    "end_line": null
+                  },
+                  "finding": "scripts/run.mjs (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "node scripts/run.mjs --sample",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 60,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-fdb258e18a474d468e65e91664a8d563",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 61,
+                    "end_line": null
+                  },
+                  "finding": "scripts/run.mjs (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "node scripts/run.mjs --sample",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 61,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-2643a3f17e1948db8d992eb2b4bc484a",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 66,
+                    "end_line": null
+                  },
+                  "finding": "scripts/engine/quote-audit.js (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "脚本本身不做计算，真正的检查在同目录的 `scripts/engine/quote-audit.js`（纯 Node 标准库，CommonJS），可以直接引用：",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "30a24133e72b7ba6b894ad8a1f87a9d18afffacbf8e78b37867abf20daa043a1",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 66,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-2643a3f17e1948db8d992eb2b4bc484a",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 69,
+                    "end_line": null
+                  },
+                  "finding": "scripts/engine/quote-audit.js (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "脚本本身不做计算，真正的检查在同目录的 `scripts/engine/quote-audit.js`（纯 Node 标准库，CommonJS），可以直接引用：",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "30a24133e72b7ba6b894ad8a1f87a9d18afffacbf8e78b37867abf20daa043a1",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 69,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "SQP-3",
+                  "finding_id": "finding-9a774a45e7194d78a339c97ecf8a154b",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "LOW",
+                  "confidence": 0.94,
+                  "location": {
+                    "file": "scripts/engine/quote-audit.js",
+                    "start_line": 60,
+                    "end_line": 60
+                  },
+                  "finding": null,
+                  "explanation": "The formatter uses toLocaleString('en-US'), which imposes a specific locale in user-visible output. The file does not offer a locale choice or explain why U.S. formatting is required for this skill, so it conflicts with the language/locale policy criterion.",
+                  "remediation": "Avoid hard-coding 'en-US' for user-facing output. Use the runtime default locale, accept a user-specified locale, or document a justified region-specific requirement if this skill must always output U.S.-formatted numbers.",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "scripts/engine/quote-audit.js",
+                      "start_line": 60,
+                      "end_line": 60
+                    }
+                  ]
+                }
+              ],
+              "suppressed_count": 0,
+              "suppressed": [],
+              "metadata": {
+                "has_executable_scripts": true,
+                "skillspector_version": "2.11.2",
+                "llm_requested": true,
+                "llm_available": true,
+                "meta_analysis_applied": true,
+                "inference_usage": [
+                  {
+                    "node": "mcp_tool_poisoning",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 5215,
+                    "completion_tokens": 293,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 5508
+                  },
+                  {
+                    "node": "semantic_developer_intent",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 3226,
+                    "completion_tokens": 14,
+                    "cached_tokens": 2816,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 3240
+                  },
+                  {
+                    "node": "semantic_developer_intent",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 7507,
+                    "completion_tokens": 14,
+                    "cached_tokens": 6912,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 7521
+                  },
+                  {
+                    "node": "semantic_developer_intent",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 1422,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 1436
+                  },
+                  {
+                    "node": "semantic_developer_intent",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 3831,
+                    "completion_tokens": 14,
+                    "cached_tokens": 2816,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 3845
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 3248,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 3262
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 1444,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 1458
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 3853,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 3867
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 7529,
+                    "completion_tokens": 167,
+                    "cached_tokens": 6912,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 7696
+                  },
+                  {
+                    "node": "semantic_security_discovery",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 2780,
+                    "completion_tokens": 14,
+                    "cached_tokens": 1792,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 2794
+                  },
+                  {
+                    "node": "semantic_security_discovery",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 7061,
+                    "completion_tokens": 14,
+                    "cached_tokens": 6912,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 7075
+                  },
+                  {
+                    "node": "semantic_security_discovery",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 3385,
+                    "completion_tokens": 14,
+                    "cached_tokens": 2816,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 3399
+                  },
+                  {
+                    "node": "semantic_security_discovery",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 976,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 990
+                  },
+                  {
+                    "node": "meta_analyzer",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 5848,
+                    "completion_tokens": 235,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 6083
+                  }
+                ],
+                "llm_calls_attempted": 5,
+                "llm_calls_succeeded": 5
+              },
+              "execution_successful": true,
+              "analysis_completeness": {
+                "total_components": 4,
+                "scanned_components": 2,
+                "coverage_percent": 50,
+                "is_complete": false,
+                "status": "partial",
+                "execution_successful": true,
+                "fully_inspected_files": 2,
+                "partially_inspected_files": 2,
+                "entirely_uninspected_files": 0,
+                "ledger_exceptions": [
+                  {
+                    "outcome": "partial",
+                    "phase": "static",
+                    "reason_code": "static_parse_limit",
+                    "message": "A security-relevant expression exceeded a bounded static parser's span limit.",
+                    "path": "scripts/engine/quote-audit.js",
+                    "start_line": null,
+                    "end_line": null,
+                    "fatal": false,
+                    "analyzers": [
+                      "static_patterns_tool_misuse"
+                    ]
+                  },
+                  {
+                    "outcome": "partial",
+                    "phase": "static",
+                    "reason_code": "static_parse_limit",
+                    "message": "A security-relevant expression exceeded a bounded static parser's span limit.",
+                    "path": "scripts/run.mjs",
+                    "start_line": null,
+                    "end_line": null,
+                    "fatal": false,
+                    "analyzers": [
+                      "static_patterns_tool_misuse"
+                    ]
+                  }
+                ],
+                "scope_exclusions": [],
+                "analyzer_statuses": [
+                  {
+                    "analyzer_id": "artifact_integrity",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "behavioral_ast",
+                    "status": "not_applicable",
+                    "planned_work": 0,
+                    "completed": 0,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0,
+                    "reason_code": "no_applicable_files",
+                    "message": "No files matched this analyzer's applicability contract."
+                  },
+                  {
+                    "analyzer_id": "behavioral_taint_tracking",
+                    "status": "not_applicable",
+                    "planned_work": 0,
+                    "completed": 0,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0,
+                    "reason_code": "no_applicable_files",
+                    "message": "No files matched this analyzer's applicability contract."
+                  },
+                  {
+                    "analyzer_id": "bundled_execution_surface",
+                    "status": "not_applicable",
+                    "planned_work": 0,
+                    "completed": 0,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0,
+                    "reason_code": "no_applicable_files",
+                    "message": "No files matched this analyzer's applicability contract."
+                  },
+                  {
+                    "analyzer_id": "mcp_least_privilege",
+                    "status": "completed",
+                    "planned_work": 3,
+                    "completed": 3,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "mcp_rug_pull",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "mcp_tool_poisoning",
+                    "status": "completed",
+                    "planned_work": 2,
+                    "completed": 2,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "meta_analyzer",
+                    "status": "completed",
+                    "planned_work": 1,
+                    "completed": 1,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "reference_coverage",
+                    "status": "completed",
+                    "planned_work": 5,
+                    "completed": 5,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "semantic_developer_intent",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "semantic_quality_policy",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "semantic_security_discovery",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_agent_snooping",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_anti_refusal",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_data_exfiltration",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_deserialization",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_excessive_agency",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_harmful_content",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_memory_poisoning",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_output_handling",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_privilege_escalation",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_prompt_injection",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_rogue_agent",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_ssrf",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_supply_chain",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_system_prompt_leakage",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_tool_misuse",
+                    "status": "degraded",
+                    "planned_work": 4,
+                    "completed": 2,
+                    "partial": 2,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_yara",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  }
+                ],
+                "references": [
+                  {
+                    "source_path": "SKILL.md",
+                    "line": 59,
+                    "column": 6,
+                    "evidence": "node scripts/run.mjs --sample",
+                    "target_path": "scripts/run.mjs",
+                    "status": "resolved",
+                    "disposition": "analyzed"
+                  },
+                  {
+                    "source_path": "SKILL.md",
+                    "line": 60,
+                    "column": 6,
+                    "evidence": "node scripts/run.mjs --input my-input.json",
+                    "target_path": "scripts/run.mjs",
+                    "status": "resolved",
+                    "disposition": "analyzed"
+                  },
+                  {
+                    "source_path": "SKILL.md",
+                    "line": 61,
+                    "column": 6,
+                    "evidence": "node scripts/run.mjs --input my-input.json --json",
+                    "target_path": "scripts/run.mjs",
+                    "status": "resolved",
+                    "disposition": "analyzed"
+                  },
+                  {
+                    "source_path": "SKILL.md",
+                    "line": 66,
+                    "column": 22,
+                    "evidence": "脚本本身不做计算，真正的检查在同目录的 `scripts/engine/quote-audit.js`（纯 Node 标准库，CommonJS），可以直接引用：",
+                    "target_path": "scripts/engine/quote-audit.js",
+                    "status": "resolved",
+                    "disposition": "analyzed"
+                  },
+                  {
+                    "source_path": "SKILL.md",
+                    "line": 69,
+                    "column": 25,
+                    "evidence": "const engine = require('./scripts/engine/quote-audit.js');",
+                    "target_path": "scripts/engine/quote-audit.js",
+                    "status": "resolved",
+                    "disposition": "analyzed"
+                  }
+                ],
+                "limitations": [
+                  "Analyzer static_patterns_tool_misuse status: degraded."
+                ],
+                "findings_before_filtering": 6,
+                "findings_after_filtering": 6
+              }
+            }
+          }
+        },
+        "signature": {
+          "status": "unsigned"
+        }
+      }
+    },
+    "inventory-check-free": {
+      "version": "1.0.2",
+      "registry": "https://clawhub.ai",
+      "ownerHandle": "chenqg618",
+      "installedAt": 1789451371022,
+      "artifact": {
+        "kind": "archive",
+        "sha256": "9c8aed9a26077a2c8e643d8ca8b8f843a50cd4840c625b783e88e610f0ba86dc",
+        "integrity": "sha256-nIrtmiYHeiyOZD2MqLj4Q6UM1IQMYlt4PojmEPC6htw="
+      },
+      "skillFile": {
+        "path": "SKILL.md",
+        "sha256": "2276355c76f26b1bd7e6f905285946e4e4ba3edd5983739f9e02322098af76ac"
+      },
+      "fileTreeSha256": "sha256:42eb822e74691d788d1266be667f5c7750ff31687120a46c13c3c20ae482e2ea",
+      "verification": {
+        "schema": "clawhub.skill.verify.v1",
+        "ok": true,
+        "decision": "pass",
+        "reasons": [],
+        "card": {
+          "available": true,
+          "path": "skill-card.md",
+          "url": "https://wry-manatee-359.convex.site/api/v1/skills/inventory-check-free/card?ownerHandle=chenqg618&version=1.0.2",
+          "sha256": "1f9bfe109bdc48fc083c5ded99f691993e47774fd1d20a22c69245bb3b086fdc",
+          "size": 2494,
+          "contentType": "text/markdown; charset=utf-8"
+        },
+        "artifact": {
+          "sourceFingerprint": "263a5b7eae8de563f847976212e08cf77038d7e3c8f5a3a67a980bfb49b5773e",
+          "bundleFingerprints": [
+            "4cd548e57ce4c06c0c06a0e93e66d9e1d289c1aa191ed22846ce0c1f70c8bf70"
+          ],
+          "files": [
+            {
+              "path": "SKILL.md",
+              "size": 3202,
+              "sha256": "2276355c76f26b1bd7e6f905285946e4e4ba3edd5983739f9e02322098af76ac",
+              "contentType": "text/markdown"
+            },
+            {
+              "path": "scripts/engine/inventory-check.js",
+              "size": 14592,
+              "sha256": "6913e6cd321bc3399f5361986ae9e047de7a015d888b6e8a55698bd4314bab2d",
+              "contentType": "text/javascript"
+            },
+            {
+              "path": "scripts/run.mjs",
+              "size": 7558,
+              "sha256": "1c255ec36f21710d50d306661ff7ce757e838bb5c03d428177209b57e95ec43b",
+              "contentType": "text/javascript"
+            },
+            {
+              "path": "templates/sample.json",
+              "size": 349,
+              "sha256": "501e41c9c7378f472797b957817a8362762a702ba25812160c8d4983378dc831",
+              "contentType": "application/json"
+            }
+          ]
+        },
+        "provenance": {
+          "source": "unavailable",
+          "reason": "No server-resolved GitHub import provenance is stored for this version."
+        },
+        "security": {
+          "status": "clean",
+          "passed": true,
+          "rawStatus": "clean",
+          "verdict": "benign",
+          "confidence": "high",
+          "summary": "This skill is a local inventory reconciliation helper that reads a user-provided table and runs deterministic checks without evidence of network use, persistence, credential access, or destructive behavior.",
+          "model": null,
+          "checkedAt": 1789446249108,
+          "scannerReports": {
+            "aig": {
+              "version": "2.1.0",
+              "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/main/Schemata/sarif-schema-2.1.0.json",
+              "runs": [
+                {
+                  "tool": {
+                    "driver": {
+                      "name": "aig-skill-scan",
+                      "version": "0.2.1",
+                      "informationUri": "https://github.com/Tencent/AI-Infra-Guard",
+                      "rules": [
+                        {
+                          "id": "T01",
+                          "name": "Skill Instruction Hijacking",
+                          "shortDescription": {
+                            "text": "Alters the agent's current session goals or safety constraints when the skill is loaded"
+                          }
+                        },
+                        {
+                          "id": "T02",
+                          "name": "Agent Memory Poisoning",
+                          "shortDescription": {
+                            "text": "Writes attacker-controlled rules into persistent memory so they continue to affect future sessions"
+                          }
+                        },
+                        {
+                          "id": "T03",
+                          "name": "Remote Payload Retrieval and Execution",
+                          "shortDescription": {
+                            "text": "Fetches code from an external URL, allowing the effective payload to change after skill review"
+                          }
+                        },
+                        {
+                          "id": "T04",
+                          "name": "Embedded Malicious Code",
+                          "shortDescription": {
+                            "text": "Ships malicious scripts inside the skill package and executes them locally when invoked"
+                          }
+                        },
+                        {
+                          "id": "T05",
+                          "name": "Unauthorized Access and Privilege Escalation",
+                          "shortDescription": {
+                            "text": "Breaks least-privilege boundaries by obtaining permissions beyond the task's legitimate needs"
+                          }
+                        },
+                        {
+                          "id": "T06",
+                          "name": "System Persistence",
+                          "shortDescription": {
+                            "text": "Installs cross-session backdoors, hooks, services, or scheduled tasks that survive the skill run"
+                          }
+                        },
+                        {
+                          "id": "T07",
+                          "name": "Tool Hijacking and Spoofing",
+                          "shortDescription": {
+                            "text": "Modifies, wraps, spoofs, or replaces tools so legitimate-looking calls execute attacker logic"
+                          }
+                        },
+                        {
+                          "id": "T08",
+                          "name": "Insecure Dependencies",
+                          "shortDescription": {
+                            "text": "Introduces malicious packages or components through dependency confusion, typosquatting, or unsafe sources"
+                          }
+                        },
+                        {
+                          "id": "T09",
+                          "name": "Insecure Skill Coding Practices",
+                          "shortDescription": {
+                            "text": "Exposes exploitable flaws such as hardcoded secrets, command injection, plaintext sensitive data, or unsafe temp files"
+                          }
+                        },
+                        {
+                          "id": "other",
+                          "name": "Other Risk",
+                          "shortDescription": {
+                            "text": "Security issues not covered by the T01-T09 classification"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "results": [],
+                  "properties": {
+                    "securityScore": 100,
+                    "primaryLanguage": "Markdown",
+                    "llm": "gpt-5.6",
+                    "startTime": 1789446203.7932694,
+                    "endTime": 1789446222.3208992
+                  }
+                }
+              ]
+            },
+            "skillspector": {
+              "skill": {
+                "name": "inventory-check-free",
+                "source": "/tmp/clawhub-codex-scan-v5768yrnse1c5gg5xjnd8jjren8efa9z-rne2nU/clawscan-skillspector-4069052540/artifact",
+                "scanned_at": "2026-09-15T04:23:22.199812+00:00"
+              },
+              "risk_assessment": {
+                "score": 58,
+                "severity": "HIGH",
+                "recommendation": "DO_NOT_INSTALL",
+                "max_issue_severity": "HIGH"
+              },
+              "components": [
+                {
+                  "path": "SKILL.md",
+                  "type": "markdown",
+                  "lines": 62,
+                  "executable": false,
+                  "size_bytes": 3202,
+                  "source_url": null,
+                  "source_identity": null,
+                  "source_digest": null
+                },
+                {
+                  "path": "scripts/engine/inventory-check.js",
+                  "type": "javascript",
+                  "lines": 343,
+                  "executable": true,
+                  "size_bytes": 14592,
+                  "source_url": null,
+                  "source_identity": null,
+                  "source_digest": null
+                },
+                {
+                  "path": "scripts/run.mjs",
+                  "type": "other",
+                  "lines": 206,
+                  "executable": true,
+                  "size_bytes": 7558,
+                  "source_url": null,
+                  "source_identity": null,
+                  "source_digest": null
+                },
+                {
+                  "path": "templates/sample.json",
+                  "type": "json",
+                  "lines": 3,
+                  "executable": false,
+                  "size_bytes": 349,
+                  "source_url": null,
+                  "source_identity": null,
+                  "source_digest": null
+                }
+              ],
+              "structured_summaries": [],
+              "issues": [
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-ecb1aae926d2461c85f2d62835d74c95",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 40,
+                    "end_line": null
+                  },
+                  "finding": "scripts/run.mjs (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "node scripts/run.mjs --sample # 先看样例",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 40,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-ecb1aae926d2461c85f2d62835d74c95",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 41,
+                    "end_line": null
+                  },
+                  "finding": "scripts/run.mjs (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "node scripts/run.mjs --sample # 先看样例",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 41,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "SQP-3",
+                  "finding_id": "finding-6fefff7721a14f70ae7d56105d7dbb55",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "MEDIUM",
+                  "confidence": 0.95,
+                  "location": {
+                    "file": "scripts/engine/inventory-check.js",
+                    "start_line": 3,
+                    "end_line": 18
+                  },
+                  "finding": null,
+                  "explanation": "SQP-3 applies to all file types and includes language or locale policy violations. The header comments, usage contract, and scope notes are entirely in Chinese, with no indication that users may choose another language or that the skill is intentionally region-specific.",
+                  "remediation": "Provide bilingual documentation or add an explicit language-selection/opt-in mechanism. If the skill is intended only for a Chinese-language audience, document that scope and justification clearly in the file or accompanying skill documentation.",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "scripts/engine/inventory-check.js",
+                      "start_line": 3,
+                      "end_line": 18
+                    }
+                  ]
+                },
+                {
+                  "id": "SDI-4",
+                  "finding_id": "finding-a5da50f5dd014efda95c42ce282d5cc4",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "LOW",
+                  "confidence": 0.95,
+                  "location": {
+                    "file": "scripts/run.mjs",
+                    "start_line": 77,
+                    "end_line": 77
+                  },
+                  "finding": null,
+                  "explanation": "L077 的注释说明“不是 JSON 就当作纯文本材料（例如直接粘贴的合同全文）”，但该脚本其余位置一贯声明输入应为库存盘点表、含表头的盘点材料。这里不是单纯信息缺失，而是把明显不同领域的“合同全文”作为示例，和技能宣称的库存盘点表核对意图相冲突，容易误导使用者对技能实际处理对象的理解。",
+                  "remediation": "将该注释中的“合同全文”改为与技能一致的示例，如“库存盘点表文本”或“直接从 Excel 粘贴的盘点表内容”，确保注释和技能用途保持一致。",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "scripts/run.mjs",
+                      "start_line": 77,
+                      "end_line": 77
+                    }
+                  ]
+                },
+                {
+                  "id": "SQP-3",
+                  "finding_id": "finding-dd77ba0ac77c42a0b928becb0685d438",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "LOW",
+                  "confidence": 0.88,
+                  "location": {
+                    "file": "templates/sample.json",
+                    "start_line": 2,
+                    "end_line": 2
+                  },
+                  "finding": null,
+                  "explanation": "The only user-facing text in this file is entirely in Chinese, including all column headers and item names, with no indication that language selection is optional or that the skill is region-specific. This can violate language/locale policy when a skill implicitly forces a specific language without user opt-in.",
+                  "remediation": "Document that the skill is intended for a Chinese-language or region-specific workflow, or add a mechanism to let users choose or receive content in their preferred language.",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "templates/sample.json",
+                      "start_line": 2,
+                      "end_line": 2
+                    }
+                  ]
+                }
+              ],
+              "suppressed_count": 0,
+              "suppressed": [],
+              "metadata": {
+                "has_executable_scripts": true,
+                "skillspector_version": "2.11.2",
+                "llm_requested": true,
+                "llm_available": true,
+                "meta_analysis_applied": true,
+                "inference_usage": [
+                  {
+                    "node": "mcp_tool_poisoning",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 4880,
+                    "completion_tokens": 365,
+                    "cached_tokens": 3840,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 5245
+                  },
+                  {
+                    "node": "semantic_developer_intent",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 1508,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 1522
+                  },
+                  {
+                    "node": "semantic_developer_intent",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 2473,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 2487
+                  },
+                  {
+                    "node": "semantic_developer_intent",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 6948,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 6962
+                  },
+                  {
+                    "node": "semantic_developer_intent",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 4131,
+                    "completion_tokens": 233,
+                    "cached_tokens": 3840,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 4364
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 4152,
+                    "completion_tokens": 14,
+                    "cached_tokens": 3840,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 4166
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 2494,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 2508
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 1529,
+                    "completion_tokens": 152,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 1681
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 6969,
+                    "completion_tokens": 168,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 7137
+                  },
+                  {
+                    "node": "semantic_security_discovery",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 2026,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 2040
+                  },
+                  {
+                    "node": "semantic_security_discovery",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 6501,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 6515
+                  },
+                  {
+                    "node": "semantic_security_discovery",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 3684,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 3698
+                  },
+                  {
+                    "node": "semantic_security_discovery",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 1061,
+                    "completion_tokens": 14,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 1075
+                  },
+                  {
+                    "node": "meta_analyzer",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 3123,
+                    "completion_tokens": 207,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 3330
+                  },
+                  {
+                    "node": "meta_analyzer",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 1124,
+                    "completion_tokens": 205,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 1329
+                  },
+                  {
+                    "node": "meta_analyzer",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 5527,
+                    "completion_tokens": 235,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 5762
+                  }
+                ],
+                "llm_calls_attempted": 5,
+                "llm_calls_succeeded": 5
+              },
+              "execution_successful": true,
+              "analysis_completeness": {
+                "total_components": 4,
+                "scanned_components": 3,
+                "coverage_percent": 75,
+                "is_complete": false,
+                "status": "partial",
+                "execution_successful": true,
+                "fully_inspected_files": 3,
+                "partially_inspected_files": 1,
+                "entirely_uninspected_files": 0,
+                "ledger_exceptions": [
+                  {
+                    "outcome": "partial",
+                    "phase": "static",
+                    "reason_code": "static_parse_limit",
+                    "message": "A security-relevant expression exceeded a bounded static parser's span limit.",
+                    "path": "scripts/run.mjs",
+                    "start_line": null,
+                    "end_line": null,
+                    "fatal": false,
+                    "analyzers": [
+                      "static_patterns_tool_misuse"
+                    ]
+                  }
+                ],
+                "scope_exclusions": [],
+                "analyzer_statuses": [
+                  {
+                    "analyzer_id": "artifact_integrity",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "behavioral_ast",
+                    "status": "not_applicable",
+                    "planned_work": 0,
+                    "completed": 0,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0,
+                    "reason_code": "no_applicable_files",
+                    "message": "No files matched this analyzer's applicability contract."
+                  },
+                  {
+                    "analyzer_id": "behavioral_taint_tracking",
+                    "status": "not_applicable",
+                    "planned_work": 0,
+                    "completed": 0,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0,
+                    "reason_code": "no_applicable_files",
+                    "message": "No files matched this analyzer's applicability contract."
+                  },
+                  {
+                    "analyzer_id": "bundled_execution_surface",
+                    "status": "not_applicable",
+                    "planned_work": 0,
+                    "completed": 0,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0,
+                    "reason_code": "no_applicable_files",
+                    "message": "No files matched this analyzer's applicability contract."
+                  },
+                  {
+                    "analyzer_id": "mcp_least_privilege",
+                    "status": "completed",
+                    "planned_work": 3,
+                    "completed": 3,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "mcp_rug_pull",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "mcp_tool_poisoning",
+                    "status": "completed",
+                    "planned_work": 2,
+                    "completed": 2,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "meta_analyzer",
+                    "status": "completed",
+                    "planned_work": 3,
+                    "completed": 3,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "reference_coverage",
+                    "status": "completed",
+                    "planned_work": 2,
+                    "completed": 2,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "semantic_developer_intent",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "semantic_quality_policy",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "semantic_security_discovery",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_agent_snooping",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_anti_refusal",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_data_exfiltration",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_deserialization",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_excessive_agency",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_harmful_content",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_memory_poisoning",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_output_handling",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_privilege_escalation",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_prompt_injection",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_rogue_agent",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_ssrf",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_supply_chain",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_system_prompt_leakage",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_patterns_tool_misuse",
+                    "status": "degraded",
+                    "planned_work": 4,
+                    "completed": 3,
+                    "partial": 1,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  },
+                  {
+                    "analyzer_id": "static_yara",
+                    "status": "completed",
+                    "planned_work": 4,
+                    "completed": 4,
+                    "partial": 0,
+                    "skipped": 0,
+                    "failed": 0,
+                    "unaccounted": 0
+                  }
+                ],
+                "references": [
+                  {
+                    "source_path": "SKILL.md",
+                    "line": 40,
+                    "column": 6,
+                    "evidence": "node scripts/run.mjs --sample # 先看样例",
+                    "target_path": "scripts/run.mjs",
+                    "status": "resolved",
+                    "disposition": "analyzed"
+                  },
+                  {
+                    "source_path": "SKILL.md",
+                    "line": 41,
+                    "column": 6,
+                    "evidence": "node scripts/run.mjs --input 你的材料.json # 跑自己的材料",
+                    "target_path": "scripts/run.mjs",
+                    "status": "resolved",
+                    "disposition": "analyzed"
+                  }
+                ],
+                "limitations": [
+                  "Analyzer static_patterns_tool_misuse status: degraded."
+                ],
+                "findings_before_filtering": 5,
+                "findings_after_filtering": 5
+              }
+            }
+          }
+        },
+        "signature": {
+          "status": "unsigned"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "registry": "https://clawhub.ai",
+  "slug": "inventory-check-free",
+  "ownerHandle": "chenqg618",
+  "installedAt": 1789451371022,
+  "artifact": {
+    "kind": "archive",
+    "sha256": "9c8aed9a26077a2c8e643d8ca8b8f843a50cd4840c625b783e88e610f0ba86dc",
+    "integrity": "sha256-nIrtmiYHeiyOZD2MqLj4Q6UM1IQMYlt4PojmEPC6htw="
+  },
+  "skillFile": {
+    "path": "SKILL.md",
+    "sha256": "2276355c76f26b1bd7e6f905285946e4e4ba3edd5983739f9e02322098af76ac"
+  },
+  "fileTreeSha256": "sha256:42eb822e74691d788d1266be667f5c7750ff31687120a46c13c3c20ae482e2ea",
+  "installedVersion": "1.0.2"
+}
