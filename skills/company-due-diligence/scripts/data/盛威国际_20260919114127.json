@@ -1,0 +1,22 @@
+{
+  "company_name": "盛威国际",
+  "query_time": "2026-09-19T11:40:53.532574",
+  "screenshot_folder": "/Users/zhangdongfang/.openclaw/workspace-in3bot/skills/company-due-diligence/reports/due-diligence/screenshots/盛威国际_20260919",
+  "sources": {
+    "qichacha": {
+      "source": "企查查",
+      "query_time": "2026-09-19T11:40:53.532577",
+      "search_result": "\"405\\n很抱歉，由于您访问的链接有可能对网站造成安全威胁，您的访问被阻断。\\n如需帮助，可联系在线客服。\\n返回首页\\n请求时间：2026-09-19 11:40:55\\n请求IP：134.185.96.109\\n更多信息，点击查看诊断页面\"\n[agent-browser] restore: missing; save: saved\n"
+    },
+    "tianyancha": {
+      "source": "天眼查",
+      "query_time": "2026-09-19T11:41:01.086832",
+      "search_result": "\"根据相关法律规定，当前所在地区暂不支持访问\\nAccording to relevant legal regulations, access is temporarily not supported in your current location.\\n当前IP：134.185.96.109Current IP: 134.185.96.109\\n当前地区：韩国Current location: KR\\n如果您的设备或所处Wi-Fi环境使用了VPN服务，请关闭后重试。\\n如有其他问题，请联系官方客服：\\n客服电话：+86 400-608-0000\\n服务时间 (北京时间)\\n· 工作日：9:00-20:00\\nIf your device or the Wi-Fi environment you are in is using a VPN service, please disable it and try again.\\nIf you have any other questions, please contact official customer service:\\nCustomer service number: +86 400-608-0000\\nService hours (Beijing Time)\\n· Weekdays: 9:00 AM to 6:00 PM\"\n[agent-browser] restore: missing; save: saved\n"
+    },
+    "wenshu": {
+      "source": "中国裁判文书网",
+      "query_time": "2026-09-19T11:41:10.960271",
+      "content": "\"2026年9月19日 星期六\\n\\n登录\\n注册\\n意见建议\\n返回主站\\n使用帮助\\n首页 刑事案件 民事案件 行政案件 赔偿案件 执行案件 其他案件民族语言文书\\n搜索\\n\\n今日新增\\n\\n16,871 篇\\n\\n文书总量\\n\\n168,270,462 篇\\n\\n访问总量\\n\\n126,956,236,446 次\\n\\n民事文书 103,649,146篇 刑事文书 10,848,717篇 行政文书 3,296,160篇 赔偿文书 146,688篇 执行文书 48,620,953篇 其他文书 1,708,798篇\\n北京\\n天津\\n上海\\n重庆\\n河北\\n山西\\n辽宁\\n吉林\\n黑龙江\\n江苏\\n浙江\\n安徽\\n福建\\n江西\\n山东\\n河南\\n湖北\\n湖南\\n广东\\n海南\\n四川\\n贵州\\n云南\\n陕西\\n甘肃\\n青海\\n台湾\\n内蒙古\\n广西\\n西藏\\n宁夏\\n新疆\\n澳门\\n香港\\n北京\\n最高人民法院\\n北京市高级人民法院\\n北京市第一中级人民法院\\n北京市第二中级人民法院\\n北京市第三中级人民法院\\n北京市第四中级人民法院\\n北京知识产权法院\\n| 中国政府公开信息整合服务平台| 人民检察院案件信息公开网| 中国审判流程信息公开网| 中国司法大数据服务网|\\n| 中国执行信息公开网| 全国法院减刑、假释、暂予监外执行信息网| 中国涉外商事海事审判网| 最高人民法院服务人民群众系统场景导航|\\n\\n地址：北京市东城区东交民巷27号    邮编：100745    总机：010-67550114    \\n\\n中华人民共和国最高人民法院 版权所有\\n\\n京ICP备05023036号\"\n[agent-browser] restore: missing; save: saved\n"
+    }
+  }
+}

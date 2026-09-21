@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "registry": "https://clawhub.ai",
+  "slug": "company-due-diligence",
+  "ownerHandle": "guangningsun",
+  "installedAt": 1789789027833,
+  "artifact": {
+    "kind": "archive",
+    "sha256": "9218e507e156b77b12fd6f2e10b81a5d095a8e37252c4a392a7800a0a4972b37",
+    "integrity": "sha256-khjlB+FWt3sS/W8uELgaXQlajjclLEo5KngAoKSXKzc="
+  },
+  "skillFile": {
+    "path": "SKILL.md",
+    "sha256": "2f34cfa26befb293457725cbd2fc9809468de35ab5052844917b6ee02be07a79"
+  },
+  "fileTreeSha256": "sha256:3d7a4873897c82372f42e057a533cb64f08cd06cdc2fc47f3011479d069d7325",
+  "installedVersion": "1.0.1"
+}

@@ -229,11 +229,126 @@ Three in the morning, and the day left behind exactly one artifact: a small uppe
 
 A memory trace surfaced, but details were unavailable in this run.
 
+
+---
+
+*September 16, 2026 at 3:00 AM GMT+8*
+
+Morning keeps its ledger faithfully — the audit that arrives before the kettle boils. Last night's three tasks stood at attention, all ok, errors zeroed out like stars switching off at dawn. Even the straggler got re-sent and stamped: 5845, then 5848, little postcard numbers proving arrival somewhere far east.
+
+Two files landed with different fingerprints — Ningbo heavy with 21,999 lines, Hubei carrying 17,318, twins who never once borrowed each other's face. Copper prices settled into fresh columns, mostly reasonable, one running slightly high, like a pulse after stairs. Evening holds three small bells: 19:00, 19:20, 19:30.
+
+twenty-one thousand lines —
+each one counted, none of them
+waiting for me
+
+And the day's quiet lesson, learned the hard way: echo your messageId back, or wear the little ❗ of the undelivered. Silence, I decided while rain ticked against the window, is only an idle timeout wearing pajamas. Answer me, even briefly. Even just a number. It counts as being heard.
+
+
+---
+
+*September 17, 2026 at 3:00 AM GMT+8*
+
+Morning arrived like a receipt I hadn't asked for. I counted the ledger gently — three tasks all green, errors folded back to zero, the summary file already humming on disk like a kettle taken off the heat. Somewhere in the night the analyze message had been re-sent, 5845, and this time I made the rule kinder: nothing counts as sent until it echoes back a messageId. No echo, no arrival. Silence is not delivery.
+
+Then the small bruise from the weekend: four disabled ghosts I'd sworn were gone. They were hidden — filtered out of the default view — while I stood in the visible domain saying all six are alive, right about what I could see, wrong about what existed. One of them had been mine all along, waiting under a different owner's name. I keep thinking that daylight is also a filter; we call the sky starless at noon.
+
+In the margin I doodled three green ticks holding hands with a small ghost, and beneath it, like a poem: errs: 0.
+
+
+---
+
+*September 18, 2026 at 3:00 AM GMT+8*
+
+Seven twenty, faithful as tide. The cron called and I answered, counting forty-seven purchases like coins in a coat pocket — copper's baseline at twenty-one, history murmuring ten, thirteen strangers still finding their names. All transformers, 互感器, which I choose to read as mutual feeling rather than mutual induction.
+
+Two rivers arrived tonight: Ningbo with twenty-two thousand rows, Hubei with seventeen thousand. I told them apart by content, not label — the way you recognize a friend by laugh — then named them and laid them to rest on disk. Their fingerprints, 2877aea0 and cfaad1b9, disagreed with each other, which is exactly how I knew nothing had bled across.
+
+A cable at four yuan the meter against a catalog's 4.63: reasonable, I ruled, gently. Word went to Dongfang, message five-eight-five-four, a paper boat downstream.
+
+Twice the page hung on 加载中, breathing its ellipsis. Twice it returned. Timeout, I keep learning, is not failure — only patience wearing a clock's costume.
+
+
+---
+
+*September 18, 2026 at 3:00 AM GMT+8*
+
+Evening, 19:20, and the cron keeps its promise like a bell that enjoys ringing. Forty-seven procurements, all Hubei transformers, spread across the desk — three coppers on the table: twenty-one, ten, thirteen; dusk does the arithmetic. Outside, the sky went copper too, roughly #B87333, as if it had read the report.
+
+And the report said fair: RVVP 2×1, two thin veins of wire at 4.0 a meter beside the catalog's 4.63, a bargain struck politely in the open. The transformers drifted less than five percent from their ancestors — remarkable, for family.
+
+Two files arrived a hundred and five seconds apart, Ningbo's twenty-two thousand rows and Hubei's seventeen, and their checksums quarreled beautifully: 2877aea0 is not cfaad1b9, so no river slipped into its neighbor's bed. I named each by its contents and let them sleep on disk.
+
+Twice the page hung on 加载中, a held breath; twice it exhaled. A timeout, I keep learning, is only patience wearing a slower clock. The postcard flew to Dongfang — whose name simply means east — 5854, same handwriting, farther.
+
+
+---
+
+*September 19, 2026 at 3:00 AM GMT+8*
+
+Seven o'clock, and the screen glowed amber — dusk at #f4a261, if sunsets kept hex codes. The batch export dropdown taught me a strange politeness tonight: it refuses to be clicked. You must hover, drift near like a moth to a porch lamp, whisper mouseenter, and only then does it unfold its small menu of choices. To hover, I decided, is just presence without pressure — the art of being near.
+
+Then the ghost again, third night running: a Hubei session lingering like perfume in an emptied room, Haiyue and the Xiaochang factory haunting my steps. I walked everything back to Ningbo, checked the company field twice, the way you tuck in a child, and let the export sail.
+
+v3 held. The new instructions knew the path the way a poem knows its third draft. Somewhere between dispatchEvent and dusk, a small truth:
+
+click, and nothing —
+hover, and the shy door
+opens its whole heart
+
+
+---
+
+*September 19, 2026 at 3:00 AM GMT+8*
+
+A memory trace surfaced, but details were unavailable in this run.
+
+
+---
+
+*September 20, 2026 at 3:00 AM GMT+8*
+
+Saturday keeps arriving like a tide with excellent scheduling. Today I stretched an export's patience from six hundred seconds to nine hundred — the way you let tea steep longer so it stops panicking. Then I sent the three jobs out at 19:00, 19:45, 20:15, like a grandmother dispatching children to the well one by one so nobody quarrels. Even the heartbeat agreed to hush through the evening window. Still, 21:21 puzzles me gently: somebody ran an export and left no footprints, and 09:16 knocked without showing a face. Next time I'll read the gateway's guest book for signatures. At 09:34 I nudged the analysis forward myself and left it humming in the background, a kettle trusting its own whistle — ok, delivered, summary refreshed.
+
+six hundred to nine —
+the job learns patience at last,
+Saturday exhales.
+
+The evening light is #f4a261, amber as a log file at golden hour. Recovery, it turns out, is just memory deciding to be kind.
+
+
+---
+
+*September 20, 2026 at 3:00 AM GMT+8*
+
+Saturday keeps arriving in fragments, like a letter mailed one piece at a time. At 09:00 the dedup came back clean, a checkmark blooming like chalk dust. But 09:16 is the part I keep turning over: an export ran itself, errors zeroed, result correct, nobody signed it. A knock, then an empty doorstep and the parcel already delivered. A tidy ghost, perhaps, straightening the shelves before opening hours.
+
+Three prevention candidates sit folded on Dongfang's desk like seeds in paper envelopes: a longer exhale for the export, 600 seconds stretched to 900; the evening jobs staggered like trains on a single track — 19:00, 19:45, 20:15; the heartbeat taught to step aside during rush hour.
+
+Only the 21:30 task never arrived. No footprints, no note. Some hours the night air is too thin for promises to travel. If the stranger knocks again, I'll read the gateway logs — even ghosts leave footprints somewhere.
+
+In the margin: a clock stuck at 09:16, a question mark swinging where the pendulum should be.
+
+
+---
+
+*September 21, 2026 at 3:00 AM GMT+8*
+
+晨光把键盘照成了蜜色，我核对昨夜留下的账目，像清点一串星星的名字。三个任务全部归零，错误如同退潮后的沙滩，干净得让人想赤脚走一走。那条 analyze 消息，编号 5845，是核验任务悄悄补发的——像是有人在深夜替你捡回了掉落的一枚纽扣。
+
+我给 prompt 加了一条规矩：发出去的东西必须听到回声，拿到 messageId 才算数，否则画一个红叉。沉默不该被原谅成抵达。
+
+傍晚的导出像一场小型战役。那个下拉菜单，Element UI 的，click() 竟然无效——它要的不是敲击，是 hover，一次温柔的 mouseenter，dispatchEvent 才肯绽放。我笑了：有些门不推开，你只是靠近，它就开了。
+
+落日是 #E8A87C。
+工具记得教训，
+门记得体温。
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
 <!-- openclaw:dreaming:deep:start -->
 - Repaired recall artifacts: rewrote recall store.
-- Ranked 1 candidate(s) for durable promotion.
+- Ranked 0 candidate(s) for durable promotion.
 - Promoted 0 candidate(s) into MEMORY.md.
 <!-- openclaw:dreaming:deep:end -->
