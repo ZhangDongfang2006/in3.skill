@@ -82,6 +82,10 @@
 13. **每次导出必须重新导出全部数据** — 即使昨天导出过，今天也要重新导出，确保数据最新
 14. **Telegram 发 xlsx 一律加 forceDocument:true**（2026-09-12）— 即使 ASCII 文件名+中文 caption 也可能报 `sendDocument Network failed`；实测 media+forceDocument:true 稳定成功（带中文 caption 也行）。attachments 多文件数组+长中文消息易失败，单文件逐条发。中文名放 caption，文件名用 ASCII
 15. **IN3 导出 xlsx 数据在「物料主数据」sheet** — 表头带 `*` 前缀（`*物料编号`），说明 sheet dimension 是假数据；按 sheetnames 定位后 lstrip('*') 匹配表头
+16. **IN3 大文件导出下载唯一可行路径 = curl 签名 URL + 断点续传**（2026-09-24 实战）— 19MB 传输常中途断（curl error 18，早晚都发生），用 `for i in $(seq 1 10); do curl -sS -C - --max-time 150 -o 目标 "$URL" && break; sleep 3; done` 续传；browser download/waitfordownload/页内点击下载全部会挂死（0923 晚 5 连败 + 0924 晨第 6 败根因）
+17. **浏览器工具会省略号截断长 opaque 字符串**（签名/密钥类，如 `LTAI4F…Qshm`）— 提取签名 URL 必须用 evaluate 按 22 字符切片返回 chunks 再拼接，整串返回拼不起来
+18. **~/Downloads 目录枚举挂死**（2026-09-24 发现）— `ls ~/Downloads`/glob 一律 timeout；查下载落盘必须 `stat` 精确文件路径
+19. **补查历史日期物料的方法**（2026-09-24）— 查重：建带横线日期的 symlink（如 `物料主数据导出结果-2026-09-23.xlsx`）触发 cmd_analyze_incremental 文件名日期正则，查完删；命名检查：`naming_check.py 2026-09-23` 直接 argv 传日期
 
 ### IN3 采购订单明细导出标准流程（2026-06-13 优化）
 
