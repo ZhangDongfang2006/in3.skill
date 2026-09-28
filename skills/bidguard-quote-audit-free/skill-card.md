@@ -1,6 +1,6 @@
 ## Description:
 
-A free local bid-quote pre-check that flags line-item arithmetic mismatches and missing quantity, unit-price, or total-amount fields without registration, payment, or API keys.
+Audits a single bid quotation locally for line-item arithmetic errors and missing quantity, unit-price, or amount fields.
 
 This skill is ready for commercial/non-commercial use.
 
@@ -14,7 +14,7 @@ MIT-0
 
 ## Use Case:
 
-Bid preparers, procurement reviewers, and developers use this skill to locally pre-check bid quote line items for arithmetic mismatches and missing quantity, unit-price, or total-amount fields before submission. It is a pre-check aid, not an official bid evaluation or scoring decision.
+External procurement, bidding, and bid-preparation users use this skill to pre-check quote tables for mechanical arithmetic mismatches and missing line-item fields before submission. It is an aid for local self-review, not an official bid evaluation or scoring decision.
 
 ### Deployment Geography for Use:
 
@@ -22,37 +22,36 @@ Global
 
 ## Known Risks and Mitigations:
 
-Risk: Bid documents may contain sensitive commercial data.
+Risk: The artifact's English description suggests broader checks than the free version actually performs.
 
-Mitigation: Run the checker locally and provide only files intended for the Node script to read; the security evidence reports no network or credential behavior.
+Mitigation: Treat this release as limited to line-item arithmetic and missing quantity, unit-price, or amount fields unless later evidence aligns the docs and code.
 
-Risk: The free release covers only line-item arithmetic checks and missing-field prompts, so it can miss broader bid compliance issues.
+Risk: Users may mistake the output for an official bid evaluation or scoring decision.
 
-Mitigation: Review the listed withheld checks and use qualified human review for official bid evaluation decisions.
+Mitigation: Use the results only as a local self-review aid and keep final bid evaluation with the responsible reviewers or committee.
 
-Risk: Insufficient or poorly structured input can prevent valid checking.
+Risk: Incomplete or poorly structured quote input can prevent meaningful checks.
 
-Mitigation: Treat an insufficient-input result as no conclusion and provide complete quote text or structured line items before relying on the output.
+Mitigation: Provide quote text or structured items containing quantity, unit price, and amount fields, and treat insufficient-input output as no conclusion.
 
 ## Reference(s):
 
 - [ClawHub skill page](https://clawhub.ai/chenqg618/skills/bidguard-quote-audit-free)
-- [Free web checker](https://www.tokendidi.cn/check)
-- [AI 核对工具铺](https://skillpay.alipay.com/public/tokendidi)
+- [Publisher profile: chenqg618](https://clawhub.ai/user/chenqg618)
 
 ## Skill Output:
 
-**Output Type(s):** [Text, JSON, Guidance]
+**Output Type(s):** [Analysis, JSON, Shell commands, Guidance]
 
-**Output Format:** [Plain text report or JSON result from a local Node.js checker]
+**Output Format:** [Markdown or JSON results from local quote-audit checks]
 
 **Output Parameters:** [1D]
 
-**Other Properties Related to Output:** [Reports executed and withheld checks; exits with code 3 and no conclusion when input is insufficient.]
+**Other Properties Related to Output:** [Reports checks performed, withheld checks, arithmetic discrepancies, missing fields, insufficient-input status, and local-execution notes.]
 
 ## Skill Version(s):
 
-1.0.8 (source: server release metadata and SKILL.md frontmatter)
+1.0.54 (source: server release metadata and SKILL.md frontmatter)
 
 ## Ethical Considerations:
 

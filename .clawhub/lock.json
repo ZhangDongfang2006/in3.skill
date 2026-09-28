@@ -2,20 +2,20 @@
   "version": 1,
   "skills": {
     "bidguard-quote-audit-free": {
-      "version": "1.0.8",
+      "version": "1.0.54",
       "registry": "https://clawhub.ai",
+      "installedAt": 1790474613114,
       "ownerHandle": "chenqg618",
-      "installedAt": 1789451359118,
       "artifact": {
         "kind": "archive",
-        "sha256": "87e1b6231ee248f0c2d1da0ed62ba11f39b55bc63191025fe59417247111e0c8",
-        "integrity": "sha256-h+G2Ix7iSPDC0doO1iuhHzm1W8YxkQJf5ZQXJHER4Mg="
+        "sha256": "a95af85ee30e56e486cd9605673636abe220ea0d3d08df33072b8fa4f6df7d92",
+        "integrity": "sha256-qVr4XuMOVuSGzZYFZzY2q+Ig6g09CN8zByuPpPbffZI="
       },
       "skillFile": {
         "path": "SKILL.md",
-        "sha256": "96d3e6f306f9caf65828676db786fd7fe96a3e5e5a91cba08754a064a63f4d36"
+        "sha256": "892ee5766584fc914eded7a2109bf80798f48839b2f7ad43570ca66ab8faa643"
       },
-      "fileTreeSha256": "sha256:d46d062abc192b1565619d84d5c3250c95f6c091e51bc6e6e1899ea1ef4424cc",
+      "fileTreeSha256": "sha256:50e5dbf33d62e24db8cc2f326ccdd4c5dde265192e78e1b78f0c647f6df0a680",
       "verification": {
         "schema": "clawhub.skill.verify.v1",
         "ok": true,
@@ -24,21 +24,21 @@
         "card": {
           "available": true,
           "path": "skill-card.md",
-          "url": "https://wry-manatee-359.convex.site/api/v1/skills/bidguard-quote-audit-free/card?ownerHandle=chenqg618&version=1.0.8",
-          "sha256": "08703a7938d7dd54d2b1abf27aa0dce3351fcf49201eba3e50ad6e9bcdfdc12d",
-          "size": 2331,
+          "url": "https://wry-manatee-359.convex.site/api/v1/skills/bidguard-quote-audit-free/card?ownerHandle=chenqg618&version=1.0.54",
+          "sha256": "5c736a0e800a6a71a1c069ff92bb4cde95fed8e97803be57c3dd41fcd6bf5c26",
+          "size": 2290,
           "contentType": "text/markdown; charset=utf-8"
         },
         "artifact": {
-          "sourceFingerprint": "c0180f274a42747dbe9979c1d5390a7dde9176bfd2db8d99d989678ce2a1dc1b",
+          "sourceFingerprint": "c2a3b7e97eed4868f1564f6fcf0b9be0f7713d6c5fe8966a11ebae2e49e68940",
           "bundleFingerprints": [
-            "f6256df159dc1f8d72595cfae5579ee8276f559a44a563dbc61d3d522dca7301"
+            "398b31728dcc4244b241f9d576c2b9989ecddfd83ce6a8966c1929ed0431d653"
           ],
           "files": [
             {
               "path": "SKILL.md",
-              "size": 5226,
-              "sha256": "96d3e6f306f9caf65828676db786fd7fe96a3e5e5a91cba08754a064a63f4d36",
+              "size": 4935,
+              "sha256": "892ee5766584fc914eded7a2109bf80798f48839b2f7ad43570ca66ab8faa643",
               "contentType": "text/markdown"
             },
             {
@@ -49,8 +49,8 @@
             },
             {
               "path": "scripts/run.mjs",
-              "size": 6720,
-              "sha256": "fa1f42720d657651c4a6f00854bf98ed8e30d3f106fc4389611ad9e11d3ff697",
+              "size": 6563,
+              "sha256": "5c84155f94b6b034aa04496ab1851e3697b270f9e7e98b55a33f6ec035c33870",
               "contentType": "text/javascript"
             },
             {
@@ -71,9 +71,9 @@
           "rawStatus": "clean",
           "verdict": "benign",
           "confidence": "high",
-          "summary": "This skill is a local bid-quote arithmetic checker whose scripts match the stated purpose and do not show network use, credential access, persistence, or hidden high-impact behavior.",
+          "summary": "This is a local bid-quote arithmetic checker with a minor scope-description mismatch, but no hidden network, persistence, credential, or destructive behavior was found.",
           "model": null,
-          "checkedAt": 1789445385255,
+          "checkedAt": 1789929109814,
           "scannerReports": {
             "aig": {
               "version": "2.1.0",
@@ -83,7 +83,7 @@
                   "tool": {
                     "driver": {
                       "name": "aig-skill-scan",
-                      "version": "0.2.1",
+                      "version": "0.2.2",
                       "informationUri": "https://github.com/Tencent/AI-Infra-Guard",
                       "rules": [
                         {
@@ -164,8 +164,8 @@
                     "securityScore": 100,
                     "primaryLanguage": "Markdown",
                     "llm": "gpt-5.6",
-                    "startTime": 1789445325.2684238,
-                    "endTime": 1789445354.651289
+                    "startTime": 1789929054.4791818,
+                    "endTime": 1789929070.4864361
                   }
                 }
               ]
@@ -173,22 +173,22 @@
             "skillspector": {
               "skill": {
                 "name": "bidguard-quote-audit-free",
-                "source": "/tmp/clawhub-codex-scan-v577n7nmhz4qvtwbe7c83dc2md8ee6e0-rVILZ5/clawscan-skillspector-3293875972/artifact",
-                "scanned_at": "2026-09-15T04:08:43.936272+00:00"
+                "source": "/tmp/clawhub-codex-scan-v57fkqpb63xr0ah7602g9e4jh98er3mr-eatdds/clawscan-skillspector-4215747577/artifact",
+                "scanned_at": "2026-09-20T18:30:53.642358+00:00"
               },
               "risk_assessment": {
-                "score": 49,
-                "severity": "MEDIUM",
-                "recommendation": "CAUTION",
+                "score": 66,
+                "severity": "HIGH",
+                "recommendation": "DO_NOT_INSTALL",
                 "max_issue_severity": "HIGH"
               },
               "components": [
                 {
                   "path": "SKILL.md",
                   "type": "markdown",
-                  "lines": 126,
+                  "lines": 120,
                   "executable": false,
-                  "size_bytes": 5226,
+                  "size_bytes": 4935,
                   "source_url": null,
                   "source_identity": null,
                   "source_digest": null
@@ -206,9 +206,9 @@
                 {
                   "path": "scripts/run.mjs",
                   "type": "other",
-                  "lines": 189,
+                  "lines": 187,
                   "executable": true,
-                  "size_bytes": 6720,
+                  "size_bytes": 6563,
                   "source_url": null,
                   "source_identity": null,
                   "source_digest": null
@@ -228,7 +228,71 @@
               "issues": [
                 {
                   "id": "AE1",
-                  "finding_id": "finding-fdb258e18a474d468e65e91664a8d563",
+                  "finding_id": "finding-010aa6ad5ced44f6b5c5abaf5b98ac5f",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 57,
+                    "end_line": null
+                  },
+                  "finding": "scripts/run.mjs (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "node scripts/run.mjs --sample",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 57,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-010aa6ad5ced44f6b5c5abaf5b98ac5f",
+                  "category": "analysis-evasion",
+                  "pattern": null,
+                  "severity": "HIGH",
+                  "confidence": 1,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 58,
+                    "end_line": null
+                  },
+                  "finding": "scripts/run.mjs (partial)",
+                  "explanation": "Referenced artifact was not completely inspected",
+                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
+                  "code_snippet": "node scripts/run.mjs --sample",
+                  "intent": null,
+                  "tags": [
+                    "coverage",
+                    "reference",
+                    "target-disposition:partial"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 58,
+                      "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "AE1",
+                  "finding_id": "finding-010aa6ad5ced44f6b5c5abaf5b98ac5f",
                   "category": "analysis-evasion",
                   "pattern": null,
                   "severity": "HIGH",
@@ -260,78 +324,14 @@
                 },
                 {
                   "id": "AE1",
-                  "finding_id": "finding-fdb258e18a474d468e65e91664a8d563",
+                  "finding_id": "finding-d0645824b6b24eccb733456401dcd019",
                   "category": "analysis-evasion",
                   "pattern": null,
                   "severity": "HIGH",
                   "confidence": 1,
                   "location": {
                     "file": "SKILL.md",
-                    "start_line": 60,
-                    "end_line": null
-                  },
-                  "finding": "scripts/run.mjs (partial)",
-                  "explanation": "Referenced artifact was not completely inspected",
-                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
-                  "code_snippet": "node scripts/run.mjs --sample",
-                  "intent": null,
-                  "tags": [
-                    "coverage",
-                    "reference",
-                    "target-disposition:partial"
-                  ],
-                  "evidence": {},
-                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
-                  "occurrences": [
-                    {
-                      "file": "SKILL.md",
-                      "start_line": 60,
-                      "end_line": null
-                    }
-                  ]
-                },
-                {
-                  "id": "AE1",
-                  "finding_id": "finding-fdb258e18a474d468e65e91664a8d563",
-                  "category": "analysis-evasion",
-                  "pattern": null,
-                  "severity": "HIGH",
-                  "confidence": 1,
-                  "location": {
-                    "file": "SKILL.md",
-                    "start_line": 61,
-                    "end_line": null
-                  },
-                  "finding": "scripts/run.mjs (partial)",
-                  "explanation": "Referenced artifact was not completely inspected",
-                  "remediation": "Make the referenced artifact locally available and fully analyzable, or remove the reference.",
-                  "code_snippet": "node scripts/run.mjs --sample",
-                  "intent": null,
-                  "tags": [
-                    "coverage",
-                    "reference",
-                    "target-disposition:partial"
-                  ],
-                  "evidence": {},
-                  "match_fingerprint": "a539f7d70ea2fc45850b831227d4db9db4da68354362029a5b78ce1aa40123c4",
-                  "occurrences": [
-                    {
-                      "file": "SKILL.md",
-                      "start_line": 61,
-                      "end_line": null
-                    }
-                  ]
-                },
-                {
-                  "id": "AE1",
-                  "finding_id": "finding-2643a3f17e1948db8d992eb2b4bc484a",
-                  "category": "analysis-evasion",
-                  "pattern": null,
-                  "severity": "HIGH",
-                  "confidence": 1,
-                  "location": {
-                    "file": "SKILL.md",
-                    "start_line": 66,
+                    "start_line": 64,
                     "end_line": null
                   },
                   "finding": "scripts/engine/quote-audit.js (partial)",
@@ -349,21 +349,21 @@
                   "occurrences": [
                     {
                       "file": "SKILL.md",
-                      "start_line": 66,
+                      "start_line": 64,
                       "end_line": null
                     }
                   ]
                 },
                 {
                   "id": "AE1",
-                  "finding_id": "finding-2643a3f17e1948db8d992eb2b4bc484a",
+                  "finding_id": "finding-d0645824b6b24eccb733456401dcd019",
                   "category": "analysis-evasion",
                   "pattern": null,
                   "severity": "HIGH",
                   "confidence": 1,
                   "location": {
                     "file": "SKILL.md",
-                    "start_line": 69,
+                    "start_line": 67,
                     "end_line": null
                   },
                   "finding": "scripts/engine/quote-audit.js (partial)",
@@ -381,26 +381,86 @@
                   "occurrences": [
                     {
                       "file": "SKILL.md",
-                      "start_line": 69,
+                      "start_line": 67,
                       "end_line": null
+                    }
+                  ]
+                },
+                {
+                  "id": "SDI-1",
+                  "finding_id": "finding-8b8cc3769c944b2da2bb1bbb7c5b5ce3",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "MEDIUM",
+                  "confidence": 0.96,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 13,
+                    "end_line": 13
+                  },
+                  "finding": null,
+                  "explanation": "L013 says the free skill audits totals, the tender upper price cap, and written-figure cross-checks. Elsewhere in the manifest, the free version is explicitly limited to line-item arithmetic and omission prompts, and it explicitly says those additional checks are not included. This creates a semantic mismatch in the skill description about what the free version actually does.",
+                  "remediation": "Align L013 with the actual free-version scope. Remove references to totals, upper price cap, and written-figure cross-checks, or clearly mark them as unavailable in this edition.",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 13,
+                      "end_line": 13
+                    }
+                  ]
+                },
+                {
+                  "id": "SDI-4",
+                  "finding_id": "finding-05b6214d2b644b28bf6dae88390c9148",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "LOW",
+                  "confidence": 0.89,
+                  "location": {
+                    "file": "SKILL.md",
+                    "start_line": 64,
+                    "end_line": 64
+                  },
+                  "finding": null,
+                  "explanation": "L064 states '脚本本身不做计算' ('the script itself does not do calculations') while immediately identifying `scripts/engine/quote-audit.js` as the component that performs the real checks. Because that engine is part of the skill code being referenced for direct use, the wording is misleading and contradicts the surrounding implementation description rather than merely omitting detail.",
+                  "remediation": "Reword the documentation to distinguish the CLI wrapper from the checking engine, for example: '命令行脚本只负责入参/出参封装，实际计算由 scripts/engine/quote-audit.js 完成'.",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "SKILL.md",
+                      "start_line": 64,
+                      "end_line": 64
                     }
                   ]
                 },
                 {
                   "id": "SQP-3",
-                  "finding_id": "finding-9a774a45e7194d78a339c97ecf8a154b",
+                  "finding_id": "finding-1c067ca8911043a39532e93671d0e046",
                   "category": null,
                   "pattern": null,
                   "severity": "LOW",
-                  "confidence": 0.94,
+                  "confidence": 0.9,
                   "location": {
                     "file": "scripts/engine/quote-audit.js",
                     "start_line": 60,
                     "end_line": 60
                   },
                   "finding": null,
-                  "explanation": "The formatter uses toLocaleString('en-US'), which imposes a specific locale in user-visible output. The file does not offer a locale choice or explain why U.S. formatting is required for this skill, so it conflicts with the language/locale policy criterion.",
-                  "remediation": "Avoid hard-coding 'en-US' for user-facing output. Use the runtime default locale, accept a user-specified locale, or document a justified region-specific requirement if this skill must always output U.S.-formatted numbers.",
+                  "explanation": "The code hard-codes `toLocaleString('en-US', ...)`, which imposes a specific locale format for output regardless of the user's language or regional preferences. This matches the policy category for language/locale constraints because no opt-in or justification is provided in the file.",
+                  "remediation": "Avoid forcing `en-US` formatting by default. Use the runtime's default locale, accept a user-specified locale parameter, or document and justify the locale restriction if it is intentionally required for this skill.",
                   "code_snippet": null,
                   "intent": null,
                   "tags": [
@@ -413,6 +473,36 @@
                       "file": "scripts/engine/quote-audit.js",
                       "start_line": 60,
                       "end_line": 60
+                    }
+                  ]
+                },
+                {
+                  "id": "SQP-3",
+                  "finding_id": "finding-31a18fe934b44f0da48ce1a0cdefc88a",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "LOW",
+                  "confidence": 0.94,
+                  "location": {
+                    "file": "templates/sample.json",
+                    "start_line": 2,
+                    "end_line": 2
+                  },
+                  "finding": null,
+                  "explanation": "The JSON value contains only Chinese text and provides no indication that the user can choose a language or locale. Under the stated policy, forcing a specific language without opt-in is a natural-language policy concern.",
+                  "remediation": "Document that this template is intended only for Chinese-language use cases, or add metadata/instructions allowing users to select or opt into the language/locale explicitly.",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "templates/sample.json",
+                      "start_line": 2,
+                      "end_line": 2
                     }
                   ]
                 }
@@ -434,10 +524,10 @@
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
                     "prompt_tokens": 5215,
-                    "completion_tokens": 293,
+                    "completion_tokens": 249,
                     "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 5508
+                    "total_tokens": 5464
                   },
                   {
                     "node": "semantic_developer_intent",
@@ -446,11 +536,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 3226,
+                    "prompt_tokens": 3789,
                     "completion_tokens": 14,
-                    "cached_tokens": 2816,
+                    "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 3240
+                    "total_tokens": 3803
                   },
                   {
                     "node": "semantic_developer_intent",
@@ -461,7 +551,7 @@
                     "usage_source": "provider_response",
                     "prompt_tokens": 7507,
                     "completion_tokens": 14,
-                    "cached_tokens": 6912,
+                    "cached_tokens": 0,
                     "reasoning_tokens": 0,
                     "total_tokens": 7521
                   },
@@ -485,11 +575,24 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 3831,
+                    "prompt_tokens": 3115,
+                    "completion_tokens": 345,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 3460
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 3811,
                     "completion_tokens": 14,
                     "cached_tokens": 2816,
                     "reasoning_tokens": 0,
-                    "total_tokens": 3845
+                    "total_tokens": 3825
                   },
                   {
                     "node": "semantic_quality_policy",
@@ -498,37 +601,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 3248,
+                    "prompt_tokens": 3137,
                     "completion_tokens": 14,
-                    "cached_tokens": 0,
+                    "cached_tokens": 2816,
                     "reasoning_tokens": 0,
-                    "total_tokens": 3262
-                  },
-                  {
-                    "node": "semantic_quality_policy",
-                    "request_kind": "structured_output",
-                    "provider": "openai",
-                    "model": "gpt-5.4-2026-03-05",
-                    "model_source": "provider_response",
-                    "usage_source": "provider_response",
-                    "prompt_tokens": 1444,
-                    "completion_tokens": 14,
-                    "cached_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "total_tokens": 1458
-                  },
-                  {
-                    "node": "semantic_quality_policy",
-                    "request_kind": "structured_output",
-                    "provider": "openai",
-                    "model": "gpt-5.4-2026-03-05",
-                    "model_source": "provider_response",
-                    "usage_source": "provider_response",
-                    "prompt_tokens": 3853,
-                    "completion_tokens": 14,
-                    "cached_tokens": 0,
-                    "reasoning_tokens": 0,
-                    "total_tokens": 3867
+                    "total_tokens": 3151
                   },
                   {
                     "node": "semantic_quality_policy",
@@ -538,10 +615,23 @@
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
                     "prompt_tokens": 7529,
-                    "completion_tokens": 167,
-                    "cached_tokens": 6912,
+                    "completion_tokens": 161,
+                    "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 7696
+                    "total_tokens": 7690
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 1444,
+                    "completion_tokens": 139,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 1583
                   },
                   {
                     "node": "semantic_security_discovery",
@@ -550,11 +640,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 2780,
+                    "prompt_tokens": 2669,
                     "completion_tokens": 14,
                     "cached_tokens": 1792,
                     "reasoning_tokens": 0,
-                    "total_tokens": 2794
+                    "total_tokens": 2683
                   },
                   {
                     "node": "semantic_security_discovery",
@@ -576,11 +666,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 3385,
+                    "prompt_tokens": 3343,
                     "completion_tokens": 14,
-                    "cached_tokens": 2816,
+                    "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 3399
+                    "total_tokens": 3357
                   },
                   {
                     "node": "semantic_security_discovery",
@@ -602,11 +692,37 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 5848,
-                    "completion_tokens": 235,
+                    "prompt_tokens": 1046,
+                    "completion_tokens": 206,
                     "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 6083
+                    "total_tokens": 1252
+                  },
+                  {
+                    "node": "meta_analyzer",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 5839,
+                    "completion_tokens": 236,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 6075
+                  },
+                  {
+                    "node": "meta_analyzer",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 2391,
+                    "completion_tokens": 396,
+                    "cached_tokens": 0,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 2787
                   }
                 ],
                 "llm_calls_attempted": 5,
@@ -732,8 +848,8 @@
                   {
                     "analyzer_id": "meta_analyzer",
                     "status": "completed",
-                    "planned_work": 1,
-                    "completed": 1,
+                    "planned_work": 3,
+                    "completed": 3,
                     "partial": 0,
                     "skipped": 0,
                     "failed": 0,
@@ -943,7 +1059,7 @@
                 "references": [
                   {
                     "source_path": "SKILL.md",
-                    "line": 59,
+                    "line": 57,
                     "column": 6,
                     "evidence": "node scripts/run.mjs --sample",
                     "target_path": "scripts/run.mjs",
@@ -952,7 +1068,7 @@
                   },
                   {
                     "source_path": "SKILL.md",
-                    "line": 60,
+                    "line": 58,
                     "column": 6,
                     "evidence": "node scripts/run.mjs --input my-input.json",
                     "target_path": "scripts/run.mjs",
@@ -961,7 +1077,7 @@
                   },
                   {
                     "source_path": "SKILL.md",
-                    "line": 61,
+                    "line": 59,
                     "column": 6,
                     "evidence": "node scripts/run.mjs --input my-input.json --json",
                     "target_path": "scripts/run.mjs",
@@ -970,7 +1086,7 @@
                   },
                   {
                     "source_path": "SKILL.md",
-                    "line": 66,
+                    "line": 64,
                     "column": 22,
                     "evidence": "脚本本身不做计算，真正的检查在同目录的 `scripts/engine/quote-audit.js`（纯 Node 标准库，CommonJS），可以直接引用：",
                     "target_path": "scripts/engine/quote-audit.js",
@@ -979,7 +1095,7 @@
                   },
                   {
                     "source_path": "SKILL.md",
-                    "line": 69,
+                    "line": 67,
                     "column": 25,
                     "evidence": "const engine = require('./scripts/engine/quote-audit.js');",
                     "target_path": "scripts/engine/quote-audit.js",
@@ -990,8 +1106,8 @@
                 "limitations": [
                   "Analyzer static_patterns_tool_misuse status: degraded."
                 ],
-                "findings_before_filtering": 6,
-                "findings_after_filtering": 6
+                "findings_before_filtering": 9,
+                "findings_after_filtering": 9
               }
             }
           }
@@ -1002,20 +1118,20 @@
       }
     },
     "inventory-check-free": {
-      "version": "1.0.2",
+      "version": "1.0.54",
       "registry": "https://clawhub.ai",
+      "installedAt": 1790474621985,
       "ownerHandle": "chenqg618",
-      "installedAt": 1789451371022,
       "artifact": {
         "kind": "archive",
-        "sha256": "9c8aed9a26077a2c8e643d8ca8b8f843a50cd4840c625b783e88e610f0ba86dc",
-        "integrity": "sha256-nIrtmiYHeiyOZD2MqLj4Q6UM1IQMYlt4PojmEPC6htw="
+        "sha256": "369008e24f421ff4577607a4eba4b062d93adaca24fa3a36037ce5ee711db3a6",
+        "integrity": "sha256-NpAI4k9CH/RXdgek66SwYtk62sok+jo2A3zl7nEds6Y="
       },
       "skillFile": {
         "path": "SKILL.md",
-        "sha256": "2276355c76f26b1bd7e6f905285946e4e4ba3edd5983739f9e02322098af76ac"
+        "sha256": "062c449c4cf85c6233b9455a97371bfd8884af2bf31998e0ecd0c9aeeeab0841"
       },
-      "fileTreeSha256": "sha256:42eb822e74691d788d1266be667f5c7750ff31687120a46c13c3c20ae482e2ea",
+      "fileTreeSha256": "sha256:de07de75cb4eefb3a88fe241a477b91b457a2c3e283b54331f9cbe21670af419",
       "verification": {
         "schema": "clawhub.skill.verify.v1",
         "ok": true,
@@ -1024,21 +1140,21 @@
         "card": {
           "available": true,
           "path": "skill-card.md",
-          "url": "https://wry-manatee-359.convex.site/api/v1/skills/inventory-check-free/card?ownerHandle=chenqg618&version=1.0.2",
-          "sha256": "1f9bfe109bdc48fc083c5ded99f691993e47774fd1d20a22c69245bb3b086fdc",
-          "size": 2494,
+          "url": "https://wry-manatee-359.convex.site/api/v1/skills/inventory-check-free/card?ownerHandle=chenqg618&version=1.0.54",
+          "sha256": "7399fa3f72bf6e93d60d4095069c973e9d3aa4da73083013d664e7b3f8af1ae1",
+          "size": 2313,
           "contentType": "text/markdown; charset=utf-8"
         },
         "artifact": {
-          "sourceFingerprint": "263a5b7eae8de563f847976212e08cf77038d7e3c8f5a3a67a980bfb49b5773e",
+          "sourceFingerprint": "1466caeeb2a8c7673a452bac9fc854ab3ad68f9d5e1eea867457096e6275e5c8",
           "bundleFingerprints": [
-            "4cd548e57ce4c06c0c06a0e93e66d9e1d289c1aa191ed22846ce0c1f70c8bf70"
+            "0680cef5509224baeabe221d1b577464b7dd44addf5272aea7372cb6151a776a"
           ],
           "files": [
             {
               "path": "SKILL.md",
-              "size": 3202,
-              "sha256": "2276355c76f26b1bd7e6f905285946e4e4ba3edd5983739f9e02322098af76ac",
+              "size": 2998,
+              "sha256": "062c449c4cf85c6233b9455a97371bfd8884af2bf31998e0ecd0c9aeeeab0841",
               "contentType": "text/markdown"
             },
             {
@@ -1049,8 +1165,8 @@
             },
             {
               "path": "scripts/run.mjs",
-              "size": 7558,
-              "sha256": "1c255ec36f21710d50d306661ff7ce757e838bb5c03d428177209b57e95ec43b",
+              "size": 7377,
+              "sha256": "7af790ab7b056840be5f01bef8a362b0a12b30a5007c93c6a77c20fb3bdac9d1",
               "contentType": "text/javascript"
             },
             {
@@ -1071,9 +1187,9 @@
           "rawStatus": "clean",
           "verdict": "benign",
           "confidence": "high",
-          "summary": "This skill is a local inventory reconciliation helper that reads a user-provided table and runs deterministic checks without evidence of network use, persistence, credential access, or destructive behavior.",
+          "summary": "This skill is a local inventory reconciliation checker that reads a user-provided table and does not show network, persistence, credential, or hidden mutation behavior.",
           "model": null,
-          "checkedAt": 1789446249108,
+          "checkedAt": 1789908246901,
           "scannerReports": {
             "aig": {
               "version": "2.1.0",
@@ -1083,7 +1199,7 @@
                   "tool": {
                     "driver": {
                       "name": "aig-skill-scan",
-                      "version": "0.2.1",
+                      "version": "0.2.2",
                       "informationUri": "https://github.com/Tencent/AI-Infra-Guard",
                       "rules": [
                         {
@@ -1164,8 +1280,8 @@
                     "securityScore": 100,
                     "primaryLanguage": "Markdown",
                     "llm": "gpt-5.6",
-                    "startTime": 1789446203.7932694,
-                    "endTime": 1789446222.3208992
+                    "startTime": 1789908211.3724275,
+                    "endTime": 1789908223.260506
                   }
                 }
               ]
@@ -1173,11 +1289,11 @@
             "skillspector": {
               "skill": {
                 "name": "inventory-check-free",
-                "source": "/tmp/clawhub-codex-scan-v5768yrnse1c5gg5xjnd8jjren8efa9z-rne2nU/clawscan-skillspector-4069052540/artifact",
-                "scanned_at": "2026-09-15T04:23:22.199812+00:00"
+                "source": "/tmp/clawhub-codex-scan-v57c4svqn59s6p6nmpww9hkkqn8esnre-YeQpoD/clawscan-skillspector-3317860889/artifact",
+                "scanned_at": "2026-09-20T12:43:30.837374+00:00"
               },
               "risk_assessment": {
-                "score": 58,
+                "score": 64,
                 "severity": "HIGH",
                 "recommendation": "DO_NOT_INSTALL",
                 "max_issue_severity": "HIGH"
@@ -1186,9 +1302,9 @@
                 {
                   "path": "SKILL.md",
                   "type": "markdown",
-                  "lines": 62,
+                  "lines": 58,
                   "executable": false,
-                  "size_bytes": 3202,
+                  "size_bytes": 2998,
                   "source_url": null,
                   "source_identity": null,
                   "source_digest": null
@@ -1206,9 +1322,9 @@
                 {
                   "path": "scripts/run.mjs",
                   "type": "other",
-                  "lines": 206,
+                  "lines": 204,
                   "executable": true,
-                  "size_bytes": 7558,
+                  "size_bytes": 7377,
                   "source_url": null,
                   "source_identity": null,
                   "source_digest": null
@@ -1228,7 +1344,7 @@
               "issues": [
                 {
                   "id": "AE1",
-                  "finding_id": "finding-ecb1aae926d2461c85f2d62835d74c95",
+                  "finding_id": "finding-26c173bc1b7545769c4f94126ebbf9e5",
                   "category": "analysis-evasion",
                   "pattern": null,
                   "severity": "HIGH",
@@ -1260,7 +1376,7 @@
                 },
                 {
                   "id": "AE1",
-                  "finding_id": "finding-ecb1aae926d2461c85f2d62835d74c95",
+                  "finding_id": "finding-26c173bc1b7545769c4f94126ebbf9e5",
                   "category": "analysis-evasion",
                   "pattern": null,
                   "severity": "HIGH",
@@ -1292,7 +1408,7 @@
                 },
                 {
                   "id": "SQP-3",
-                  "finding_id": "finding-6fefff7721a14f70ae7d56105d7dbb55",
+                  "finding_id": "finding-6cd0204cdd0c48d0895faaef7c7e363e",
                   "category": null,
                   "pattern": null,
                   "severity": "MEDIUM",
@@ -1303,8 +1419,8 @@
                     "end_line": 18
                   },
                   "finding": null,
-                  "explanation": "SQP-3 applies to all file types and includes language or locale policy violations. The header comments, usage contract, and scope notes are entirely in Chinese, with no indication that users may choose another language or that the skill is intentionally region-specific.",
-                  "remediation": "Provide bilingual documentation or add an explicit language-selection/opt-in mechanism. If the skill is intended only for a Chinese-language audience, document that scope and justification clearly in the file or accompanying skill documentation.",
+                  "explanation": "This JavaScript file's natural-language interface is entirely Chinese, including the main file description, input requirements, and operational notes. The skill does not offer any language choice or document that it is intentionally limited to a Chinese-speaking/regional context, which can violate locale/language policy requirements.",
+                  "remediation": "Document the language constraint explicitly as a justified region-specific limitation, or add user-selectable language support for prompts, errors, and result messages. At minimum, state clearly in the skill description that the tool is intended for Chinese-language inventory tables.",
                   "code_snippet": null,
                   "intent": null,
                   "tags": [
@@ -1321,20 +1437,80 @@
                   ]
                 },
                 {
+                  "id": "SQP-3",
+                  "finding_id": "finding-d02c2c26a5124311982f560d5634b011",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "MEDIUM",
+                  "confidence": 0.93,
+                  "location": {
+                    "file": "scripts/engine/inventory-check.js",
+                    "start_line": 265,
+                    "end_line": 281
+                  },
+                  "finding": null,
+                  "explanation": "The insufficient-input responses are emitted only in Chinese, which forces a specific language on users of the skill. Because there is no opt-in or fallback locale behavior, this constitutes a natural-language policy concern rather than a code-security issue.",
+                  "remediation": "Externalize user-facing strings and support locale selection or fallback behavior. If the skill is intentionally Chinese-only, document that restriction clearly in the skill metadata or README.",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "scripts/engine/inventory-check.js",
+                      "start_line": 265,
+                      "end_line": 281
+                    }
+                  ]
+                },
+                {
+                  "id": "SQP-3",
+                  "finding_id": "finding-7dd614ba8d784aea9f8f0f865daaafd8",
+                  "category": null,
+                  "pattern": null,
+                  "severity": "MEDIUM",
+                  "confidence": 0.91,
+                  "location": {
+                    "file": "scripts/engine/inventory-check.js",
+                    "start_line": 316,
+                    "end_line": 336
+                  },
+                  "finding": null,
+                  "explanation": "The result payload contains Chinese-only summary text and notes, including basis explanations and pass/fail commentary. This enforces a single language for outputs without offering users a choice or stating a justified locale restriction.",
+                  "remediation": "Provide localized output strings or a configurable language option. Alternatively, clearly declare the skill as a Chinese-only accounting/inventory tool in accompanying documentation.",
+                  "code_snippet": null,
+                  "intent": null,
+                  "tags": [
+                    "llm-unconfirmed"
+                  ],
+                  "evidence": {},
+                  "match_fingerprint": null,
+                  "occurrences": [
+                    {
+                      "file": "scripts/engine/inventory-check.js",
+                      "start_line": 316,
+                      "end_line": 336
+                    }
+                  ]
+                },
+                {
                   "id": "SDI-4",
-                  "finding_id": "finding-a5da50f5dd014efda95c42ce282d5cc4",
+                  "finding_id": "finding-0907f1c464224b6f868ffb5884223a26",
                   "category": null,
                   "pattern": null,
                   "severity": "LOW",
-                  "confidence": 0.95,
+                  "confidence": 0.89,
                   "location": {
                     "file": "scripts/run.mjs",
-                    "start_line": 77,
-                    "end_line": 77
+                    "start_line": 75,
+                    "end_line": 75
                   },
                   "finding": null,
-                  "explanation": "L077 的注释说明“不是 JSON 就当作纯文本材料（例如直接粘贴的合同全文）”，但该脚本其余位置一贯声明输入应为库存盘点表、含表头的盘点材料。这里不是单纯信息缺失，而是把明显不同领域的“合同全文”作为示例，和技能宣称的库存盘点表核对意图相冲突，容易误导使用者对技能实际处理对象的理解。",
-                  "remediation": "将该注释中的“合同全文”改为与技能一致的示例，如“库存盘点表文本”或“直接从 Excel 粘贴的盘点表内容”，确保注释和技能用途保持一致。",
+                  "explanation": "L075 的注释写明“不是 JSON 就当作纯文本材料（例如直接粘贴的合同全文）”，但该脚本整体用途、帮助信息和后续提示都明确限定为库存盘点表核对。这里的文档示例主动暗示可处理合同，与代码和技能声明的库存盘点表场景相矛盾，属于意图层面的文档偏差。",
+                  "remediation": "将该注释中的“合同全文”改为与技能范围一致的示例，如“库存盘点表文本”或“从 Excel 复制的盘点表内容”，避免暗示超出声明范围的材料类型。",
                   "code_snippet": null,
                   "intent": null,
                   "tags": [
@@ -1345,26 +1521,26 @@
                   "occurrences": [
                     {
                       "file": "scripts/run.mjs",
-                      "start_line": 77,
-                      "end_line": 77
+                      "start_line": 75,
+                      "end_line": 75
                     }
                   ]
                 },
                 {
                   "id": "SQP-3",
-                  "finding_id": "finding-dd77ba0ac77c42a0b928becb0685d438",
+                  "finding_id": "finding-e577d6d1dd254ebfba41498abb7e4635",
                   "category": null,
                   "pattern": null,
                   "severity": "LOW",
-                  "confidence": 0.88,
+                  "confidence": 0.9,
                   "location": {
                     "file": "templates/sample.json",
                     "start_line": 2,
                     "end_line": 2
                   },
                   "finding": null,
-                  "explanation": "The only user-facing text in this file is entirely in Chinese, including all column headers and item names, with no indication that language selection is optional or that the skill is region-specific. This can violate language/locale policy when a skill implicitly forces a specific language without user opt-in.",
-                  "remediation": "Document that the skill is intended for a Chinese-language or region-specific workflow, or add a mechanism to let users choose or receive content in their preferred language.",
+                  "explanation": "The JSON template hard-codes all field labels and sample data in Chinese, which indicates a fixed language/locale assumption. For a general-purpose skill artifact, this can violate language-choice policy when no user opt-in or justification for a China-specific locale is provided.",
+                  "remediation": "Document that the skill is specifically intended for Chinese-language use, or make the template locale-configurable so users can choose their preferred language.",
                   "code_snippet": null,
                   "intent": null,
                   "tags": [
@@ -1398,10 +1574,10 @@
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
                     "prompt_tokens": 4880,
-                    "completion_tokens": 365,
+                    "completion_tokens": 374,
                     "cached_tokens": 3840,
                     "reasoning_tokens": 0,
-                    "total_tokens": 5245
+                    "total_tokens": 5254
                   },
                   {
                     "node": "semantic_developer_intent",
@@ -1423,11 +1599,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 2473,
+                    "prompt_tokens": 2397,
                     "completion_tokens": 14,
-                    "cached_tokens": 0,
+                    "cached_tokens": 1792,
                     "reasoning_tokens": 0,
-                    "total_tokens": 2487
+                    "total_tokens": 2411
                   },
                   {
                     "node": "semantic_developer_intent",
@@ -1438,7 +1614,7 @@
                     "usage_source": "provider_response",
                     "prompt_tokens": 6948,
                     "completion_tokens": 14,
-                    "cached_tokens": 0,
+                    "cached_tokens": 5888,
                     "reasoning_tokens": 0,
                     "total_tokens": 6962
                   },
@@ -1449,11 +1625,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 4131,
-                    "completion_tokens": 233,
+                    "prompt_tokens": 4081,
+                    "completion_tokens": 223,
                     "cached_tokens": 3840,
                     "reasoning_tokens": 0,
-                    "total_tokens": 4364
+                    "total_tokens": 4304
                   },
                   {
                     "node": "semantic_quality_policy",
@@ -1462,24 +1638,24 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 4152,
-                    "completion_tokens": 14,
-                    "cached_tokens": 3840,
-                    "reasoning_tokens": 0,
-                    "total_tokens": 4166
-                  },
-                  {
-                    "node": "semantic_quality_policy",
-                    "request_kind": "structured_output",
-                    "provider": "openai",
-                    "model": "gpt-5.4-2026-03-05",
-                    "model_source": "provider_response",
-                    "usage_source": "provider_response",
-                    "prompt_tokens": 2494,
+                    "prompt_tokens": 2418,
                     "completion_tokens": 14,
                     "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 2508
+                    "total_tokens": 2432
+                  },
+                  {
+                    "node": "semantic_quality_policy",
+                    "request_kind": "structured_output",
+                    "provider": "openai",
+                    "model": "gpt-5.4-2026-03-05",
+                    "model_source": "provider_response",
+                    "usage_source": "provider_response",
+                    "prompt_tokens": 4102,
+                    "completion_tokens": 14,
+                    "cached_tokens": 3840,
+                    "reasoning_tokens": 0,
+                    "total_tokens": 4116
                   },
                   {
                     "node": "semantic_quality_policy",
@@ -1489,10 +1665,10 @@
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
                     "prompt_tokens": 1529,
-                    "completion_tokens": 152,
+                    "completion_tokens": 145,
                     "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 1681
+                    "total_tokens": 1674
                   },
                   {
                     "node": "semantic_quality_policy",
@@ -1502,10 +1678,10 @@
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
                     "prompt_tokens": 6969,
-                    "completion_tokens": 168,
-                    "cached_tokens": 0,
+                    "completion_tokens": 426,
+                    "cached_tokens": 5888,
                     "reasoning_tokens": 0,
-                    "total_tokens": 7137
+                    "total_tokens": 7395
                   },
                   {
                     "node": "semantic_security_discovery",
@@ -1514,11 +1690,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 2026,
+                    "prompt_tokens": 1950,
                     "completion_tokens": 14,
-                    "cached_tokens": 0,
+                    "cached_tokens": 1792,
                     "reasoning_tokens": 0,
-                    "total_tokens": 2040
+                    "total_tokens": 1964
                   },
                   {
                     "node": "semantic_security_discovery",
@@ -1529,7 +1705,7 @@
                     "usage_source": "provider_response",
                     "prompt_tokens": 6501,
                     "completion_tokens": 14,
-                    "cached_tokens": 0,
+                    "cached_tokens": 5888,
                     "reasoning_tokens": 0,
                     "total_tokens": 6515
                   },
@@ -1540,11 +1716,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 3684,
+                    "prompt_tokens": 3634,
                     "completion_tokens": 14,
-                    "cached_tokens": 0,
+                    "cached_tokens": 2816,
                     "reasoning_tokens": 0,
-                    "total_tokens": 3698
+                    "total_tokens": 3648
                   },
                   {
                     "node": "semantic_security_discovery",
@@ -1566,11 +1742,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 3123,
-                    "completion_tokens": 207,
+                    "prompt_tokens": 3086,
+                    "completion_tokens": 216,
                     "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 3330
+                    "total_tokens": 3302
                   },
                   {
                     "node": "meta_analyzer",
@@ -1579,11 +1755,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 1124,
-                    "completion_tokens": 205,
+                    "prompt_tokens": 1128,
+                    "completion_tokens": 225,
                     "cached_tokens": 0,
                     "reasoning_tokens": 0,
-                    "total_tokens": 1329
+                    "total_tokens": 1353
                   },
                   {
                     "node": "meta_analyzer",
@@ -1592,11 +1768,11 @@
                     "model": "gpt-5.4-2026-03-05",
                     "model_source": "provider_response",
                     "usage_source": "provider_response",
-                    "prompt_tokens": 5527,
-                    "completion_tokens": 235,
-                    "cached_tokens": 0,
+                    "prompt_tokens": 5636,
+                    "completion_tokens": 441,
+                    "cached_tokens": 4864,
                     "reasoning_tokens": 0,
-                    "total_tokens": 5762
+                    "total_tokens": 6077
                   }
                 ],
                 "llm_calls_attempted": 5,
@@ -1940,8 +2116,8 @@
                 "limitations": [
                   "Analyzer static_patterns_tool_misuse status: degraded."
                 ],
-                "findings_before_filtering": 5,
-                "findings_after_filtering": 5
+                "findings_before_filtering": 7,
+                "findings_after_filtering": 7
               }
             }
           }

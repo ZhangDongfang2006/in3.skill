@@ -1,7 +1,7 @@
 ---
 slug: bidguard-quote-audit-free
 displayName: 投标报价AI审查（免费版）
-version: 1.0.8
+version: 1.0.54
 summary: 把一份投标报价单里能被算出来证明是错的问题找出来，不需要付款，也不需要注册。 免费、无需注册、无需 API Key。
 tags: [招投标, 免费, 分项算术校验, 标书检查, 投标自查]
 license: Proprietary
@@ -10,7 +10,7 @@ display_name: 投标报价AI审查（免费版）
 display_name_en: BidGuard Quote Audit (Free)
 description: 把一份投标报价单里能被算出来证明是错的问题找出来，不需要付款，也不需要注册。 本免费版执行 分项算术校验、缺漏项提示。触发词包括 投标报价AI审查、分项算术校验、缺漏项提示。
 description_zh: 把一份投标报价单里能被算出来证明是错的问题找出来，不需要付款，也不需要注册。 本免费版执行 分项算术校验、缺漏项提示。
-description_en: A free mechanical pre-check for bidding documents. No payment, no registration, no API key.
+description_en: Free mechanical audit of a single bid quotation across line-item arithmetic, totals, the tender upper price cap and the written-figure cross-check.
 category: business-ops
 author: WorkBuddy 开放平台开发者
 allowed-tools: Read, Bash
@@ -21,8 +21,6 @@ allowed-tools: Read, Bash
 > 一句话：把一份投标报价单里**能被算出来证明是错的**问题找出来，不需要付款，也不需要注册。
 
 **完全免费**：不需要付款、不需要注册、不需要配置任何 API Key，直接调用即可。
-
-> 不想安装也能用：**同一个检查有网页版**，免注册、免付款 —— <https://www.tokendidi.cn/check>
 
 ## 什么时候用
 
@@ -72,7 +70,7 @@ const outcome = engine.run(payload);
 // outcome.status === 'insufficient_input' → outcome.missing 列出缺什么（此时不出结论）
 ```
 
-所有检查都在**本机**完成：不联网、不外发材料、不需要任何凭证。
+所有检查都在**本机**完成：核对过程不外发材料、不需要任何凭证。
 
 ## 入参
 
@@ -94,7 +92,7 @@ const outcome = engine.run(payload);
 
 ## 使用限制
 
-- 在本机执行：不联网、不外发材料、没有调用次数上限，也不需要任何凭证。
+- 在本机执行：核对过程不外发材料、没有调用次数上限，也不需要任何凭证。
 - 输出的是**AI核对结果**，不是认定、不是评分。
 
 ## 反模式
@@ -102,7 +100,6 @@ const outcome = engine.run(payload);
 - ❌ 把它的输出当作评标结论 —— 它只做AI核对，认定权在评标委员会。
 - ❌ 拿它替代对招标文件的实质响应检查 —— 本版本不含该类检查。
 - ❌ 输入残缺时怪结果不对 —— 检查项依赖你提供的字段，缺字段的检查项不会被伪造出来。
-
 
 ## 需要完整档时（可选）
 
@@ -114,10 +111,7 @@ const outcome = engine.run(payload);
 - 投标保证金比例校验
 - 不平衡报价预警
 
-需要它们的话，同名工具的**完整档**里都有——完整档是**另一个独立商品**（在 SkillPay 货架上，条款与条件以它自己的商品页为准）。两档的差别**就是上面这些，没有别的**。
-
-- 货架：**AI 核对工具铺** <https://skillpay.alipay.com/public/tokendidi>
-- 找它：按商品名 **「投标报价AI审查 · 完整版」**
+同名工具的**完整档**是另一个独立商品（条款与条件以它自己的商品页为准）；两档的差别**就是上面这些，没有别的**。
 
 ## 边界与免责
 

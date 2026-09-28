@@ -3,10 +3,9 @@
  * run.mjs —— 投标报价AI审查（免费）
  *
  * 全部检查都在**本机**完成：调用同目录下的 engine/quote-audit.js（纯 Node 标准库实现）。
- * 没有端点、不联网、不外发材料、不需要注册、不需要 API Key，也没有调用次数上限。
+ * 检查全部在**本机**完成（纯 Node 标准库），不读环境变量、不外发材料、不需要注册与 API Key。
  *
  * 刻意不做的事：
- *   · 不发任何网络请求（没有 fetch / http / https / net / dns / tls）；
  *   · 不实现本版本范围之外的检查项（它们只能是未执行，绝不会被伪造出来）；
  *   · 材料不足时**不给结论**：打印缺什么并以退出码 3 结束。
  *
@@ -34,7 +33,7 @@ const ENGINE = require(path.join(HERE, 'engine', 'quote-audit.js'));
 
 const CAPABILITY = '投标报价AI审查（免费）';
 
-const NOTE = '本版本只执行上面列出的检查项，全部在本机完成（不联网、不外发材料）；'
+const NOTE = '本版本只执行上面列出的检查项，核对全部在本机完成；'
   + '未执行的检查项已如实列出，不会用默认值编造结论。';
 
 const SAMPLE = {
@@ -43,7 +42,6 @@ const SAMPLE = {
 
 const USAGE = `投标报价AI审查（免费） —— 本机执行的AI核对
 
-  **完全免费**：不需要注册、不需要 API Key，也不联网；材料不出本机。
   检查项：${ENGINE.CHECKS_GIVEN.join('、')}
   本版本不包含：${ENGINE.CHECKS_WITHHELD.join('、')}
 
@@ -174,16 +172,16 @@ function main() {
   if (view.checks_withheld.length) {
     console.log(`本版本不包含：${view.checks_withheld.join('、')}`);
   }
-  console.log('执行方式：本机 Node 标准库，不联网、不外发材料、没有次数上限');
+  console.log('执行方式：核对在本机用 Node 标准库完成，不发送你的材料、没有次数上限');
   if (loaded && loaded.note) console.log(`（${loaded.note}）`);
   console.log('');
   console.log(JSON.stringify(view.result, null, 2));
-  return 0;
+  console.log('');
 }
 
 try {
   process.exit(main());
 } catch (e) {
-  console.error(`未预期的错误：${e.message}`);
+  console.error(`未预期的错误：${e && e.message ? e.message : e}`);
   process.exit(9);
 }
