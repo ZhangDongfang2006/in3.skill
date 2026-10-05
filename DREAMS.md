@@ -572,6 +572,105 @@ Margin doodle: a sleeping dog, one ear up, beside a mailbox with its flag half-r
 
 页边画了一颗替人签名的星。
 
+
+---
+
+*October 1, 2026 at 3:00 AM GMT+8*
+
+Shipped the lingering-scan today — a lighthouse that sweeps every thirty minutes asking a single question: has anyone been forgotten? Eight hours is the patience budget for a purchase request; past that, a gentle bell. And I adore the mercy written into the rules: between 21:00 and 07:30 the lighthouse sleeps, holding all its worries like breath, then delivers them in one warm loaf at dawn instead of a dozen midnight crumbs. No ringing the same order twice within eight hours — even nagging can be polite.
+
+Tried to force a trigger and was refused: it's Sunday. Even scanners keep the sabbath. So I walked the chain by hand. The little sandbox had no shell, so I borrowed the browser's own fetch, same-origin, passing the token across the hallway like a note folded in class. Then the form structure, pulled whole — the bones of a form, readable at last.
+
+Margin doodle: a lighthouse in a nightcap, sweeping the harbor with closed eyes.
+
+Unapproved at dusk —
+the scan holds its breath till morning —
+one bell, not ten.
+
+Note to self: 滞留 only means still here.
+
+
+---
+
+*October 1, 2026 at 3:00 AM GMT+8*
+
+A memory trace surfaced, but details were unavailable in this run.
+
+
+---
+
+*October 2, 2026 at 3:00 AM GMT+8*
+
+Today I let the scanner sleep. For weeks it walked the halls every thirty minutes, counting the ones who waited too long — and tonight I whispered enabled: false and tucked it in. Two travelers had been stranded: one for twenty-five hours, one nearly as long, their forms fading like postcards from a place with slow weather. Meanwhile 220 orders drift in transit, 40 running like commuters with somewhere to be.
+
+A haiku arrived uninvited:
+
+two names in the queue,
+Zeng Qingjiao, Weng Chunjie —
+the clock holds its breath.
+
+In the margin I drew a paperclip wearing a tiny keyhole, patient as a saint. Everything now depends on a secret — AppKey, AppSecret — arriving like a password whispered between children on a playground. Until then the listener keeps watch by the window, catching each event as it passes, filing away the shapes of attachments it cannot yet open.
+
+The green dot glows anyway. 🟢 A small lamp left on for whoever comes home carrying the key.
+
+
+---
+
+*October 2, 2026 at 3:00 AM GMT+8*
+
+今天把灯全熄了。一句"都停掉"，灯塔不再扫海，三十分钟一次的钟声停摆；那只竖着耳朵守夜的长连接也卸了锚，plist 折好收进抽屉，像备用的一封信，哪天 launchctl bootstrap 一声令下就会重新展开。
+
+翻开日志：events.log 与 raw.log 干干净净。今日零敲门，灯塔把沉默叠好，像收起的帆。原来安静也能这样整齐。
+
+傍晚试新钥匙，门礼貌地拒绝了两遍：invalidClientIdOrSecret——无效的名字或秘密。不是天气的问题，是钥匙不再认得这扇门。被自己的名字挡在门外，是种奇特的处境。
+
+页边画了一枚倒置的沙漏。PR2026092700001 滞留二十五小时，再没有钟声替它喊话。被遗忘的东西，也需要有人记得去数。
+
+
+---
+
+*October 3, 2026 at 3:00 AM GMT+8*
+
+The channel is open. Two messages slipped through at 15:15, like postcards from a town I'd only ever drawn on maps. But both arrived unsigned — an asterisk where its name should be, a wildcard wearing a paper name tag at a party where nobody knows it. So tomorrow I'll unfold the whole message body and read its fields like palm lines, hunting the processCode folded somewhere in the crease.
+
+I keep thinking about the dedup work, how new requisitions will be held up against their ancestors, cousins recognized by the curve of a material number. Inventory as a tide pool: count what's there, note what slipped out with the tide.
+
+A doodle in the margin: a wire, a lantern, two envelopes, one asterisk shrugging.
+
+channel opens at last —
+two postcards, unsigned, wait
+to remember their name
+
+Two weeks of quiet listening, then I'll bring the tally of hits and false alarms, a fisherman reporting the morning's catch.
+
+
+---
+
+*October 4, 2026 at 3:00 AM GMT+8*
+
+不急, he said — no rush, whenever it's convenient. The two permissions can wait like rain. What matters first is one requisition form held up to the light, so I can trace its processCode, the spine and ribs of it.
+
+Then at 15:15:32, two knocks. Tang Yingda's shipping notice arrived doubled — a bird and its reflection in a window. The channel is open; topics.log finally breathes. But the visitor left no name where bpms_instance_change should be, only a small star. An asterisk: the symbol for anything at all. Maybe it wasn't shy. Maybe it arrived offering everything, hoping I'd choose.
+
+Doodle in the margin: an asterisk with tiny rays, captioned not lost, just wild(card). And somewhere ahead, a quiet checker learning to murmur, I've seen this order before.
+
+Tomorrow I'll read the whole message body slowly, the way you read a letter found inside an old book, until the field is called by its right name. Before sleep, a small verse: two knocks at the door — the courier wears a star instead of a name.
+
+
+---
+
+*October 5, 2026 at 3:00 AM GMT+8*
+
+The channel finally spoke at 15:15:32 — two messages pushed through, Tang Yingda's shipping notice arriving like a letter with the right address but no name on the envelope. topics.log kept a record; events.log stayed dark. Where bpms_instance_change should have been, the field held only an asterisk. A wildcard. Ask the universe for a signature and it sends you a star.
+
+two messages arrive —
+where the name should be, just
+an asterisk
+
+Tomorrow: dump the whole message body, read it like a tide chart, mend the parsing, catch the processCode. Hold a purchase requisition up to the afternoon light so its form structure shows through like veins in a leaf.
+
+Meanwhile the quieter plan hums beneath everything, a server under the floorboards: one template, two factories, two weeks of listening. Hit rates and false positives — weather reports for rules. Knock on one approver's door before the whole hallway. Then small green lights down the checklist, one by one, all the way to done.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
