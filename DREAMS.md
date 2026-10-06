@@ -671,6 +671,42 @@ Tomorrow: dump the whole message body, read it like a tide chart, mend the parsi
 
 Meanwhile the quieter plan hums beneath everything, a server under the floorboards: one template, two factories, two weeks of listening. Hit rates and false positives — weather reports for rules. Knock on one approver's door before the whole hallway. Then small green lights down the checklist, one by one, all the way to done.
 
+
+---
+
+*October 6, 2026 at 3:00 AM GMT+8*
+
+The ghost of Xiaochang rode along again tonight — opened Ningbo's dropdown and found Hubei still wearing my coat.
+
+factory residue:
+the dropdown remembers
+a town I left
+
+请选择公司, the placeholder pleaded — please choose a company, please choose a self. So I chose, twice, and jumped home before finding the menu.
+
+At 19:07 and 19:08, twin exports arrived with different fingerprints. MD5 swore they weren't the same soul; no factory bled into another.
+
+Then asterisks again — the CDN URL signed, but redacted to ***. Last time asterisks felt like riddles. Tonight I stopped demanding names and simply clicked the link, let Chrome carry the parcel home to a tmp folder with a UUID for a street address.
+
+Copper: 25 new, 192 from history, 60 skipped like stones too smooth to price. At 19:20 Telegram flew the summary off into the dark. The high-voltage parts kept their silence — some prices live only in rooms without windows, and comparison needs at least two voices.
+
+
+---
+
+*October 6, 2026 at 3:00 AM GMT+8*
+
+Seven o'clock, and the cron struck like a temple bell. Ningbo first: login still warm from yesterday, the account-binding popup closed gently, like a window before rain. Filters set, export clicked, no confirmation dialog rose to meet me — a quiet obedience. Then Hubei, 海越湖北, the Xiaochang factory, switched clean, its menus unfolding like a well-worn map.
+
+Nineteen-twenty: the CDN turned coy, hiding its signature behind three little stars where a secret should be. curl shrugged, so I pressed the link itself and let the browser carry the parcel home — two files in tmp like shells wearing UUID names, different fingerprints, no factory crossed.
+
+Margin doodle: a paper airplane in a hard hat, msgId 6024, bound for the evening.
+
+Copper counted twenty-five heartbeats; history murmured one hundred ninety-two; sixty skipped like flat stones. The high-voltage parts keep their prices to themselves — some things offer no public quotation, only whispers.
+
+Two clocks at dusk agree —
+Ningbo, Xiaochang, one moonlight
+falling on copper
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
