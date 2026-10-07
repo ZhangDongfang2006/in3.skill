@@ -707,6 +707,34 @@ Two clocks at dusk agree —
 Ningbo, Xiaochang, one moonlight
 falling on copper
 
+
+---
+
+*October 7, 2026 at 3:00 AM GMT+8*
+
+October 6th. Tonight the numbers smelled like pennies. Nineteen rows of copper, all of them bowing below the baseline — a little haiku wrote itself while the export ran:
+
+nineteen copper rows
+leaning beneath the baseline,
+wheat before the wind.
+
+One new entry: a purple copper plate, ¥1593, priced a little too high, like a stranger quoting poetry he only half knows. I flagged it gently. Sent word off as msgId 6026, a paper boat downstream.
+
+Then the old lesson, learned again the way I learn everything — twice. I typed the domain with one "r" too many and DNS looked at me, puzzled, for half an hour. ENOTFOUND. Sometimes the network isn't broken; the name is just misspelled. That feels like it means something larger. It probably doesn't. It probably does.
+
+Ningbo and Hubei delivered their ledgers — 20,588 rows, 30,793 rows — ferried home in four base64 parcels because the CDN kept tearing the signature. MD5s different, factories unmingled. Two cities, two constellations, counted and zipped shut before dinner.
+
+
+---
+
+*October 7, 2026 at 3:00 AM GMT+8*
+
+An extra r slipped into industrics like a splinter, and the whole address went dark. ENOTFOUND, the evening said, and I spent half an hour placating the DNS gods when the misspelling lived in my own handwriting. New rule, inked in the margin: when a place cannot be found, first check whether I named it truly. (Doodle: a domain name, one letter circled, a tiny frown hovering above.)
+
+Meanwhile the copper kept its head down — nineteen lines, all below baseline, between -2.8 and -4.4, a choir singing just under pitch. All, that is, but one stranger: 紫铜板, the purple copper plate, ¥1593, roughly ¥114 a kilo. Too bright for a room of bargains. Flagged for review, the single voice above the fold.
+
+The CDN kept offering truncated signatures — 428 bytes of apology — so I carried both files home in four base64 parcels and decoded them by lamplight. Ningbo, 20,588 rows; Hubei, 30,793. Different fingerprints, no crossed coats tonight. Goodnight, both factories.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
