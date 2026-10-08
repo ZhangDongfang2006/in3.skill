@@ -1,0 +1,29 @@
+[in3bot/sessions/in3bot/293df471-03a2-4126-88af-f6080a814bad#L88] Assistant: 已到达采购订单列表页。Step 2.5：核验工厂。
+[in3bot/sessions/in3bot/293df471-03a2-4126-88af-f6080a814bad#L92] Assistant: 工厂残留「孝昌工厂/湖北公司」——与既往事故一致。执行切换到宁波。
+[in3bot/sessions/in3bot/293df471-03a2-4126-88af-f6080a814bad#L130] Assistant: 找到公司下拉（当前选中湖北）。点击宁波公司选项。
+[in3bot/sessions/in3bot/293df471-03a2-4126-88af-f6080a814bad#L140] Assistant: 已切到宁波（跳回/home符合预期）。重新菜单导航并核验。
+[in3bot/sessions/in3bot/293df471-03a2-4126-88af-f6080a814bad#L151] Assistant: ✅ 宁波核验通过（公司=宁波海越电器制造有限公司，工厂=宁波工厂）。Step 3：配置筛选并导出。
+[in3bot/sessions/in3bot/293df471-03a2-4126-88af-f6080a814bad#L207] Assistant: ✅ 湖北核验通过（公司=海越（湖北）电气股份有限公司，工厂=孝昌工厂）。Step 6：湖北筛选并导出。
+[in3bot/sessions/in3bot/293df471-03a2-4126-88af-f6080a814bad#L228] Assistant: ✅ 采购价格分析 Step 1 完成：宁波+湖北采购订单明细均已触发导出（导出全部字段）。 **执行摘要：** | 步骤 | 结果 | |---|---| | 登录 | SSO 登录成功（haiyue / 18392180970），关闭了「账号绑定确定」弹窗 | | 宁波工厂核验 | ⚠️ 进入时残留「海越（湖北）/孝昌工厂」（串厂隐患再次出现），已通过公司选择器切到「宁波海越电器制造有限公司 / 宁波工厂」，硬核验通过后才导出 | | 宁波导出 | 明细视图→展开→取消open PO→查询→批量导出→导出全部字段，确认网络请
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L3029] Assistant: 今日无任务 （假期最后一天，钉钉侧保持全停：扫描 cron 已禁用、事件监听已卸载；明日恢复上班后待 Dongfang 确认是否重启监听/扫描，附件下载仍等新应用凭据） 🟢 ANNOUNCE_SKIP
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L3031] Assistant: ANNOUNCE_SKIP
+[in3bot/sessions/in3bot/b70e5dcd-7e82-463c-81a9-42a6cbeaef62#L14] Assistant: 今天还没有物料主数据导出，开始 Step 1 登录导出。
+[in3bot/sessions/in3bot/b70e5dcd-7e82-463c-81a9-42a6cbeaef62#L45] Assistant: 已登录。直接跳转物料档案管理页。
+[in3bot/sessions/in3bot/b70e5dcd-7e82-463c-81a9-42a6cbeaef62#L63] Assistant: ⚠️ 误点了「批量导出模具清单」，需要修正：找到正确的「批量导出」按钮重新点击。
+[in3bot/sessions/in3bot/b70e5dcd-7e82-463c-81a9-42a6cbeaef62#L84] Assistant: 导出任务已提交（19:31:48，执行中）。服务端生成需3-10分钟，等待后轮询。
+[in3bot/sessions/in3bot/b70e5dcd-7e82-463c-81a9-42a6cbeaef62#L124] Assistant: 导出已成功。提取下载链接（分块防截断）并 curl 下载。
+[in3bot/sessions/in3bot/b70e5dcd-7e82-463c-81a9-42a6cbeaef62#L135] Assistant: 下载校验通过（21MB）。Step 2/3：增量查重 + 命名检查。
+[in3bot/sessions/in3bot/b70e5dcd-7e82-463c-81a9-42a6cbeaef62#L189] Assistant: 10/7 IN3 物料每日检查全部完成 ✅ - **导出**：物料主数据 48964 行（20630 条物料），curl 下载 zip 校验通过 - **增量查重**：今日新建/修改 21 条，确认重复 1 对、待人工确认 1 对（非重复 52 对已排除） - **命名规范**：检查 118 条，4 条问题——🔴 BC01000125 铜排半成品描述疑似含项目编号（严重）；💡 2 条制造商空缺、1 条描述多余空格 - 两份 Excel 和执行总结已发 Dongfang Telegram，浏览器已关闭，日记已记录 小坑记录：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L42] Assistant: 已登录。进下载中心刷新并找今日文件。
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L50] Assistant: 今日两条「采购订单明细导出」已成功（19:06、19:04）。提取下载链接：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L54] Assistant: URL被页面截断（…）。改从DOM原始属性读取完整href：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L58] Assistant: href本身就被截断（页面端渲染时已省略）。改用浏览器内 fetch 取文件并检查工厂数据：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L68] Assistant: 数据量超预算。改为分块返回：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L121] Assistant: results 只支持 JSON。改走文件写入路径：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L129] Assistant: 有意思：页面内 fetch 用这个（含…的）URL成功了。直接试 curl：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L133] Assistant: 用浏览器原生下载：点击下载链接并等待保存。
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L146] Assistant: MD5 不同 ✅。核对哪个文件是宁波（对比历史文件大小），再跑分析：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L154] Assistant: 工厂对应正确（宁波≈11.2MB/湖北≈7.5MB，与10/6一致）。Step 1.5 通过，停浏览器并跑分析：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L165] Assistant: 分析完成。Step 3：对重点新元器件做网上比价：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L185] Assistant: 网上比价信息有限，已获取关键参考。现在发送 Telegram 报告：
+[in3bot/sessions/in3bot/d436c580-6eeb-4b3e-a343-62114014d840#L194] Assistant: 采购价格分析完成 ✅ - **下载**：今日两条「采购订单明细导出」（19:04/19:06）均已成功；下载链接 href 被页面截断导致 curl 403，改用点击「下载」让浏览器原生下载成功，已重命名为宁波/湖北两文件 - **MD5核验**：宁波 `7b9bd67b…` / 湖北 `c0a5c7b8…`，不同 ✅，文件大小与历史规律一致，无串厂 - **分析**（76条当日采购）：铜价基准8条（铜排整体低于基准4.7~6.4%）、历史均价比价36条、新物料32条 - **重点异动**：电抗器 RST-ER-60-P7/4
