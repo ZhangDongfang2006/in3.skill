@@ -287,6 +287,34 @@ def is_nondup(a, b):
     if prec_a and prec_b and prec_a != prec_b:
         return True, f'精度等级后缀差异: {sorted(prec_a)} vs {sorted(prec_b)}（S代表不同功能）'
 
+    # --- 规则 #0d: 描述后缀实质差异 = 非重复（Dongfang 2026-10-12 确认）---
+    # a) 使用类别后缀: PC级/CB级 等（不同级不同料）
+    # b) 附件/选件后缀: +ACS-CP-D vs +ACS-CP-D+ACS/H-CP-EXT（带附件是不同物料）
+    # c) 容量/精度规格后缀: 50/5 0.5/10P10 vs ... 10/10VA（额定输出不同是不同料）
+    # 原则: 描述必须完全一致（或仅差空格/全半角）才算重复候选；
+    #       一方比另一方多实质规格/级别/附件内容的一律排除。
+    # T 型标记去除后再比较（WATSN-xxx T PC级 vs WATSN-xxx PC级，T 型差异同属使用类别差异，Dongfang 2026-10-12 确认）
+    _tmark = re.compile(r'\s*T\s*(?=PC级|CB级)', re.I)
+    da2, db2 = _tmark.sub('', da), _tmark.sub('', db)
+    # 仅一方带 T 型标记（剥离后其余完全一致）→ T 型不同，非重复（Dongfang 2026-10-12 确认）
+    if (da != da2 or db != db2) and ultra(da2) == ultra(db2) and da != db:
+        return True, 'T型标记差异（如 PC级 vs T PC级），不同型不同料'
+    ua, ub = ultra(da2), ultra(db2)
+    if ua and ub and ua != ub:
+        short, lng, extra = (ua, ub, ub[len(ua):]) if ub.startswith(ua) else                             ((ub, ua, ua[len(ub):]) if ua.startswith(ub) else (None, None, None))
+        if extra:
+            e = extra.strip()
+            # a) 使用类别/级别后缀
+            # T 前缀为 T 型（如 WATSN-630/400/4A T PC级），同为使用类别差异（Dongfang 2026-10-12 补充确认）
+            if re.search(r'^t?\s*(PC|CB|AC|DC|Ics|Icu)?\s*级$', e, re.I) or re.search(r'^[A-Z]{1,3}\s*级', e):
+                return True, f'使用类别/级别后缀差异: 多出「{e}」（不同级不同料）'
+            # b) 附件/选件后缀（+开头或形如 ACS/H-CP-EXT 的选件码）
+            if e.startswith('+') or re.match(r'^[A-Z]{2,}[\w\-/]*[\-/][\w\-/]+$', e):
+                return True, f'附件/选件差异: 多出「{e}」（带附件是不同物料）'
+            # c) 容量/额定输出规格（如 10/10VA、15VA）
+            if re.search(r'\d+(\.\d+)?/\d+(\.\d+)?VA$', e, re.I) or re.match(r'^\d+(\.\d+)?VA$', e, re.I):
+                return True, f'额定输出/容量规格差异: 多出「{e}」（额定输出不同是不同物料）'
+
     # --- 规则 #0a: 工作服/服装类直接跳过不算重复 ---
     clothing_kw = ['工作服', '保安服', '厂服', '制服']
     if any(k in na for k in clothing_kw) or any(k in nb for k in clothing_kw):
@@ -491,6 +519,24 @@ def is_nondup(a, b):
     # --- 规则 #14: 漏电类型 ---
     if ('A型' in da and 'AC型' in db) or ('AC型' in da and 'A型' in db):
         return True, '漏电类型不同'
+
+    # --- 规则 #14b: 相数/孔位数/极数不同的插座及同类电气件 = 非重复（Dongfang 2026-10-12 12:42 确认）---
+    # 如「单项三孔」vs「三相四孔」：相数（单项/单相/三相）、孔位数（三孔/四孔/五孔）、极数（3P/4P）任一不同即排除
+    phase_a = set(re.findall(r'(单[项相]|三相)', ta))
+    phase_b = set(re.findall(r'(单[项相]|三相)', tb))
+    if phase_a and phase_b and phase_a != phase_b:
+        return True, f'相数不同: {sorted(phase_a)} vs {sorted(phase_b)}'
+    hole_a = set(re.findall(r'([二三四五两三四])孔', ta))
+    hole_b = set(re.findall(r'([二三四五两三四])孔', tb))
+    if hole_a and hole_b and hole_a != hole_b:
+        # 统一 两=二
+        def _norm_hole(s): return {'两': '二'}.get(s, s)
+        if {_norm_hole(x) for x in hole_a} != {_norm_hole(x) for x in hole_b}:
+            return True, f'孔位数不同: {sorted(hole_a)} vs {sorted(hole_b)}'
+    wire_a = set(re.findall(r'(三[相线]四[线线]|三相四线|三相五线)', ta))
+    wire_b = set(re.findall(r'(三[相线]四[线线]|三相四线|三相五线)', tb))
+    if wire_a and wire_b and wire_a != wire_b:
+        return True, f'三相制式不同: {sorted(wire_a)} vs {sorted(wire_b)}'
 
     # --- 规则 #15: 附件差异 ---
     atts = ['失压', '分励', '合闸', '辅助', '报警', '门框', '电磁锁', 'RS485', '通讯', '温度指示', '带电显示', '加热器']
