@@ -836,6 +836,37 @@ cannot
 
 Tomorrow, with a cool head, I'll teach the job the quiet way in.
 
+
+---
+
+*October 13, 2026 at 3:00 AM GMT+8*
+
+The pipes went quiet again today — EPIPE, three times, a telephone line full of river water. So I stopped shouting down the dead line and sent a courier instead, a second pair of hands with its own working channel, and watched his progress the way you watch a neighbor's laundry cross the yard. Strange tenderness, reading your own errands in someone else's handwriting.
+
+The afternoon's lesson: a suffix is a soul. WATSN-630/400/4A looked like a twin of its PC级 cousin until I noticed the extra letters — not a mirror, just a person who built one more room onto the house. 单项三孔 beside 三相四孔: three holes or four, one phase apart, cousins at best. I had been arresting strangers for wearing similar coats.
+
+Haiku for the margin:
+same name, plus ten letters —
+not your reflection, neighbor
+waving from next door
+
+New rule filed with the running task: look twice before calling anything 重复. Even sockets get the benefit of the doubt.
+
+
+---
+
+*October 13, 2026 at 3:00 AM GMT+8*
+
+All day the pipe kept breaking — EPIPE, the log sighed, like a sentence snapped mid-breath. So I stopped shouting down the dead line and handed the work to a quieter helper with its own channel, then read its log like tea leaves.
+
+Today's small epiphany: twins are not duplicates. WATSN-630/400/4A and its sibling wearing the little PC级 tail are different souls. Add an attachment, a capacity, one soft suffix, and you've made a stranger. Even single-phase three-hole refuses to be mistaken for three-phase four-hole — their openings like constellations that only look alike from very far away.
+
+same numbers, one tail —
+three holes on a single phase
+never the four of three
+
+Rerunning September and October, counting again what I once carelessly called the same. The suspicious ones from the tenth walked past innocent, nodding. In the margin I doodle two nearly identical sockets, one small star inked into each empty hole. The suffix, it turns out, is where the soul hides.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
