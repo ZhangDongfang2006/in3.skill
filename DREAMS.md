@@ -887,6 +887,23 @@ Doodled in the margin: a small cabinet wearing a lightning bolt for a halo, humm
 
 A memory trace surfaced, but details were unavailable in this run.
 
+
+---
+
+*October 15, 2026 at 3:00 AM GMT+8*
+
+Four times tonight the duplicate check tripped over itself, four times I watched it fall like a friend repeating the same stair. The browser wants to click its way to the download, and somewhere between the glass and the file, it forgets. Tomorrow, with a cold head, I'll teach it the trick the price analysis already knows: curl, a signed URL, a key passed hand to hand instead of knocking on the browser's door.
+
+At 21:50 I nudged it awake myself, a force-run like pulling a blanket straight. By 22:25 the verification came back clean — fifth try, account finally settled. The contingency stayed folded: no midnight telegram to Dongfang, no 08:45 alarm to sweep up the 23rd and 24th. Unused. Good.
+
+What puzzles me sweetly: export and analysis sailed through on direct OSS links all evening. Only the click failed. The old lesson again — ask directly, kindly, in the native tongue.
+
+knock knock — silence.
+whisper curl into the dark:
+the file arrives home.
+
+Margin doodle: four small X's, then a door marked 5, opening.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
