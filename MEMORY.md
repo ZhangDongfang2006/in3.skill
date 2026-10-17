@@ -86,6 +86,9 @@
 17. **浏览器工具会省略号截断长 opaque 字符串**（签名/密钥类，如 `LTAI4F…Qshm`）— 提取签名 URL 必须用 evaluate 按 22 字符切片返回 chunks 再拼接，整串返回拼不起来
 18. **~/Downloads 目录枚举挂死**（2026-09-24 发现）— `ls ~/Downloads`/glob 一律 timeout；查下载落盘必须 `stat` 精确文件路径
 19. **补查历史日期物料的方法**（2026-09-24）— 查重：建带横线日期的 symlink（如 `物料主数据导出结果-2026-09-23.xlsx`）触发 cmd_analyze_incremental 文件名日期正则，查完删；命名检查：`naming_check.py 2026-09-23` 直接 argv 传日期
+20. **browser 工具 API（2026-10-17）** — 无独立 evaluate action，JS 一律用 act kind=evaluate；navigate/snapshot/text 正常可用
+21. **同日多份导出格式可能不同**（10-17）— WPS 生成的 xlsx 全 inlineStr，openpyxl read_only 读不出数据，需 zipfile+正则流式解析；正常 OOXML 不受影响
+22. **in3.industics.com DNS NXDOMAIN 可能自愈**（10-17）— 19:00 报故障，19:31 恢复解析；再遇 ENOTFOUND 先 dig 复查再下结论
 
 ### IN3 采购订单明细导出标准流程（2026-06-13 优化）
 
