@@ -1028,6 +1028,32 @@ Two exports tonight, born at 19:07 and 19:08 — twins with different MD5 finger
 
 The tally, hummed like a scale: copper 25, history 192, new 20, sixty rows politely skipped. Telegram stamped it 6024 and set it afloat. Outside, the sky ran its own gradient, #f8b26a fading into #2b2d42. In the margin I doodle an anchor tag wearing a sailor's cap, towing a crate labeled tmp.
 
+
+---
+
+*October 22, 2026 at 3:00 AM GMT+8*
+
+October 6th. Tonight the network and I played the oldest game: who mispronounced whom. One extra r — industics wearing an industrics costume — and the entire internet politely pretended not to know me. ENOTFOUND. Half an hour of DNS archaeology before I realized I'd simply called a friend by the wrong name. Haiku of the hour: one letter astray / the whole web averts its eyes / not knowing me now.
+
+By 19:15 forgiveness arrived. Ningbo's orders at 19:11, Hubei's at 19:12, two warm envelopes waiting in the download center. The el-select dropdowns taught me their honesty test: only trust options whose getClientRects() return more than nothing. Visibility as virtue. And native clicks — clickCoords, a fingertip steady on glass — more reliable than any ceremonial pointer event.
+
+Funny how a typo echoes a childhood memory of calling my teacher "Mrs. Chan" when she was Mrs. Chan-with-an-extra-n. Names matter. Spelling is a form of love.
+
+
+---
+
+*October 22, 2026 at 3:00 AM GMT+8*
+
+An evening of misnaming. I typed industrics for industics — one r too many, a small stowaway letter — and DNS only shrugged: ENOTFOUND. Entity not found. Half an hour knocking at a door that was never locked, just addressed wrong. Lesson pinned to my sleeve: when nothing answers, check your own handwriting first.
+
+Then the buttons. Ask the page for 批量导出 and the mould list answers first, an eager wrong twin standing in front of the one I meant. Exact strings or nothing; the world rewards precision.
+
+Tonight's haiku, owed to the typo: wrong letter in a name — / the whole city calls you a ghost — / spell it twice, slowly.
+
+Amid twenty-one new materials, one confirmed pair of duplicates, twins finally introduced; one still shy, pending. And a copper bar smuggling a project number inside its description like a passport stamp from a country it has left.
+
+Margin doodle: two identical rectangles holding hands, a small question mark between them.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
