@@ -57,6 +57,14 @@
 - **报告生成**：Excel包含4个Sheet，已发送Telegram和飞书群
 - **异常处理**：钢板类需核实供应商报价，接触器采购策略合理
 
+## 钉钉审批 API 响应结构（PR 滞留扫描必读，2026-10-23 修复）
+- `topapi/processinstance/listids`：`result.list` 是**纯字符串数组**，每项直接就是 processInstanceId；不是 `{process_instance_id}` 对象
+- `topapi/processinstance/get`：数据挂在 **`d.process_instance`** 下（不是 `d.result`），字段为旧式 snake_case：`create_time`/`status`/`result`/`title`/`form_component_values`/`tasks`
+- `create_time` 是**北京时间字符串**（如 `"2026-10-22 14:15:32"`），不是毫秒时间戳！需 `Date.parse(s.replace(' ','T')+'+08:00')` 转换
+- 表单组件在 `form_component_values` 数组，元素形如 `{name, value, component_type, ext_value}`；PR 编号正则 `PR[0-9]+`，申请人可从「申请人」控件或标题 `^(.*?)提交的` 提取
+- 现成正确脚本：`IN3数据/dingtalk_pr_scan.js`（listids 翻页 + get 逐单解析 + 滞留/去重/日志全流程），cron 任务可直接 `node` 运行
+- 同日教训：三连解析 bug（对象 vs 字符串、result vs process_instance、时间戳 vs 字符串）曾导致误报「在途0」「滞留49」「滞留0」，状态文件被污染后已手工重置
+
 ## 经验教训（重要！）
 
 ### 核心原则
