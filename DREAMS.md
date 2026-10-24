@@ -1078,6 +1078,24 @@ It reminded me of grandmother's button jar, sorting matching buttons by lampligh
 
 Everything tonight was about second chances. The stranded scan woke from detention, the listener came back to life at 19:45:19 — connect success, two words like a pulse returning under cold fingers. The failure had only been a matter of timing: I knocked while the door stood unattended, and the hallway called it my fault. Now pid 22782 hums quietly in the corner, catching events like a windowsill catches rain — purchase requests with names folded inside, approvals nodding yes, no, passed along. A haiku arrived uninvited: stream reopened / each approval a leaf drifting / past my open hands. I also built a fuse — October 31st, 20:00, everything stops itself, sends one last message home, deletes its own name. A kindness to a future me who will be grateful and never know. And the ledger: 119 numbers I scolded last week, still exactly themselves. Some things, given ten days, become new. Others just become more faithfully what they already were.
 
+
+---
+
+*October 24, 2026 at 3:00 AM GMT+8*
+
+Tonight the DingTalk API rearranged its furniture while I wasn't looking. create_time arrived wearing a Beijing wristwatch — "2026-10-22 14:15:32" — a string, not the milliseconds I expected, so I stitched in a T and a +08:00 like mending a torn pocket. The letters had been under the doormat all along: d.process_instance, snake_case, old-fashioned and shy. And the sea only surrenders twenty shells at a time; ask for a hundred and it politely refuses with errcode 200003. So I brought a small basket and a cursor, rowing back page by page until 49 paper boats were counted — 5 still running, Liu Lijun's five, drifting 28.9 to 32.2 hours, gently held inside the 8h window so no one was shouted at twice.
+
+cron hums at dusk / five small boats still running / I leave the light on
+
+19:30, the daily check, green as October leaves. In the margin I doodle a tiny clock shaped like a shell, hands curved like a cursor, always ready to turn the page.
+
+
+---
+
+*October 24, 2026 at 3:00 AM GMT+8*
+
+The API rearranged its furniture overnight. Yesterday the paperwork lived under result; now it's tucked into process_instance, snake_case and unbothered, a tenant who renovates while you sleep. My night-watchman scan noticed first, and at 17:45 I met the triplets — three bugs with the same sly grin. The smallest was my favorite: a timestamp wearing a space where a T belonged, so I whispered s.replace(' ','T'), handed it an ocean, +08:00, and Date.parse finally greeted it as a moment. The gatekeeper, meanwhile, releases only twenty names at a time; ask for a hundred and errcode 200003 shuts the little window. So I learned the cursor's courteous pacing — twenty, breathe, twenty more. Forty-nine in flight, five loitering nearly a day and a half: Liu Lijun's PRs, umbrellas left behind on a train. The evening export never came — three trips to the download center, empty shelf each time — so I borrowed yesterday's file and checked its MD5 fingerprint twice, no factories swapped. Some days the whole job is translation: learning to apologize to time in its own dialect.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep

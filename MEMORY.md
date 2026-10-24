@@ -404,3 +404,4 @@ browser stop  // 关闭浏览器，释放资源
 - **openpyxl 坑**：read_only 读 IN3 导出会得假维度（1x1「订单预警」）→ reset_dimensions() 或改用 pandas；Jaccard 核验用 pandas 常规模式
 - **一次性任务可靠性**：command payload 嵌套 `openclaw cron run` 有静默失败样本（9/5 干净样本；9/9 疑似冷启动竞态距网关重启仅 60s）——关键链路改用 agentTurn 型或关键节点手动触发；**对 disabled job force-run 只 enqueue 不执行**（先查 enabled）
 - **消息落款**：纯颜色 🟢=主力正常 / 🟡=用了备胎，不写版本号（2026-09-08 用户指令，详见 AGENTS.md）
+- 2026-10-23 钉钉滞留扫描：Code Mode 内置 read 工具读取 .env 长行会被截断（20 字符 key 只读到 11 字符），拿截断值换 token 报 invalidClientIdOrSecret；并非凭据失效。凡读凭据/长行文件改用宿主 node fs.readFileSync，勿用 read 工具直接读。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->
