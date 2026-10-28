@@ -405,3 +405,4 @@ browser stop  // 关闭浏览器，释放资源
 - **一次性任务可靠性**：command payload 嵌套 `openclaw cron run` 有静默失败样本（9/5 干净样本；9/9 疑似冷启动竞态距网关重启仅 60s）——关键链路改用 agentTurn 型或关键节点手动触发；**对 disabled job force-run 只 enqueue 不执行**（先查 enabled）
 - **消息落款**：纯颜色 🟢=主力正常 / 🟡=用了备胎，不写版本号（2026-09-08 用户指令，详见 AGENTS.md）
 - 2026-10-23 钉钉滞留扫描：Code Mode 内置 read 工具读取 .env 长行会被截断（20 字符 key 只读到 11 字符），拿截断值换 token 报 invalidClientIdOrSecret；并非凭据失效。凡读凭据/长行文件改用宿主 node fs.readFileSync，勿用 read 工具直接读。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->
+\n- 2026-10-28 钉钉OA listids 实证： 直接是字符串ID数组（不是 [{process_instance_id:...}] 对象数组），按dict解析会得到0条；详情接口  数据在顶层  键下。修正脚本见 cron 内嵌逻辑。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->\n
