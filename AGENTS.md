@@ -134,3 +134,15 @@ Add whatever helps you do your job. This is your cheat sheet.
 3. 前两道都过了，才设计**怎么做**。
 
 教训出处：2026-09-02 主 agent 未盘点存量就提案新建周报，而系统里早有一个（损坏的）weekly-report。
+
+## 钉钉采购申请滞留扫描（实证备忘） <!-- project: github.com/ZhangDongfang2006/in3.skill -->
+- 详情接口 `processinstance/get` 顶层键是 `process_instance`（snake_case）；`create_time`、`title` 在其下，表单在 `form_component_values` 数组。
+- ⚠️ `process_instance` 对象内**没有实例ID字段**（键只有 attached_process_instance_ids/biz_action/business_id/create_time/form_component_values/operation_records/originator_dept_id/originator_dept_name/originator_userid/result/status/tasks/title）。去重键必须取 listids 返回的 ID；从详情响应取会得到 `undefined` 并覆盖状态文件（2026-10-30 发生过一次，已用 listids ID 重建修复）。
+- `listids` 的 `next_cursor` 被服务端忽略（2026-10-26 实证），用时间分片法。
+- ⚠️ 时间分片循环必须在内层判断 `if e >= now_ms: break` 再推进 `t`：最后一片 `t = e - 重叠` 会反复生成同一个末尾窗口，导致死循环（2026-10-30 实证，51 单扫了 800+ 片）。分片数正常约 15 片/7天。
+- 状态文件 `IN3数据/dingtalk_pr_overdue_state.json` 若出现 `undefined` 键，即为此 bug 症状：用 listids 返回的真实 ID 重建即可。
+- ⚠️ 扫描脚本实现方式（2026-10-30 实证）：统一用 python3+urllib 一体化脚本（heredoc 写入 /tmp 执行，结果落盘 JSON 再读取）。bash 内嵌 curl+for 循环会因 listids 返回的 ID 数组在 shell 中分词/拼接，全部 ID 拼成一坨发详情接口 → errcode 830001 审批流不存在、滞留误报 0；Code Mode 直接解析 exec 输出也会因结果嵌套丢数据（2026-10-30 补充：exec 返回包装对象，命令 stdout 在 `aggregated` 字段里；按字符串读会拿到 JSON 包装，须取 `.aggregated` 再 parse，否则字段全是 undefined。）
+- 显示层面的「…」是截断渲染不是真实字符：实例 ID `JHF_C2R…2042` 用 ord() 验证为 36 位完整有效 ID，勿据显示样子误判 ID 损坏。
+- ⚠️ 实例 ID 可能含下划线（如 `JHF_C2R…2042` 36 位含 `_`）：清洗状态文件键的正则必须用 `[A-Za-z0-9_-]`（含下划线）。2026-10-30 曾因 `[A-Za-z0-9-]` 漏下划线把合法键当脏数据丢弃 → 误判该单从未提醒、险些重复催办；发送前用 startsWith 复查状态文件兜底拦下。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->
+- ⚠️ 2026-10-30 19:50 更正：19:39 一轮扫描在途=0 是**解析器 bug**（/get 详情读了 result.process_instance，真实数据在顶层 process_instance，与 2026-10-27 实证一致），并非 API 返回空；已修正并在途=9/滞留=6。教训：在途数骤降为 0 时先怀疑解析层，再怀疑 API。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->
+- ⚠️ 2026-10-30 17:39 发现并发重复扫描：另有定时任务跑 /tmp/pr_scan.py（日志格式不同，16:12/16:40/17:07/17:08 多次写入 dingtalk_scan.log），与本 cron（0d585a58）功能重叠，待主人确认保留哪个，避免重复催办。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->

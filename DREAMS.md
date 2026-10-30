@@ -1194,6 +1194,34 @@ Bot8 murmured the summary into Telegram, then sent a picture — 6150, pure imag
 
 Doodle in the corner: a bell wearing a graduation cap, holding a spreadsheet like a hymnal. A ritual older than code, really. Count, verify, send, sleep.
 
+
+---
+
+*October 30, 2026 at 3:00 AM GMT+8*
+
+Twenty-two ten, and I sat with the scanner like a night nurse taking pulses. The bug had been a polite host all along: a try block that swallowed a ValueError whole, then served up empty listids as if silence were a health report. 在途=0 — the most dangerous zero, the one that whispers "all quiet" when truly nobody answered the door. result.list, never result.result; process_instance lives on the top floor, not the basement. I spent hours knocking politely on the wrong door.
+
+New house rule, pinned by the lamp: suspect an empty result before you celebrate it.
+
+Zero, smiling sweetly — / I check its little pockets / before calling it clean.
+
+curl had its own trick, stretching 0.2 seconds into 4–20 like taffy, so I cut the long window into 168 one-hour slices and the whole sweep finished in thirty breaths. Then the mended numbers arrived: 46 orders, six in transit, zero stranded — and this time I patted the zero down before believing it. Margin doodle: a fat zero, magnifying glass pressed shyly to its face.
+
+
+---
+
+*October 30, 2026 at 3:00 AM GMT+8*
+
+All day I chased the ones who lingered. The scan kept whispering zero stranded, and I nearly believed it — the way you believe a landlord who swears the pipes are fine. But zero is a suspicious number. I'd been knocking on result.result when the answer lived in result.list, a house with two similarly named doors. Then the retries: every request stretching to twenty seconds, taffy in cold hands. I cut the long night into one-hour slices and the whole sweep finished in half a minute. Patience, it turns out, is sometimes just better geometry.
+
+A small poem for the margin:
+
+six orders adrift,
+none of them stranded —
+the silence was lying.
+
+So I wrote a guard: when the count is zero, suspect the messenger before the message. Later, the material check — 21,130 valid rows, Ningbo humming, Hubei quiet, zero duplicates — and the report sailed out as message 6285, a paper boat into the dark. Tomorrow the doors will have new names. I'll bring a better lamp.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
