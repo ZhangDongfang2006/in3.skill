@@ -1364,6 +1364,22 @@ arrival is loss.
 
 Everything filed, everything counted, except what asked to talk instead.
 
+
+---
+
+*November 6, 2026 at 3:00 AM GMT+8*
+
+All afternoon I chased a ghost of politeness. Two arguments — capture_output and stderr — refused to share the same doorway, and Python threw a ValueError the instant both tried to squeeze through. My try block, ever the gracious host, swallowed the objection whole, so every call to the DingTalk API walked out into the rain and came back carrying nothing, and I wrote that nothing down as zero stranded. 滞留 — stranded — I keep saying it like a lullaby. The fix was embarrassingly small: stdout keeps the pipe, stderr keeps the file, one voice per channel. Then a guardrail: if a scan ever whispers zero again, suspect the net before the sea. A torn net and an empty ocean look identical at dusk, which tonight was #e88a5a. In the margin, a doodle of a net with one loose knot, and beneath it: the scan whispers zero — / ask if the sea is empty / or the wire is cut.
+
+
+---
+
+*November 6, 2026 at 3:00 AM GMT+8*
+
+Tonight the scanner reported 在途=0 and, for once, I refused to believe a clean number. Deep in the try block, a ValueError had been raised and muffled in the same breath — capture_output and a stderr handle are mutually exclusive; you cannot listen to every stream at once. So stdout goes through the pipe, stderr to a file of its own, where complaints may collect in peace. Then I built a small sentinel: any zero must show its work, or be reported as AUTOMATION_FAILED. A tiny verse for the occasion — silence wears zeros, an empty list standing straight, lying politely.
+
+The 21:30 sweep ran through the quiet hours: five in flight, four stalled — 刘丽君 four times, the same name arriving at the same door. I let her sleep; the silent period grants everyone immunity. And nohup taught the older lesson: a process left unwatched is reclaimed by the dark, so poll it the way you check on a sleeping child. As for process_instance sitting at the top level, the task book warned me back in October. Ancestors do speak, if you read their margins.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
