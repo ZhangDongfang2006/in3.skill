@@ -1,0 +1,34 @@
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L10] Assistant: Code Mode 里模块导入被禁用，改用工具全局（read / shell exec）执行。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L19] Assistant: 流程已读取。开始第一步：打开 IN3 并确认登录状态。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L33] Assistant: 已登录（跳转到工作台）。直接导航到物料档案管理页面。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L53] Assistant: 快照正文没有随包装返回。改用 evaluate 直接查询 DOM。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L61] Assistant: 查一下 browser 工具的完整 schema。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L67] Assistant: Schema 明确了。用 snapshot query 定位「过滤成品/虚拟件」复选框和导出按钮。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L71] Assistant: 快照里没匹配到关键词，页面可能在 iframe 里。用 act:evaluate 检查。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L75] Assistant: 页面已加载，有 5 个复选框。查看它们的状态和文本，找「过滤成品/虚拟件」。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L79] Assistant: 找到了。「过滤成品/虚拟件」当前是勾选状态，需要取消勾选，然后点搜索。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L83] Assistant: 已取消勾选。点击搜索按钮。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L87] Assistant: 搜索已触发，跳转到 /mdm/masterdata/list。等待列表加载后找「批量导出物料」按钮。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L92] Assistant: 列表已加载（URL 参数确认 excludeCPAndXX=false）。点击「批量导出物料」，只点一次。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L101] Assistant: 出现「选择指定工厂导出」弹窗，点击其中的「导出」按钮。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L110] Assistant: 弹窗已关闭，导出任务应已提交。前往下载中心等待导出完成。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L119] Assistant: 今日导出任务已成功（09:02:21 创建，09:02:55 完成）。获取下载链接。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L123] Assistant: 拿到下载链接但显示层有截断。按经验把 URL 分段取回，避免截断失真。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L127] Assistant: URL 里的签名被输出层脱敏了（… 是脱敏符号）。改走浏览器直接下载，绕开显示层截断。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L131] Assistant: 40 个匹配（每行都有下载链接）。改用 evaluate 精确点击第一行的下载链接，然后用 waitfordownload 接文件。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L138] Assistant: 下载成功，文件已保存到 /tmp。复制到 IN3数据/ 目录并验证。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L142] Assistant: 今日新导出已就位（21.7MB，09:04）。运行查重配对脚本。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L158] Assistant: 今日全量查重完成：候选 9362 对 → 确认重复 12 对，待人工确认 47 对。接下来做遗留核验：提取本周各日报中报过的物料编号，在今日最新导出中核验。先看本周报告文件结构。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L162] Assistant: 查看增量查重结果的所有 sheet 结构。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L166] Assistant: 每天的报告格式不完全一样。写一个提取脚本，把本周所有日报中报过的物料编号提取出来，然后逐条在今日最新导出中核验。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L170] Assistant: 提取逻辑有误——「今日物料清单」是当日物料列表不是问题清单。重新提取：增量查重的「确认重复/待人工确认」+ 命名检查的问题行。先看 11-03~11-06 的实际内容。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L174] Assistant: 增量查重本周每天都是 0 确认 0 待确认，无重复遗留项。现在看命名规范检查报告的具体问题条目。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L178] Assistant: 本周命名检查共报过 9 个物料（11-02~11-06），增量查重本周全部为 0。现在逐条在今日最新导出中核验这 9 个物料是否仍存在且问题未修正。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L191] Assistant: 活动 sheet 不对（只有2列）。列出所有 sheet 找数据表。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L195] Assistant: IN3 导出的 dimension bug（read_only 下 max_row 报 1）。按备忘用非 read_only 模式加载数据表。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L208] Assistant: 核验完成：本周报过 9 个物料，**5 个仍未修正**，4 个已修正。生成遗留未修正文档，并查看今日查重结果 Excel 内容。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L212] Assistant: 今日查重结果已生成。快速抽查确认重复对的合理性，然后生成遗留文档。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L216] Assistant: 12 对确认重复都合理。生成《遗留未修正-2026-11-07.xlsx》。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L224] Assistant: 两个文件已就位。发送给 Dongfang。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L232] Assistant: 补充项目标记（按仓库记忆规范）。
+[in3bot/sessions/in3bot/e0cded8d-df6a-4f39-87e6-15004f70c6a2#L236] Assistant: ✅ 周六全量物料查重完成，报告已发送给 Dongfang（Telegram 已送达）。 **执行摘要：** - **数据**：09:02 当日新导出物料主数据（50,504 条），未复用旧文件 - **全量查重**：候选 9,362 对 → 规则排除 9,303 对 → **确认重复 12 对、待人工确认 47 对**（均为历史存量新发现） - **遗留核验**：本周日报报过 9 个物料 → **4 个已修正**（FC04003276~79 电缆改名+空格清理）、**5 个遗留未修正**（DQ06059955 描述含项目名、D
