@@ -1,0 +1,21 @@
+# in3_client 打包元数据 —— 供 vendoring 打成 py3-none-any wheel，由 cmd_init 离线装进
+# <workspace>/python-packages/（见 docs/in3-cli-cemcp/issues/2,7 + ADR-0002）。
+# 第三方依赖全部**可选**：requests 缺→urllib 兜底；pandas 缺→stdlib join 降级。故不在
+# dependencies 硬声明（否则离线装 in3_client 会强拉 requests，破坏「纯 stdlib 也能 run」）。
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "in3-client"
+version = "1.1.0"
+description = "IN3 read-only Python SDK (direct HTTP, codegen-aligned). mm/wm/sd/md entities + value surface."
+requires-python = ">=3.9"
+dependencies = []
+
+[project.optional-dependencies]
+http = ["requests"]   # 更优 HTTP 传输（缺则 _transport 退 urllib）
+value = ["pandas"]    # df/join 聚合（缺则 value 层退 stdlib）
+
+[tool.setuptools]
+packages = ["in3_client", "in3_client.entities"]

@@ -1,0 +1,20 @@
+{
+  "name": "in3-workspace",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Workspace for IN3 multi-tenant CLI environment. Managed by in3-cli skill.",
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@industics/ibrain-mm-cli": "0.4.7",
+    "@industics/ibrain-wm-cli": "0.1.16",
+    "@industics/in-mom-md-cli": "0.1.8",
+    "@industics/ibrain-pp-cli": "0.2.12",
+    "@industics/in-mom-qm-cli": "0.1.1",
+    "@industics/ibrain-sd-cli": "0.2.7",
+    "@industics/in-mom-cr-cli": "0.1.0",
+    "@industics/ibrain-mom-fn-cli": "0.1.1",
+    "@industics/ibrain-identity-cli": "0.1.1"
+  }
+}
