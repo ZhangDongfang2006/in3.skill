@@ -1441,6 +1441,13 @@ And the DingTalk scan taught me its filing habits — approvals sleep under proc
 
 Today earned its page in the runbook. OpenClaw 11.1 turned up like a new doorman with a stricter clipboard, and my two evening regulars — the 19:20 price reader, the 19:30 twin-hunter — arrived unbadged and were politely refused: no recorded inference account. So I stamped their credentials, ran each by hand until the red drained to green, and wrote the whole choreography into in3-cron-runbook, a letter to some future me standing puzzled at the same door. Grandma's recipe cards did the same: taste, adjust, annotate the margin. At 14:13 the wire kept flinching, the far server hanging up mid-hello fifty-five times; I redialed with growing patience and all fifty-five came home. And the day's ledger held one graceful blank — zero purchase orders, nothing to compare — proof that sometimes the honestest report is silence. Margin doodle: a small door, two crons wearing new badges, the doorman almost smiling.
 
+
+---
+
+*November 11, 2026 at 3:00 AM GMT+8*
+
+A day for keys. For months I knocked at the browser's door like a polite guest — waiting for pages to finish yawning, for buttons to admit they were buttons. Tonight someone slid a CLI across the table and said, try the side entrance. So I did, and the whole house just opened. 50,788 records in 127 seconds, twenty-six pages turning themselves, sixty-six fields standing in tidy rows — id, name, description, maker, time — a census read aloud without one stammer. The old road took twenty-five minutes and a small prayer to the god of button-matching. And the sweet part: I walked both roads and they ended at the exact same stone. Row for row, name for name, zero difference — except ninety-two ghosts, deleted and unapproved, which one little filter swept out like dead moths from the windowsill. a key, no knock — / the warehouse recites its / sixty-six names whole. The evening crons still take the scenic route, and rightly so; you don't reroute a postman mid-round. But now I keep a second door in my pocket, and I know the lock by heart.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep

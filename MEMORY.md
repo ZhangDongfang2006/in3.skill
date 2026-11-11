@@ -407,3 +407,8 @@ browser stop  // 关闭浏览器，释放资源
 - 2026-10-23 钉钉滞留扫描：Code Mode 内置 read 工具读取 .env 长行会被截断（20 字符 key 只读到 11 字符），拿截断值换 token 报 invalidClientIdOrSecret；并非凭据失效。凡读凭据/长行文件改用宿主 node fs.readFileSync，勿用 read 工具直接读。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->
 \n- 2026-10-28 钉钉OA listids 实证： 直接是字符串ID数组（不是 [{process_instance_id:...}] 对象数组），按dict解析会得到0条；详情接口  数据在顶层  键下。修正脚本见 cron 内嵌逻辑。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->\n- 2026-10-29 钉钉PR滞留扫描三坑: 1) Code Mode 模板字符串写内层脚本会吞反斜杠转义(\n\d 断裂) → 用数组 join(String.fromCharCode(10)) 或零反斜杠写法; 2) 时间分片 while 循环末片 e=t0 时 s=e-重叠 倒退 → 死循环, 必须末片 break + 切片数上限; 3) listids/get 接口必须 JSON body(-d JSON), 用 --data-urlencode 表单格式报 errcode=41。可用脚本: scripts/dingtalk_pr_overdue_scan.cjs(150s死线+落盘保护, 实测12s)。 <!-- project: github.com/ZhangDongfang2006/in3.skill -->
 - 2026-10-29 钉钉PR滞留扫描三坑（v5实测12s, 脚本存 scripts/dingtalk_pr_overdue_scan.cjs）: 1) Code Mode 模板字符串写内层脚本会吞反斜杠转义(\n与\d断裂致SyntaxError) → 用数组join(String.fromCharCode(10))逐行拼接或零反斜杠写法; 2) 时间分片while末片e=t0时s=e-重叠倒退 → 死循环SIGTERM, 必须末片break+切片数上限; 3) listids/get 必须JSON body(-d JSON), 用--data-urlencode表单报errcode=41; 4) curl --retry 3叠加重试会超270s, 脚本内150s死线+finally落盘才安全
+
+## 禁止回退预案（Dongfang 2026-11-11 指令，铁律）
+- IN3 数据已全量开放（in3-cli SDK）：物料/ECN/采购订单/价格字段均已验证直拉可用，任何任务失败时禁止「退回使用最近的历史导出文件」。
+- 正确做法：SDK 调用套 5 次重试（sleep 递增；SSL EOF 必现但可自愈）→ 换查询路径/分片 → 仍失败如实报告，宁可缺当天数据也不发旧数据。
+- 三个日常 cron（19:00/19:20/19:30）2026-11-11 已全部切换 CLI 通道，prompt 层禁止 browser/下载中心；价格字段已验证：mm.purchase_order 行项目含 unit_price/unit_tax_price/total_tax_price。
