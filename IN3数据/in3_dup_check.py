@@ -240,27 +240,55 @@ def load_materials(input_path):
     ws = wb['物料主数据']
     print(f"   Sheet: {ws.max_row} 行 × {ws.max_column} 列")
 
+    # 按表头名动态定位列（兼容网页宽表导出与 CLI 17列导出，2026-11-12 修复：
+    # 旧 COL 硬编码列号在 CLI 导出上全部错位，导致增量筛选日期列读空=当天0条）
+    _headers = {}
+    for _c in range(1, ws.max_column + 1):
+        _h = ws.cell(row=1, column=_c).value
+        if _h is not None:
+            _headers[str(_h).strip().lstrip('*')] = _c
+    col_of = {
+        'code': _headers.get('物料编号', COL['code']),
+        'name': _headers.get('物料名称', COL['name']),
+        'desc': _headers.get('物料描述', COL['desc']),
+        'cat': _headers.get('物料类别', COL['cat']),
+        'subcat': _headers.get('物料子类别', COL['subcat']),
+        'manufacturer': _headers.get('制造商', COL['manufacturer']),
+        'source': _headers.get('物料来源', COL['source']),
+        'lead_time': _headers.get('提前期', COL['lead_time']),
+        'unit': _headers.get('主计量单位', COL['unit']),
+        'price': _headers.get('标准价格', COL['price']),
+        'creator': _headers.get('创建人', COL['creator']),
+        'create_date': _headers.get('创建日期', COL['create_date']),
+        'modifier': _headers.get('最近修改人', COL['modifier']),
+        'modify_date': _headers.get('最近修改日期', COL['modify_date']),
+        # 颜色列：CLI 17列窄表导出没有「颜色」列（2026-11-12 实证），此时禁用该字段
+        # （否则回退到旧宽表列号16会指向「最近修改人」，人名被当颜色误触发规则#13，
+        #  曾把「智能仪表 描述仅差一个空格」的真候选错误排除）
+        'color': _headers.get('颜色', (COL['color'] if ws.max_column >= 70 else 9999)),
+    }
+
     materials = []
     for r in range(2, ws.max_row + 1):
-        cat = gv(ws, r, COL['cat'])
+        cat = gv(ws, r, col_of['cat'])
         if cat in EXCLUDE_CATS:
             continue
         materials.append({
-            'code': gv(ws, r, COL['code']),
-            'name': gv(ws, r, COL['name']),
-            'desc': gv(ws, r, COL['desc']),
+            'code': gv(ws, r, col_of['code']),
+            'name': gv(ws, r, col_of['name']),
+            'desc': gv(ws, r, col_of['desc']),
             'cat': cat,
-            'subcat': gv(ws, r, COL['subcat']),
-            'manufacturer': gv(ws, r, COL['manufacturer']),
-            'source': gv(ws, r, COL['source']),
-            'unit': gv(ws, r, COL['unit']),
-            'lead_time': gv(ws, r, COL['lead_time']),
-            'price': gv(ws, r, COL['price']),
-            'creator': gv(ws, r, COL['creator']),
-            'create_date': gv(ws, r, COL['create_date']),
-            'modifier': gv(ws, r, COL['modifier']),
-            'modify_date': gv(ws, r, COL['modify_date']),
-            'color': gv(ws, r, COL['color']),
+            'subcat': gv(ws, r, col_of['subcat']),
+            'manufacturer': gv(ws, r, col_of['manufacturer']),
+            'source': gv(ws, r, col_of['source']),
+            'unit': gv(ws, r, col_of['unit']),
+            'lead_time': gv(ws, r, col_of['lead_time']),
+            'price': gv(ws, r, col_of['price']),
+            'creator': gv(ws, r, col_of['creator']),
+            'create_date': gv(ws, r, col_of['create_date']),
+            'modifier': gv(ws, r, col_of['modifier']),
+            'modify_date': gv(ws, r, col_of['modify_date']),
+            'color': gv(ws, r, col_of['color']),
         })
     wb.close()
     print(f"✅ 加载 {len(materials)} 条物料，耗时 {time.time()-t0:.1f}s")
