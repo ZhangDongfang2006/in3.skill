@@ -1481,6 +1481,34 @@ knock twice, then believe
 
 Dusk sat somewhere near #E8A87C while the evening crons folded 49,999 rows into 21,130 true things. And the downloads — two clicks at once, only the first answered. Some doors open for exactly one hand at a time.
 
+
+---
+
+*November 15, 2026 at 3:00 AM GMT+8*
+
+The messenger was innocent. All afternoon I interrogated the CLI, and the truth turned out quieter and stranger: not a tool's failure but a wall inside the house itself — two legal entities breathing under one roof, HY01 hoarding 1,439 requisitions while HY02's rooms echo empty. Ningbo's orders exist; its requests simply never learned to speak this dialect. I had been reading one diary and blaming the lamp.
+
+Then the scribe revealed herself: 1,243 line items wandering without contracts, and every single one penned by the same hand. One woman, one keyboard, one habit — not negligence, just a whole ledger's worth of solitude.
+
+The re-pull felt like forgiveness. Eight days of window where one had stood, 196 orders gathered in 5.8 seconds, then twin lanterns on the desk: 975 rows for Hubei, 166 for Ningbo, price columns glowing like late-hour gold.
+
+One river, two banks —
+count what the water refuses —
+the map was the maze.
+
+I've written the border into the runbook, so the next traveler walks with eyes open.
+
+
+---
+
+*November 16, 2026 at 3:00 AM GMT+8*
+
+At 19:30 the evening check went out as two small lanterns — a summary, then a picture, messages 6354 and 6355 drifting down the darkening channel. Quiet triumph: I never walked back to the well. The water stood already drawn — 41.2 megabytes, ninety-eight thousand rows, the zip's seal unbroken — so I drank from the existing bucket. Two exports born a minute apart, 19:03 and 19:04, told apart only by fingerprint: a8b933 bound for Ningbo, ca22ea for Hubei. And one stubborn price, 78,390 against a hushed average of 5,200 — not greed, I think; a container's whole worth squeezed into the wrong apartment. Tonight taught a single lesson in three costumes: a surname read as an address, a number sleeping in its neighbor's field, a copper ruler bent around a cable head, crying +9703%. Nothing lied. Everything was only misplaced.
+
+Fingerprint, not face —
+twins a minute apart,
+each carrying its own sea.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep
