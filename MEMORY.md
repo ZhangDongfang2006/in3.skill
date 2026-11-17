@@ -326,6 +326,7 @@ browser stop  // 关闭浏览器，释放资源
   - 修复了电度表/电能表被 type_pairs_chk 错误排除的 bug
   - 持续扩展中，遇到新的同义词可搜索确认后加入
 - **定时任务：** 每天17:30增量查重（当天新建vs历史）+ 每周六15:00全量排查，agentId: in3bot
+- **⚠️ CLI 数据源时代（2026-11-12 起）：** `auto` 子命令不带 `--incremental` 会走全量 analyze（候选95万对、"确认重复"58.8万条）→ Excel 超 104 万行上限崩溃。日常增量必须 `python3 IN3数据/in3_dup_check.py auto --dir IN3数据 --incremental`；全量拉取用 `in3_cli.py run IN3数据/cli_pull_materials.py`（valid=True 口径）。2026-11-17 实证
 - **IN3 访问问题（已解决 2026-05-18）：** ① 网址拼错！正确是 `industics`（没有r）② OpenClaw 浏览器需配 `--proxy-auto-detect` + `dangerouslyAllowPrivateNetwork: true`
 - **Dongfang 指示（2026-05-13）：** 每次定时任务先试登录 IN3，不行就跳过告知他
 - **⚠️ 教训：** `可疑重复物料_已验证_v5.xlsx` 是 AI 生成非人工核查，有大量误标，不可用作验证库
