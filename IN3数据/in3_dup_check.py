@@ -45,6 +45,10 @@ COL = {
 
 # 排除的物料类别
 EXCLUDE_CATS = {'成品柜', '外购成套', '管道配件', '气动配件', '外包服务'}
+# 2026-11-18 CLI代码口径：CLI导出的物料类别是代码（CP_05/WG_03等），中文名永远匹配不上，
+# 导致成品柜/外购成套等未排除、当日批量成品柜录入曾引发数千条假"确认重复"。
+# 按类别代码前缀排除（与中文名口径等价：CP=成品柜 WG=外购成套 GD=管道 QD=气动 FW=外包服务）
+EXCLUDE_CAT_PREFIXES = {'CP', 'WG', 'GD', 'QD', 'FW'}
 
 # ─── 名称同义词组（用于跨名称配对） ─────────────────────────────────────────
 # 同一组内的名称互为同义词，配对后可进入确认/待人工确认
@@ -273,6 +277,9 @@ def load_materials(input_path):
         cat = gv(ws, r, col_of['cat'])
         if cat in EXCLUDE_CATS:
             continue
+        _cat_s = str(cat or '')
+        if '_' in _cat_s and _cat_s.split('_')[0] in EXCLUDE_CAT_PREFIXES:
+            continue  # CLI 代码口径（2026-11-18）
         materials.append({
             'code': gv(ws, r, col_of['code']),
             'name': gv(ws, r, col_of['name']),
