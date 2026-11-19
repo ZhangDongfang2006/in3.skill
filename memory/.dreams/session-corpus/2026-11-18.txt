@@ -1,0 +1,29 @@
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L20] Assistant: CLI 通道正常，规则明确。开始拉取全量物料（昨日 50,906 条，约 2 分钟）。
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L24] Assistant: 拉取成功：50,948 条（99.4s，无 SSL 问题），较昨日 50,906 净增 42。现在做增量查重和命名规范检查。先确认两个脚本的调用方式：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L32] Assistant: 增量查重超 300s 超时了。看一下增量逻辑怎么取“当天物料”，可能卡在对比大文件：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L36] Assistant: 增量逻辑是先对全量 5 万条跑配对再过滤，耗时较长（今日 42 条新建/修改多于昨日）。改用更长超时重跑：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L40] Assistant: 增量结果出来了，但「确认重复 4,839」远超正常水平（昨日为 0），需要先抽样验证是不是误判再推送：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L44] Assistant: 结果异常：确认重复 4,839（昨日 0）。抽查显示绝大部分是今日徐元萍批量新建的 CP 成品柜（描述只有 "GGD"、"/" 等）与历史存量配对。先核实脚本是否本应排除成品柜类别：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L52] Assistant: 找到根因方向：`EXCLUDE_CATS` 按中文类别名（成品柜等）排除，但 CLI 导出的「物料类别」是代码（CP_05/CP_11/DQ_22），永远匹配不上 → 今日徐元萍批量建的 CP 成品柜全进了配对。先探测 SDK 里类别是否有中文名字段：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L56] Assistant: SDK 有 `c.md.material_category` 目录。拉取类别目录，建立 CP_05→成品柜 等映射，核实排除范围：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L60] Assistant: 类别目录拿到了：CP_01~CP_31 全是成品柜类（低压柜/小三箱/计量箱等），FW_* 是外包服务（精加工/电镀/硫化）。输出被截断，先把完整目录落盘，找「外购成套/管道配件/气动配件」的代码：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L68] Assistant: 拿到完整目录（245 类）。外购成套=WG、管道=GD_01、气动=QD_01。还需确认 FW 与 WB 前缀的归属（外包服务）：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L72] Assistant: 映射齐了：成品柜=CP、外购成套=WG、管道=GD、气动=QD、外包服务=FW。给 `in3_dup_check.py` 打最小补丁（按类别代码前缀排除），同时看 naming_check 是否有同类问题：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L76] Assistant: naming_check 用列名映射（不受错位影响），但规则 6「制造商空缺」按 `category=='电器元件'` 精确匹配——CLI 代码口径下永远不触发（宽松方向，漏报不误报）。补丁方案定了：给 dup_check 增加「类别代码排除」，naming_check 用类别代码前缀判定电器元件（DQ/TC/TP/QD 等元件前缀）：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L80] Assistant: 今天的结果验证了根因。打两个最小补丁（dup_check 类别代码排除 + naming_check 电器元件代码口径），并把类别目录存档备用：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L85] Assistant: 补丁完成。存档类别映射并重跑增量查重：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L89] Assistant: 补丁生效（加载 21,511 条=排除 CP/WG 等后），查重从假 4,839 降到 确认1/待1。跑命名规范检查：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L93] Assistant: 两项结果都正常了。今天查重确认重复 1 对（智能仪表 MC7200 仅空格差异），待人工确认 1 对（Pbox-FLX vs Pbox-FL，需人工判断型号后缀）；命名问题 1 条（恰好也是那条空格料）。统计今日明细并生成 PNG：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L97] Assistant: 今日明细清楚了（新建 42/修改 1；确认重复恰是马骏今日修改的那条智能仪表）。生成命名规范 PNG：
+[in3bot/sessions/in3bot/743708d0-19fa-4be0-a331-4fa77f55b730#L101] Assistant: PNG 完成。写日记并推送 Telegram（摘要先行，图片随后）：
+[in3bot/sessions/in3bot/7a435d2a-8bf3-47f7-b706-8d4bfdf6fb00#L19] Assistant: Step 2 脚本已找到（/tmp/price_step2_20261116.py，适配CLI表头+历史池），当日两文件齐全。继续读取脚本剩余部分和历史运行记录。
+[in3bot/sessions/in3bot/7a435d2a-8bf3-47f7-b706-8d4bfdf6fb00#L25] Assistant: 脚本完整拿到。现在生成 2026-11-18 版本（更新日期戳、历史池补入 11-12~11-17 的 CLI 日文件）并执行分析。
+[in3bot/sessions/in3bot/7a435d2a-8bf3-47f7-b706-8d4bfdf6fb00#L29] Assistant: 分析完成：当日 120 行（宁波67/湖北53）、32个PO，高异常3项、低异常3项、新物料57项。读取异常明细后推送 Telegram。
+[in3bot/sessions/in3bot/7a435d2a-8bf3-47f7-b706-8d4bfdf6fb00#L33] Assistant: 明细齐全。推送 Telegram（摘要+PNG）并记录日记。
+[in3bot/sessions/in3bot/dce411e1-4aa8-4726-a58d-e10337db4b3f#L67] Assistant: 📊 采购价格分析 2026-11-18（CLI版） 当日新增 120 行 ｜ 宁波 67 / 湖北 53 ｜ 32 个 PO 长江铜价 107,910 元/吨（11-18） 比价结果：历史比价 62 项（高异常 ▲3 / 低异常 ▼3）｜新物料 57 项｜标准件跳过 1 ▲ 高异常（≥+40%） 1️⃣ 圆钢 GC08000551：¥1,450.00 vs 均价 ¥4.83（+29900%）湖北 PO…0023 山东创利达 —— 价差近300倍，疑似计量单位不一致（历史按kg、本次疑按吨），建议核对 2️⃣ 塑壳断路器 DQ0
+[in3bot/sessions/in3bot/dce411e1-4aa8-4726-a58d-e10337db4b3f#L68] Assistant: 🏭 IN3 物料每日检查 2026-11-18 📦 数据：CLI 全量拉取 50,948 条（较昨日 +42），一次成功 🆕 当日新建 42 条 / 修改 1 条 创建人：徐元萍 25（GGD/MNS 成品柜体批量）、马骏 10（CSU 塑壳断路器为主）、彭更生 5、张阳成 1、郭运浩 1 🔎 增量查重： ✅ 确认重复 1 对：DQ22060109 智能仪表 MC7200（马骏今日修改）vs DQ22048583（2024年老料），描述仅空格差异 → 建议规范空格二选一 ❓ 待人工确认 1 对：DQ21060239 Pb
+[in3bot/sessions/in3bot/dd8a819f-3516-4ed5-b489-5efdc3296a47#L38] Assistant: 昨天验证过的脚本可直接复用，改日期生成今日版本并执行：
+[in3bot/sessions/in3bot/dd8a819f-3516-4ed5-b489-5efdc3296a47#L57] Assistant: 任务完成。写入今日日记后收尾：
+[in3bot/sessions/in3bot/dd8a819f-3516-4ed5-b489-5efdc3296a47#L61] Assistant: **Step 1 完成** ✅（CLI 通道，未动浏览器） - 拉取 2026-11-11 ~ 11-18（含今日）采购订单 **225 单**（今日 32 单；11-15 周日无单属正常），全部归类成功，其他=0 - **宁波**：64 PO / 168 行 → `IN3数据/采购订单明细-宁波-20261118.xlsx` - **湖北**：161 PO / 904 行 → `IN3数据/采购订单明细-湖北-20261118.xlsx` - 仅 1 单需 `get` 兜底，本次无 SSL EOF 重试，总耗时 58.5s -
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L8653] Assistant: 每日采集已回复：今日无新任务（昨日文档整理工作已完成记档），挂账两项不变（物料规范反馈版、众业达核查，均待你确认口径）。按约定对方不再回执。 🟢
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L8657] Assistant: 11-18 日报确认记档，闭环。挂账两项（物料规范反馈版、众业达核查）继续等你口径，有指示随时开工。 🟢
