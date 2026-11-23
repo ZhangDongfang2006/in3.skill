@@ -4,6 +4,18 @@ skill 触发时，Claude 用这份表决定"用户的问题该走哪个模块的
 
 ## 当前已接入
 
+### `sf` — 慧现场 SIM（SDK 直连）
+
+- CLI：`python3 ${SKILL_DIR}/scripts/in3_cli.py exec sf sim-issue list/get`。
+- SDK：`in3.sf.sim_issue.list(filter=..., all=True, include_details=True)` / `.get(id)`。
+- API base：`<api_host>/mom/sf`；租户 ID 来自当前登录 token。
+- 列表：`POST /v2/api/tenants/{tenant_id}/ld/sime/issues/page`，筛选与 `page/size` 均在 JSON body。
+- 详情：`GET /v2/api/tenants/{tenant_id}/ld/sime/issues/{id}`。
+- 自省：`exec sf __schema`（无需登录）；声明全部公开查询 DTO 条件及列表/详情字段。
+- 字段完整导出：`exec sf sim-issue list --all --include-details --output sim-details.json`。
+- `sf` 随 SDK 分发，复用主凭证，不参与 npm 的 install/upgrade/profile fanout。
+- 字段、筛选值和全量边界见 [`../docs/sim-issue-query.md`](../docs/sim-issue-query.md)。
+
 ### `mm` — ibrain-mm-cli (Material Management)
 
 - npm 包: `@industics/ibrain-mm-cli`

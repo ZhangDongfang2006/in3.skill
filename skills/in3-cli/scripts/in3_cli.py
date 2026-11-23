@@ -57,6 +57,8 @@ import time
 from datetime import datetime, timezone
 from pathlib import Path
 
+from in3_token_login import validate_token
+
 # ---------- Constants -----------------------------------------------------------
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -80,9 +82,13 @@ DEFAULT_WORKSPACE = Path.home() / "in3-workspace"
 # 1.2.0 v2 纯读 MCP server（stdio JSON-RPC 单一 execute_code 工具）+ 多租户 session-scoped
 #       路由（execute_code tenant 入参，省略回退当前 active tenant，未知报错不崩））。
 # 1.3.0 移除调度器本地价格过滤；module CLI 返回什么就原样输出什么。
-DISPATCHER_VERSION = "1.3.0"
+# 1.4.0 exec sf 直连 SDK，支持 SIM 全字段列表、全量分页及详情导出。
+# 1.4.1 token 校验、安全续期和 npm 旧口令 profile 拦截。
+# 1.5.0 SO/PR 显式公司查询与工厂映射，SDK 分页及返回范围校验。
+DISPATCHER_VERSION = "1.5.0"
 DISPATCHER_FEATURES = ["run", "audit", "login-paste-token", "login-browser", "sdk:in3_client",
-                       "mcp", "mcp:tenant-routing", "price-fields-pass-through"]
+                       "mcp", "mcp:tenant-routing", "price-fields-pass-through", "sf:sim-issue",
+                       "auth:token-safe-refresh", "so-pr:company-scope"]
 
 ENV_HOSTS = {
     "prod": "https://apiv3.industics.com/service",
@@ -377,6 +383,14 @@ def load_master_cred(ws: Path, alias: str) -> dict | None:
         return json.loads(p.read_text())
     except (OSError, json.JSONDecodeError):
         return None
+
+
+def _is_token_cred(cred: dict | None) -> bool:
+    return bool(cred and (cred.get("auth_mode") == "token" or cred.get("access_token")))
+
+
+_TOKEN_EXEC_HINT = ("当前为 token 登录，npm 模块 exec/test/sync 不支持此凭证；已阻止使用旧口令 profile。"
+                    "请用 run 的 SDK 查询；SIM 可用 exec sf。需要 npm exec 时请完成一次有效口令登录。")
 
 
 def save_master_cred(cred: dict, ws: Path, alias: str) -> None:
@@ -739,6 +753,8 @@ def cmd_status(args) -> int:
         "tenants": _list_tenants(ws) if ws else [],
         "vendor_present": bool(vendor_manifest),
         "modules": {},
+        "sdk_modules": {"sf": {"entrypoint": "exec sf sim-issue list/get",
+                               "requires_npm": False}},
     }
     current_alias = out["current_tenant"]
     if ws and current_alias:
@@ -1442,13 +1458,16 @@ def _decode_jwt_claims(token: str) -> dict:
     """解 JWT payload（不验签，只取身份字段）。失败抛 ValueError。"""
     import base64
     parts = token.split(".")
-    if len(parts) < 2:
-        raise ValueError("不是合法 JWT（缺 payload 段）")
+    if len(parts) != 3 or any(not part for part in parts) or any(c.isspace() for c in token):
+        raise ValueError("不是合法 JWT（三段必须完整且不含空白）")
     payload = parts[1] + "=" * (-len(parts[1]) % 4)
     try:
-        return json.loads(base64.urlsafe_b64decode(payload))
-    except (ValueError, json.JSONDecodeError) as e:
-        raise ValueError(f"JWT payload 解码失败: {e}")
+        claims = json.loads(base64.urlsafe_b64decode(payload))
+        if not isinstance(claims, dict):
+            raise ValueError("JWT payload 必须是对象")
+        return claims
+    except (ValueError, json.JSONDecodeError):
+        raise ValueError("JWT payload 解码失败") from None
 
 
 def _now_iso() -> str:
@@ -1507,6 +1526,12 @@ def _write_token_login(ws: Path, args, fields: dict, refresh_override: str | Non
         eprint(f"[in3-cli] 租户 '{alias}' 已存在；加 --force 覆盖")
         return 2
 
+    try:
+        validate_token(api_host, fields)
+    except ValueError as error:
+        eprint(f"[in3-cli] {error}")
+        return 2
+
     cred = {
         "api_host": api_host,
         "env_label": env_label,
@@ -1527,11 +1552,12 @@ def _write_token_login(ws: Path, args, fields: dict, refresh_override: str | Non
     if isinstance(exp, int):
         import datetime
         exp_dt = datetime.datetime.fromtimestamp(exp, datetime.timezone.utc)
-        exp_hint = f"；access token 约于 {exp_dt.isoformat()} 过期（过期后重登或带 refresh_token）"
+        exp_hint = f"；当前 access token 约于 {exp_dt.isoformat()} 过期"
     print(f"[in3-cli] token 登录成功：{fields.get('fullname') or username} @ {tenant_domain} "
           f"(alias={alias}){exp_hint}")
-    print(f"[in3-cli] 现在可 `python3 in3_cli.py run <script.py>`（SDK 用此 token）；"
-          f"注意 token 模式不写 8 个模块 CLI 的 profile，`exec`/parity 仍需 password 登录。")
+    renewal = "支持自动续期，轮换后的 token 会安全落盘" if cred["refresh_token"] else "未提供 refresh_token，无法自动续期；建议 login --browser 捕获完整登录响应"
+    print(f"[in3-cli] {renewal}。")
+    print("[in3-cli] 可用 run（SDK）和 exec sf；其余 npm 模块 exec 不可用，已阻止使用旧口令 profile。")
     return 0
 
 
@@ -1752,6 +1778,9 @@ def cmd_sync(args) -> int:
     if not cred:
         eprint(f"[in3-cli] tenant '{alias}' 没有 master cred,先跑 `login {alias}`")
         return 4
+    if _is_token_cred(cred):
+        eprint(f"[in3-cli] {_TOKEN_EXEC_HINT}")
+        return 2
     onboarded = fanout_profile_to_modules(ws, alias, cred)
     cred["modules_onboarded"] = onboarded
     save_master_cred(cred, ws, alias)
@@ -1824,6 +1853,8 @@ def _resolve_smoke_cmd(ws: Path, alias: str, mod_key: str) -> list[str]:
 
 
 def run_smoke(ws: Path, alias: str, mod_key: str) -> tuple[bool, str]:
+    if _is_token_cred(load_master_cred(ws, alias)):
+        return False, _TOKEN_EXEC_HINT
     spec = MODULES[mod_key]
     binary = _resolve_binary(ws, mod_key)
     if not binary.exists():
@@ -1891,6 +1922,54 @@ def cmd_test_all(args) -> int:
 
 # ---------- cmd: exec ----------------------------------------------------------
 
+def _exec_sf(args) -> int:
+    """SF 复用 SDK 直连，无需独立 npm 包；免登录自省不依赖 workspace。"""
+    env = os.environ.copy()
+    paths = [str(SKILL_DIR / "sdk")]
+    command = [sys.executable, "-m", "in3_client.sf_cli"]
+    introspection = not args.cli_args or args.cli_args in (
+        ["__schema"], ["--capability"], ["--version"], ["--help"])
+    if not introspection:
+        ws = _load_workspace()
+        alias = (getattr(args, "tenant", None) or _load_current_tenant(ws)) if ws else None
+        if not ws or not alias or not _tenant_cred_path(ws, alias).exists():
+            message = f"未找到 workspace 或租户凭证（{alias}）；请先 init/login"
+            print(json.dumps({"error": {"type": "VALIDATION", "message": message,
+                                        "http_status": None}}, ensure_ascii=False))
+            return 4
+        env = _build_env(ws, alias)
+        paths.append(str(ws / "python-packages"))
+        command.extend(["--workspace", str(ws), "--tenant", alias])
+    if env.get("PYTHONPATH"):
+        paths.append(env["PYTHONPATH"])
+    env["PYTHONPATH"] = os.pathsep.join(paths)
+    return subprocess.call([*command, *args.cli_args], env=env)
+
+
+def _exec_company(args) -> int:
+    """公司范围的 SO/PR list 走 SDK；不依赖 npm 的分页、凭证缓存或租户头。"""
+    supported = {("sd", "sales-order"), ("mm", "purchase-requirement")}
+    if len(args.cli_args) < 2 or (args.module, args.cli_args[0]) not in supported or args.cli_args[1] != "list":
+        message = "--company 仅支持 sd sales-order list / mm purchase-requirement list"
+    else:
+        ws = _load_workspace()
+        alias = getattr(args, "tenant", None) or (_load_current_tenant(ws) if ws else None)
+        message = None if ws and alias and _tenant_cred_path(ws, alias).exists() else "缺少 workspace 或租户登录配置"
+    if message:
+        print(json.dumps({"error": {"type": "VALIDATION", "message": message}}, ensure_ascii=False))
+        return 4
+    command = [sys.executable, "-m", "in3_client.organization_cli",
+               "--workspace", str(ws), "--tenant", alias]
+    for company in args.company:
+        command.extend(["--company", company])
+    env = _build_env(ws, alias)
+    paths = [str(SKILL_DIR / "sdk"), str(ws / "python-packages")]
+    if env.get("PYTHONPATH"):
+        paths.append(env["PYTHONPATH"])
+    env["PYTHONPATH"] = os.pathsep.join(paths)
+    return subprocess.call([*command, args.module, *args.cli_args], env=env)
+
+
 def cmd_exec(args) -> int:
     """转发一条命令给指定 module CLI,自动注入 workspace binary + 当前 tenant 的 9 个 env var。
 
@@ -1905,6 +1984,10 @@ def cmd_exec(args) -> int:
     Agent 在调任何 module CLI 时都该走这个入口,不要直接调裸 binary
     (PATH 里没有,且没设 env 会读到错 tenant)。
     """
+    if getattr(args, "company", None):
+        return _exec_company(args)
+    if args.module == "sf":
+        return _exec_sf(args)
     ws = _require_workspace()
     alias = getattr(args, "tenant", None) or _require_current_tenant(ws)
     if getattr(args, "tenant", None) and not _tenant_cred_path(ws, alias).exists():
@@ -1913,6 +1996,10 @@ def cmd_exec(args) -> int:
     mod = args.module
     if mod not in MODULES:
         eprint(f"[in3-cli] unknown module '{mod}'; known: {list(MODULES)}")
+        return 2
+    introspection = args.cli_args in (["__schema"], ["--capability"], ["--version"], ["--help"], ["-h"])
+    if not introspection and _is_token_cred(load_master_cred(ws, alias)):
+        print(json.dumps({"error": {"type": "AUTH", "message": _TOKEN_EXEC_HINT}}, ensure_ascii=False))
         return 2
     binary = _resolve_binary(ws, mod)
     if not binary.exists():
@@ -2204,6 +2291,8 @@ def build_parser() -> argparse.ArgumentParser:
     ex = sub.add_parser("exec", help="跑某模块 CLI 命令(自动注入 workspace binary + 当前 tenant env)")
     ex.add_argument("--tenant", default=None,
                     help="单次租户覆盖 alias(须置于 module 之前;不改 current-tenant 全局状态)")
+    ex.add_argument("--company", action="append", default=None,
+                    help="公司代码或 ID，可重复；'*' 选择全部可见公司；仅 SO/PR list，置于 module 之前")
     ex.add_argument("module", help="模块 key (例 mm)")
     ex.add_argument("cli_args", nargs=argparse.REMAINDER, help="转发给 binary 的所有参数")
     ex.set_defaults(func=cmd_exec)
