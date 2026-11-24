@@ -1,0 +1,342 @@
+[
+  {
+    "round": 1,
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "results": [
+      {
+        "id": "M1",
+        "desc": "fn 模块整体禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "M2",
+        "desc": "fn 模块正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "E1",
+        "desc": "mm info-record 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E2",
+        "desc": "mm quotation 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E3",
+        "desc": "sd quotation 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E4",
+        "desc": "cr fee 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E5",
+        "desc": "cr fee-category 保留（无权限但不禁用）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "F1",
+        "desc": "mm purchase-order 价格字段已删除（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "F2",
+        "desc": "mm purchase-order 价格字段保留（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "F3",
+        "desc": "sd sales-order 价格字段已删除（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      }
+    ]
+  },
+  {
+    "round": 2,
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "results": [
+      {
+        "id": "F4",
+        "desc": "sd sales-order 价格字段保留（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "F5",
+        "desc": "wm warehouse 非价格字段完整保留 + person_in_charge 白名单（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "X1",
+        "desc": "mm info-record 正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "X2",
+        "desc": "cr fee 正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "N1",
+        "desc": "pp production-plan 无影响（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "N2",
+        "desc": "qm inspection-lot 无影响（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "N3",
+        "desc": "md currency 无影响（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "E6",
+        "desc": "sd sd-info-record 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "X3",
+        "desc": "sd sd-info-record 正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "F6",
+        "desc": "mm purchase-order get 嵌套 items 价格已删除（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      }
+    ]
+  },
+  {
+    "round": 3,
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "results": [
+      {
+        "id": "M1",
+        "desc": "fn 模块整体禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "M2",
+        "desc": "fn 模块正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "E1",
+        "desc": "mm info-record 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E2",
+        "desc": "mm quotation 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E3",
+        "desc": "sd quotation 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E4",
+        "desc": "cr fee 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E5",
+        "desc": "cr fee-category 保留（无权限但不禁用）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "F1",
+        "desc": "mm purchase-order 价格字段已删除（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "F2",
+        "desc": "mm purchase-order 价格字段保留（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "F3",
+        "desc": "sd sales-order 价格字段已删除（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      }
+    ]
+  },
+  {
+    "round": 4,
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "results": [
+      {
+        "id": "F4",
+        "desc": "sd sales-order 价格字段保留（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "F5",
+        "desc": "wm warehouse 非价格字段完整保留 + person_in_charge 白名单（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "X1",
+        "desc": "mm info-record 正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "X2",
+        "desc": "cr fee 正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "N1",
+        "desc": "pp production-plan 无影响（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "N2",
+        "desc": "qm inspection-lot 无影响（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "N3",
+        "desc": "md currency 无影响（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "E6",
+        "desc": "sd sd-info-record 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "X3",
+        "desc": "sd sd-info-record 正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "F6",
+        "desc": "mm purchase-order get 嵌套 items 价格已删除（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      }
+    ]
+  },
+  {
+    "round": 5,
+    "passed": 10,
+    "failed": 0,
+    "total": 10,
+    "results": [
+      {
+        "id": "M1",
+        "desc": "fn 模块整体禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "M2",
+        "desc": "fn 模块正常返回（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "E1",
+        "desc": "mm info-record 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E2",
+        "desc": "mm quotation 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E3",
+        "desc": "sd quotation 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E4",
+        "desc": "cr fee 禁用（无权限）",
+        "passed": true,
+        "detail": "PRIVILEGE_DENIED returned"
+      },
+      {
+        "id": "E5",
+        "desc": "cr fee-category 保留（无权限但不禁用）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "F1",
+        "desc": "mm purchase-order 价格字段已删除（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      },
+      {
+        "id": "F2",
+        "desc": "mm purchase-order 价格字段保留（有权限）",
+        "passed": true,
+        "detail": "Data returned with full access"
+      },
+      {
+        "id": "F3",
+        "desc": "sd sales-order 价格字段已删除（无权限）",
+        "passed": true,
+        "detail": "Data returned, no price fields"
+      }
+    ]
+  }
+]

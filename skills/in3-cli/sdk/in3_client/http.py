@@ -67,7 +67,7 @@ class HttpClient:
         json: Optional[dict] = None,
         extra_headers: Optional[dict] = None,
     ):
-        """GET/POST 共享管线：三头 + 401 清 token 重试一次 + 非 JSON 200 判认证失败。
+        """GET/POST 共享管线：三头 + 401 按授权模式续期后重试一次 + 非 JSON 200 判认证失败。
 
         返回 resp.json() 原值（可能是 list/dict/None）——调用方按需 coerce（list 端点不能 `or {}`）。
 
@@ -85,11 +85,10 @@ class HttpClient:
 
         resp = send()
         if resp.status_code == 401:
-            # 优先用 refresh_token 静默刷新（不重发口令）；刷新不可用/失败 → 回退重新换 token。仅重试一次。
-            if not self._session.refresh():
-                self._session.clear()
-                self._session.token()
+            self._session.on_unauthorized()
             resp = send()
+            if resp.status_code == 401:
+                self._session.reject_token()
         if resp.status_code == 200 and not _is_json(resp):
             raise AuthFailedError(
                 f"{method} {url} returned 200 but non-JSON (gateway HTML?) —— treated as auth failure"

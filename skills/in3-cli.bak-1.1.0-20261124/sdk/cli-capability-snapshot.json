@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "purpose": "8-CLI 版本基准快照（issue #11 AC）。锁定 SDK 移植所依据的 CLI 源码版本，作为 M2+ live `<cli> __schema` 复核 / parity 门禁的基准——防止 vendored/installed CLI 版本与 SDK 移植源码版本漂移，导致 parity 假性不一致（SDK 是对的、CLI 是旧版）。复核与移植必须引用同一版本源码。",
+  "snapshot_at": "2026-06-03",
+  "snapshot_source": "installed-in-workspace",
+  "source_detail": "读自 ~/in3-workspace/node_modules/@industics/<pkg>/package.json 的 version 字段。当前 in3-cli vendor/ 仅落地 Python wheelhouse（in3_client + deps），8 个 npm CLI 未做 vendor tarball，故以 workspace 已装版本为基准。npm registry latest 复核留待 live（@slow）阶段。",
+  "sdk": {
+    "in3_client": "1.1.0",
+    "dispatcher": "1.1.0"
+  },
+  "clis": {
+    "mm": {"npm_package": "@industics/ibrain-mm-cli", "version": "0.5.0"},
+    "wm": {"npm_package": "@industics/ibrain-wm-cli", "version": "0.1.16"},
+    "md": {"npm_package": "@industics/in-mom-md-cli", "version": "0.1.8"},
+    "pp": {"npm_package": "@industics/ibrain-pp-cli", "version": "0.2.13"},
+    "qm": {"npm_package": "@industics/in-mom-qm-cli", "version": "0.1.1"},
+    "sd": {"npm_package": "@industics/ibrain-sd-cli", "version": "0.2.8"},
+    "cr": {"npm_package": "@industics/in-mom-cr-cli", "version": "0.1.0"},
+    "fn": {"npm_package": "@industics/ibrain-mom-fn-cli", "version": "0.1.1"}
+  },
+  "identity_cli": {"npm_package": "@industics/ibrain-identity-cli", "version": "0.1.1"},
+  "gaps": [
+    "mm re-pin 2026-06-04：0.4.7 → 0.5.0（隔壁升级，新增 payment 实体 + payment report 子命令：每 PO 已申请/未申请金额报表，applied_amount=审批中+已批准付款项口径）。已 upgrade workspace 安装版到 0.5.0。",
+    "sd re-pin 2026-06-04：0.2.7 → 0.2.8（修 contract-category/sales-dept/so-item-category 端点 drift——旧版拼 /<entity>/page→405，新版走裸 collection GET）。SDK 端点本就对，CLI 追平后 aquaman live parity 3 实体通过；其余 6 CLI 版本仍为 2026-06-03 snapshot_at 基线。",
+    "本快照取自 workspace 已装版本，非 npm registry latest——live __schema 复核前需对照 registry 确认未漂移。",
+    "vendor/MANIFEST.json 当前缺失（v1 只落地 Python wheelhouse，8 个 npm CLI 未做 vendor tarball），故无离线 sha256-pinned 版本可对照；离线分发面下 8-CLI 版本由 registry/workspace 决定。"
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "manifest_version": "0.4",
+  "name": "in3-mcp",
+  "display_name": "IN3 MCP (in3-cli 配置壳)",
+  "version": "0.1.0",
+  "description": "在 Claude Desktop 一键接入 in3-mcp（IN3 跨模块只读分析）。配置壳：不打包业务代码，指向你机器上已装的 in3-cli。",
+  "long_description": "把 in3-cli 的 MCP server（单一 execute_code 工具，跨 IN3 模块 mm/wm/sd/md/pp/qm/cr/fn 只读分析）接入 Claude Desktop（Chat/Cowork），免手改 claude_desktop_config.json。\n\n这是一个『配置壳』：扩展本身只含一个薄 launcher，不打包任何业务代码或 SDK；运行时用你填写的 python 解释器去启动你机器上已装好的 in3_cli.py。\n\n前置（扩展不替你做）：先装 in3-cli skill 并 `in3_cli.py init` + `login` 立起 workspace 与租户凭证（见 in3-cli INSTALL.md）。",
+  "author": {
+    "name": "DoM / industics"
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "launcher.py",
+    "mcp_config": {
+      "command": "${user_config.python_path}",
+      "args": [
+        "${__dirname}/launcher.py"
+      ],
+      "env": {
+        "IN3_CLI_PATH": "${user_config.in3_cli_path}"
+      }
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"]
+  },
+  "user_config": {
+    "in3_cli_path": {
+      "type": "file",
+      "title": "in3_cli.py 路径",
+      "description": "你机器上已装的 in3-cli skill 里的 scripts/in3_cli.py 绝对路径（dispatcher 会自定位 SDK 与 workspace，无需再填别的）。",
+      "required": true
+    },
+    "python_path": {
+      "type": "file",
+      "title": "Python 解释器路径",
+      "description": "用来启动 in3_cli.py 的 python3 可执行文件绝对路径（基本只读查询任意 python3 即可，urllib 兜底；要用 .df() 则该 python 需装 pandas）。终端里 `which python3` 可得。",
+      "required": true
+    }
+  }
+}

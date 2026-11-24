@@ -1,6 +1,6 @@
 ---
 name: in3-cli
-description: IN3（in3.industics.com）产品族多模块 CLI 调度器 + workspace-scoped 多租户 onboarding。当用户查询采购、合同、BOM、供应商、库存、销售、生产、质量、服务、财务、物料主数据，需跨模块联合分析、切换租户，或尚未初始化 workspace、安装 8 个 CLI、登录 tenant 时触发。所有 CLI 位于独立 workspace（默认 ~/in3-workspace），不污染全局；租户配置隔离，调度器原样输出模块返回的价格和金额字段。不适用于 huluwa 的 ina-* 模块及非 IN3 产品。
+description: IN3（in3.industics.com）产品族多模块 CLI 调度器 + workspace-scoped 多租户 onboarding。当用户查询采购、合同、BOM、供应商、库存、销售、生产、质量、服务、财务、物料主数据、SIM 问题列表或完整详情，需跨模块联合分析、按公司查询 SO/PR、切换租户，或尚未初始化 workspace、安装 8 个 CLI、登录 tenant 时触发。所有 CLI 位于独立 workspace（默认 ~/in3-workspace），不污染全局；租户配置隔离，调度器原样输出模块返回的价格和金额字段。不适用于 huluwa 的 ina-* 模块及非 IN3 产品。
 compatibility: [claude-code, codex]
 ---
 
@@ -31,7 +31,7 @@ python3 ${SKILL_DIR}/scripts/in3_cli.py <subcmd>
 | `where` | print workspace 路径 |
 | `status [--refresh-versions]` | JSON 输出 workspace/tenant/8 模块状态(2h 版本缓存) |
 | `login [alias]` | 交互式收 env/tenant/账号/密码;不传 alias 时用 tenant_domain;落地后跑 test-all |
-| `login --paste-token [alias]` | **SSO/MFA 兜底(零安装)**:粘贴浏览器抓的 Bearer,解 JWT 落 token 模式凭证(`--token-stdin` 非交互) |
+| `login --paste-token [alias]` | **SSO/MFA 兜底(零安装)**:粘贴 Bearer，服务端校验通过后落盘；可带 `--refresh-token` 续期（`--token-stdin` 非交互） |
 | `login --browser [--url U] [alias]` | **自动捕获(需 Python Playwright)**:起浏览器到登录页,登录后从网络流抓 token(含 refresh) |
 | `run <script.py> [--timeout N] [-- args]` | **跑 `import in3_client` 的 Python(SDK 执行壳)** — 注入凭证/SDK 到子进程,坑层下沉,中间数据不进上下文 |
 | `run --code "<py>"` | 同上,内联代码(短查询用) |
@@ -40,7 +40,8 @@ python3 ${SKILL_DIR}/scripts/in3_cli.py <subcmd>
 | `logout <alias>` | 删指定 tenant 的 cred + 8 profile (**强制 alias 参数**,避免误删全部) |
 | `use <alias>` | 切当前 active tenant (改 current-tenant.json 一行) |
 | `tenants` | 列所有 tenant + 标当前 |
-| `exec <mod> <args...>` | **调 module CLI 命令的统一入口** — 自动注入 workspace binary + 当前 tenant 的 8 个 env var |
+| `exec <mod> <args...>` | **调 module CLI 命令的统一入口** — 自动注入 workspace binary + 当前 tenant 的 8 个 env var；`sf` 直接复用随 skill 分发的 SDK |
+| `exec [--tenant A] --company C <mod> <entity> list ...` | SO/PR 显式公司范围，走随 skill 分发的 SDK；`--company` 可重复，`'*'` 选择全部可见公司 |
 | `install <mod>` | workspace 内装/重装单个模块 |
 | `install-all` | 按 lock 重装 workspace 全套 (`npm ci`) |
 | `upgrade <mod>` | 升单个模块到 latest(会脱离 lock baseline) |
@@ -66,6 +67,17 @@ python3 ${SKILL_DIR}/scripts/in3_cli.py exec mm purchase-order list --filter sta
 - 8 个 `IBRAIN_<MOD>_CONFIG_DIR` env var **必须每次都全设**，否则 CLI 读不到当前 tenant 的 profile（甚至可能读到错 tenant）
 - `exec` 一行就把这两件事都搞定
 
+### SO / PR 多公司查询（v1.5.0）
+
+查询销售订单或采购申请时，使用 **`exec --company <公司代码或ID>`** 或 SDK
+`list(company=...)`。用户未限定公司时，用 `--company '*'` 覆盖当前账号可见的公司，并说明查询范围。
+用户指定公司时按指定范围查询；公司解析失败就报告错误。
+
+- SO 将公司解析为 `company_id`；PR 自动枚举所属工厂并以 `plant_id` 查询。
+- SDK 也接受 `filter={"company_id": ...}` 别名，PR 会映射到工厂；不要将该参数直传旧 npm PR CLI。
+- 以 `items`、可信 `total` 和 `truncated` 判断结果。旧 npm CLI 可能有数据却报告 `total=0`。
+- 多公司合并、分页、上限及错误处理见 [SO/PR 公司范围查询](docs/company-scoped-so-pr.md)。
+
 ### v1.3.0：价格字段原样输出
 调度器不再检查 `price_viewer`（价格查看角色），也不再删除字段名包含 `price`、`amount`、`cost`、`tax` 等内容的字段。`fn` 财务模块、报价、价目和费用等命令与其他命令一样，module CLI 返回什么，调度器就输出什么。
 
@@ -81,6 +93,16 @@ python3 ${SKILL_DIR}/scripts/in3_cli.py exec mm __schema | jq '.commands."purcha
 ```
 
 ## 🚀 跨模块组合分析首选：`in3_client` SDK + `run` 执行壳
+
+### SIM 问题查询（v1.4.0）
+
+用户查询 SIM 问题、逾期问题或完整明细时，走 `exec sf sim-issue list/get` 或 SDK 的
+`in3.sf.sim_issue.list/get`。`sf` 随 skill 分发，无需 npm 安装；密码和 token 登录均可复用。
+先查 `exec sf __schema`，再按声明传筛选条件；全量明细优先用
+`exec sf sim-issue list --all --include-details --output <新文件名.json>`。
+完整字段、筛选示例及验收边界见 [`docs/sim-issue-query.md`](docs/sim-issue-query.md)。
+
+### 其他跨模块组合分析
 **遇到"跨 mm/wm/md/sd 的组合分析"（如本月采购金额 Top10 × 库存 × 独家供应、缺口=需求−在途、孤儿物料对账）时——优先写一段 Python 用 `run` 跑，而不是多步 `exec` + jq fan-out。**
 
 为什么（POC 实测，见 `docs/in3-cli-cemcp/BEFORE-AFTER.md`）：同一主任务，裸 `exec` 路径要把 5 月 534 单 PO + 3900 行明细的 JSON 拉进上下文（**540 万 token / 15.8 MB，塞不进任何上下文窗口**）、且 wm 库存维度因 CLI multi-filter 缺陷一律 400 做不出；SDK 路径**坑层全下沉、中间数据留子进程**，只有最终 10 行表（**565 token**）进上下文，1 次脚本搞定（轮次 11→1）。
@@ -101,7 +123,7 @@ SDK 形态（`engineering/skills/in3-cli/sdk/in3_client/`，随 skill 分发、�
 ```python
 import in3_client
 in3 = in3_client.IN3()                          # 用当前 active 租户（token 或 password 模式都透明）
-# SDK 已覆盖全 8 模块 78 个 entity，统一返回 Page{items, page, total, has_next}。
+# SDK 已覆盖 9 模块 79 个 entity（含 SF SIM），统一返回 Page{items, page, total, has_next}。
 # ① mm/wm/sd/md 核心 entity —— live-parity 逐位验证最充分，首选：
 in3.md.currency.list()        in3.md.material.list(filter=...) / .get(id)
 in3.mm.supplier.list() / .get(id)
@@ -114,6 +136,8 @@ in3.pp.sales_order.get(so_id)   in3.pp.production_plan.list(...)              # 
 in3.fn.company_code.list()      in3.fn.payment_receipt_order.list(filter=...)  # fn 5 entity（金额字段旁挂 156↔CNY companion）
 in3.qm.inspection_lot.list(...)                                              # qm 5 entity
 in3.cr.service_order.list(...)                                               # cr 6 entity（需租户开通慧客服，否则 401）
+in3.sf.sim_issue.list(all=True, include_details=True)                         # SIM 全量列表及完整详情
+in3.sf.sim_issue.get(issue_id)                                               # 单条行动、日志、附件、关联单据
 # 价值面：
 in3.df(items)                 # → pandas DataFrame，groupby/nlargest
 in3.join(a, b, c, on="material_id")   # 内存 left/outer，孤儿保留并标 _orphan（不静默丢）
@@ -124,7 +148,7 @@ in3.sole_source(material_ids)         # 独家供应三态（1供=风险/≥2/0=
 `in3_client.IN3.from_client_credentials(api_host="https://apiv3.industics.com/service", tenant_domain="<租户域名>", client_id=..., client_secret=...)`。
 机器令牌无人值守、不需浏览器/无 refresh 续期脆弱点，适合定时巡检。实际能读哪些数据由 IN3 服务端决定。坑点：T-CODE 用租户域名（如 `indx`）不是数字 id；client_id/secret 走环境变量、**绝不入库**。
 
-坑层已下沉（agent 不必再手踩）：分页归一（`total<len` 置 None，¥111K 防御）/ PO chunk≤80 fail-loud / open_qty 兜底 / 多值 filter `_matched_filter_values` / wm POST-body 分页 / 4 视图 fan-out skip-on-error / 币种 156↔CNY 归一 / 孤儿保留。**SDK 已覆盖全 8 模块 78 个 entity**（v1.x 全覆盖）。成熟度分层（按可靠性）：mm/wm/sd/md 核心 entity 经 live-parity 逐位验证（最可靠）；fn 的 company_code / posting_period / fapiao / payment_receipt 已 live 验证（其中双轨接口须走 SDK，见 `references/modules.md` 已知坑 0）；pp/qm 多数 entity 单测绿、部分 verb 的 live 端点尚未逐位钉死（结果建议抽验）；cr 6 entity 需租户开通慧客服权限，多数租户 401。
+坑层已下沉（agent 不必再手踩）：分页归一（`total<len` 置 None，¥111K 防御）/ PO chunk≤80 fail-loud / open_qty 兜底 / 多值 filter `_matched_filter_values` / wm POST-body 分页 / 4 视图 fan-out skip-on-error / 币种 156↔CNY 归一 / 孤儿保留。**SDK 已覆盖 9 模块 79 个 entity**（含 SF SIM）。成熟度分层（按可靠性）：mm/wm/sd/md 核心 entity 经 live-parity 逐位验证（最可靠）；fn 的 company_code / posting_period / fapiao / payment_receipt 已 live 验证（其中双轨接口须走 SDK，见 `references/modules.md` 已知坑 0）；pp/qm 多数 entity 单测绿、部分 verb 的 live 端点尚未逐位钉死（结果建议抽验）；cr 6 entity 需租户开通慧客服权限，多数租户 401；sf 根据本地后端源码接入，目标租户的 live 验收状态见 SIM 查询说明。
 
 `run` 自带运维护栏：超时（默认 300s→退出码 124）、输出截断（64KB）、审计日志（`<ws>/audit/`，`audit` 子命令查）。中间业务数据留在子进程、不进你的上下文。
 
@@ -222,7 +246,8 @@ python3 ${SKILL_DIR}/scripts/in3_cli.py login --browser <alias>
 - 跑之前告诉用户：
   > 浏览器马上弹出 in3 登录页，请用**账号密码**登录（**别用飞书扫码——扫码的 token 端点不同，抓不到**）。登完我自动拿 token 继续。
 - ⚠ **硬约束（已实测）**：prod 登录页 = `sso.industics.com`，同时支持飞书扫码 + 账号密码；**本模式只对账号密码登录有效**，飞书扫码会 timeout（脚本会提示改 ③）。
-- ⚠ **token 模式不写 8 个模块 CLI 的 profile**，只够 SDK `run` 用（复杂分析/报表本来就推荐走 SDK，见下方专节）。**若任务要 `exec` 单模块 CLI → token 模式会失败，改走 ②**。
+- **token 模式支持 SDK `run`、`exec sf` 和带 `--company` 的 SO/PR list**；其余 npm 模块的 `exec`/`test`/`sync` 会提前拒绝，防止误用旧密码 profile。需要这些 npm 命令时用 ② 完成一次有效口令登录。
+- 浏览器捕获到 refresh_token 后，SDK 遇到 401 会自动续期，并把轮换结果原子写回当前租户凭证；并行命令共用刷新锁。refresh_token 缺失或被拒时，抛 `TokenExpiredError` 要求重登，**绝不回退口令授权**。
 
 #### ② 账号密码直输（getpass，写齐 8 模块 profile）
 ```bash
@@ -243,6 +268,11 @@ python3 ${SKILL_DIR}/scripts/in3_cli.py login --paste-token <alias>
 
 **怎么选**：默认 ①（账号密码浏览器登录，体验最顺，配 SDK `run`）；任务要 `exec` 模块 CLI 走 ②；飞书扫码/MFA 用户走 ③。
 
+粘贴裸 access_token 时无法自动续期；优先用浏览器捕获完整响应，或同时提供 `--refresh-token`。
+token 登录落盘前只请求一页币种（`size=1`）验证有效性，需要币种读取权限；校验失败保留原凭证和当前租户。
+遇到 `401 invalid_token` 或口令授权失败时，先确认登录模式；不要重复运行口令登录或模块 smoke，避免累积错误次数。
+排查与行为边界见 [登录与续期说明](docs/auth-lifecycle.md)。
+
 ### Step 2.5 — 切换租户
 如果用户在跟某个 tenant 工作时说"看下另一个租户的..."、"对比 X 和 Y 两个租户的..."这种话，你需要切 active tenant：
 
@@ -253,7 +283,7 @@ python3 ${SKILL_DIR}/scripts/in3_cli.py use <alias> # 切
 
 如果用户要的 tenant 不在 `tenants` 输出里 → 引导先 `login <alias>` 加。
 
-切完后所有后续 `exec` 调用都自动走新 tenant 的凭证。**不需要重输密码** —— login 一次终身用，除非密码改了。
+切完后所有后续调用都使用新 tenant 的凭证，无需为切换重输密码。凭证仍受服务端过期、吊销和密码变更策略约束；token 模式的 npm `exec` 限制不变。
 
 ### Step 3 — 缺模块就装（少见，init 已装齐 8 个）
 ```bash

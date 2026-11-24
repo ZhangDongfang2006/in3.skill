@@ -1,6 +1,6 @@
 """IN3 门面：import in3_client → in3.<mod>.<entity>.list() 的入口（A surface）。
 
-v1.x 全覆盖：8 模块 78 entity（md/mm/wm/sd/pp/qm/cr/fn）+ 价值面 df / join / sole_source 均已接。
+全覆盖：9 模块 79 entity（md/mm/wm/sd/pp/qm/cr/fn/sf）+ 价值面 df / join / sole_source 均已接。
 各模块 entity 见对应 _XxNamespace；成熟度分层（哪些 live-parity 已验、哪些仅单测绿）见 SKILL.md。
 一个 IN3 实例共享一个 auth.Session（token 只换一次）和一个 HttpClient。
 sd / fn 的币种归一字典懒加载（首次访问 sd/fn 时从 md.currency 取并缓存，共享同一字典），
@@ -111,6 +111,12 @@ from .entities.pp import (
     ProductionPlanRecordEntity,
     SalesOrderEntity as PpSalesOrderEntity,
 )
+from .entities.sf import SimIssueEntity
+
+
+class _SfNamespace:
+    def __init__(self, cred, session, http):
+        self.sim_issue = SimIssueEntity(cred, session, http)
 
 
 class _MdNamespace:
@@ -272,6 +278,7 @@ class IN3:
         self.cr = _CrNamespace(cred, self.session, self.http)
         self.qm = _QmNamespace(cred, self.session, self.http)
         self.pp = _PpNamespace(cred, self.session, self.http)
+        self.sf = _SfNamespace(cred, self.session, self.http)
         self._currency_index: Optional[dict] = None
         self._sd = None
         self._fn = None

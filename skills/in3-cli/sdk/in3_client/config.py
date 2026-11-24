@@ -12,7 +12,7 @@ encrypted_password（AES 串，直发不解密）/ modules_onboarded / last_logi
 from __future__ import annotations
 
 import json
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 # mod_key → base_suffix（拼在 api_host 之后；api_host 已含 /service）。
@@ -26,6 +26,7 @@ _BASE_SUFFIX = {
     "sd": "/mom/sd",
     "cr": "/mom/cr",
     "fn": "/mom/fn",
+    "sf": "/mom/sf",
     "identity": "/mom/bo",
 }
 
@@ -43,7 +44,7 @@ class Credentials:
     api_host: str
     tenant_domain: str
     username: str
-    encrypted_password: str
+    encrypted_password: str = field(repr=False)
     alias: str
     env_label: str | None = None
     modules_onboarded: list | None = None
@@ -52,10 +53,11 @@ class Credentials:
     default_company_code_id: str | None = None
     # token 模式（login --paste-token / 浏览器捕获）：存 Bearer 而非 AES 口令。
     auth_mode: str = "password"
-    access_token: str = ""
-    refresh_token: str = ""
+    access_token: str = field(default="", repr=False)
+    refresh_token: str = field(default="", repr=False)
     tenant_id: str = ""
     user_id: str = ""
+    source_path: Path | None = field(default=None, repr=False, compare=False)
 
     @property
     def uaas_host(self) -> str:
@@ -146,4 +148,5 @@ def load_credentials(
         refresh_token=data.get("refresh_token", ""),
         tenant_id=data.get("tenant_id", ""),
         user_id=data.get("user_id", ""),
+        source_path=cred_path,
     )

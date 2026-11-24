@@ -29,6 +29,7 @@ from ..envelope import Page
 from ..filters import check_filter_keys
 from ..gotchas import open_qty_fallback
 from ..http import HttpClient, HttpError
+from ..organizations import CompanyQuery, CompanySelection, take_company
 from ..pagination import iterate_all
 from .base import PagedEntity, PostPagedEntity
 
@@ -436,12 +437,16 @@ class PurchaseRequirementEntity:
         self,
         *,
         filter: Optional[dict] = None,
+        company: Optional[CompanySelection] = None,
         plant: Optional[str] = None,
         include_items: bool = False,
         size: int = 20,
         all: bool = True,
+        page: int = 0,
+        max_items: Optional[int] = None,
     ) -> Page:
         filter = dict(filter or {})
+        company = take_company(filter, company)
         check_filter_keys("mm.purchase_requirement", filter, _PURCHASE_REQUIREMENT_FILTER_KEYS)
 
         url = self._base() + "/pages"
@@ -449,6 +454,18 @@ class PurchaseRequirementEntity:
         if plant:
             base_params["plant_id"] = plant
         base_params.update(filter)  # multi（list→repeated query）等透传
+
+        if company is not None:
+            page = CompanyQuery(self._cred, self._session, self._http).list(
+                'purchase_requirement', company=company, params=base_params, size=size, all=all,
+                page=page, max_items=max_items,
+            )
+            if include_items:
+                self._enrich_with_items(page)
+            return page
+
+        if page or max_items is not None:
+            raise ValueError('page/max_items 需要显式 company 范围')
 
         def fetch(page_no: int) -> Page:
             return self._http.get_page(

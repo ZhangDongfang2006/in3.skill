@@ -21,6 +21,7 @@ from ..envelope import Page, coerce_to_page
 from ..filters import check_filter_keys
 from ..gotchas import enrich_items_fanout, normalize_currency
 from ..http import HttpClient
+from ..organizations import CompanyQuery, CompanySelection, OrganizationDataError, take_company
 from .base import PagedEntity, PostPagedEntity
 
 # 真实 SOI 上的数值-ISO 币种字段（值如 "156"）。companion = 去掉尾 "_no"。
@@ -506,14 +507,18 @@ class SalesOrderEntity(PagedEntity):
         self,
         *,
         filter: Optional[dict] = None,
+        company: Optional[CompanySelection] = None,
         plant: Optional[str] = None,
         status: Optional[str] = None,
         customer: Optional[str] = None,
         include_items: bool = False,
         size: int = 20,
         all: bool = True,
+        page: int = 0,
+        max_items: Optional[int] = None,
     ) -> Page:
         params: dict = dict(filter or {})
+        company = take_company(params, company)
         if plant is not None:
             params["plant_id"] = plant
         if status is not None:
@@ -521,15 +526,40 @@ class SalesOrderEntity(PagedEntity):
         if customer is not None:
             params["account_id"] = customer  # --customer → account_id
         check_filter_keys("sd.sales_order", params, _SALES_ORDER_FILTER_KEYS)
-        page = self._list(params, size, all, transform=self._normalize_currency_fields)
+        if company is not None:
+            page = CompanyQuery(self._cred, self._session, self._http).list(
+                'sales_order', company=company, params=params, size=size, all=all,
+                page=page, max_items=max_items,
+            )
+            self._normalize_currency_fields(page.items)
+        else:
+            if page or max_items is not None:
+                raise ValueError('page/max_items 需要显式 company 范围')
+            page = self._list(params, size, all, transform=self._normalize_currency_fields)
         if include_items:
             # per-header fail-isolated fan-out（concurrency=5）：失败 header 留 items=None+items_error。
             page.items = enrich_items_fanout(
                 page.items,
-                lambda h: self._fetch_items_for_so(h.get("so_id") or h.get("id")),
+                lambda h: self._scoped_detail_items(h) if company is not None else
+                self._fetch_items_for_so(h.get("so_id") or h.get("id")),
                 concurrency=_INCLUDE_ITEMS_CONCURRENCY,
             )
         return page
+
+    def _scoped_detail_items(self, header: dict) -> list:
+        """公司查询用 SO 详情的行项，避免行项分页接口静默忽略 so_id。"""
+        so_id = header.get('so_id') or header.get('id')
+        detail = self.get(so_id)
+        if str(detail.get('id') or detail.get('so_id')) != str(so_id):
+            raise OrganizationDataError('SO 详情超出请求的订单范围')
+        if detail.get('company_id') is not None and str(detail['company_id']) != str(header.get('company_id')):
+            raise OrganizationDataError('SO 详情超出请求的公司范围')
+        items = detail.get('items')
+        if not isinstance(items, list) or any(
+            row.get('so_id') is not None and str(row['so_id']) != str(so_id) for row in items
+        ):
+            raise OrganizationDataError('SO 详情行项缺失或超出请求范围')
+        return self._normalize_currency_fields(items)
 
     def get(self, so_id: str, *, include_items: bool = False) -> dict:
         rec = self._get(so_id)
