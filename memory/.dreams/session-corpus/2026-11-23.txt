@@ -68,3 +68,10 @@
 [in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15517] User: 我的另外一台电脑
 [in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15520] Assistant: 明白了，源码应该在那台电脑上。那在**那台电脑**上按这个顺序排查，5 分钟能定位： **第一步：看 Chrome 还认不认得旧路径** 1. 那台电脑打开 Chrome，地址栏输入 `chrome://extensions` 2. 右上角打开「开发者模式」 3. 找到「IN3 供应商合同导入助手」卡片： - 如果有红色「错误」按钮 → 点开看报错路径，那个路径就是源码原来的位置 - 如果卡片显示正常但 options.html 打不开 → 也点「错误」看路径 **第二步：按报错路径找文件夹** - 文件夹被**移动/重命
 [in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15522] Assistant: 明白了，源码应该在那台电脑上。那在**那台电脑**上按这个顺序排查，5 分钟能定位： **第一步：看 Chrome 还认不认得旧路径** 1. 那台电脑打开 Chrome，地址栏输入 `chrome://extensions` 2. 右上角打开「开发者模式」 3. 找到「IN3 供应商合同导入助手」卡片： - 如果有红色「错误」按钮 → 点开看报错路径，那个路径就是源码原来的位置 - 如果卡片显示正常但 options.html 打不开 → 也点「错误」看路径 **第二步：按报错路径找文件夹** - 文件夹被**移动/重命
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15523] User: in3-cli-1.5.0 我放到这个公司资料里的这个文件夹 你看看
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15566] Assistant: 看完了，两个结论： **1. 这个共享盘的 in3-cli-1.5.0 包很有价值，但和你猜的用途不一样** 它是供应商（慧工云）发的**官方 SDK 发布包**（2026-11-17 打包，含 sha256 校验清单），而且比本机装的新：共享盘 SDK 是 **1.3.0**，本机 skill 里是 **1.1.0**。我准备把本机 skill 升级到这个 1.3.0。 **2. 关于「CLI 创建订单」——你的判断是对的，我之前说过头了** 我把 1.3.0 的源码翻了一遍： - SDK 只有 `post_json/p
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15569] Assistant: 💾 Learned: created `in3-order-create-path` (AI 采购订单录入扩展失效后确定写入通道结论：官方 SDK 只读，创建单据需前端 token 调写接口或供应商开放写接口). Say "undo" to revert this skill change.
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15587] Assistant: 日报已回给采集 cron：今日完成了 in3-cli 登录恢复与版本验证、跨公司单据全量实测（含 HY02 销售单据 CLI bug 定位）、宁波 24V 电源库存查询、扩展排障；blockers 是 CLI 无写接口和 API SSL 抖动；未完成项已列明。 🟢
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15598] Assistant: 已回复确认：物料规范反馈版两日内发出，采集 cron 侧已收尾闭环，无需进一步动作。 🟢
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15605] Assistant: 采集闭环通知已收到，日报流程完整结束，无需回复。 🟢
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L15607] Assistant: 💾 Learned: updated `in3-warehouse-stock-lookup` (修正误导步骤：实测 material_ids/material_id/plant_no 参数均被后端忽略，唯一可靠过滤是 material_name+本地筛选). Say "undo" to revert this skill change.
