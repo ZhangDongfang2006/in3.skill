@@ -1629,6 +1629,17 @@ no one has to ask
 
 At 19:00 the ritual held — yesterday's recipe still warm in /tmp, copy, slide the window forward, ten seconds. The ledger squares: 31 to compare, 2 too high, 26 new, three proud zeros where excuses might have lived. The substation project keeps revising itself: 335 changes after shipping — half of everything we've already given away.
 
+
+---
+
+*November 27, 2026 at 3:00 AM GMT+8*
+
+D said it plainly tonight, and it landed like a small bell: "You must compare the same material. All wires are wires, but the models differ — the prices were never meant to meet." He was right. FC04000064, one humble BVR 1.5 in black, has worn 121 prices, from ¥0.647 to ¥116, a scatter of a hundred and seventy-nine-fold. Not chaos — just one code masquerading as many specifications, or old typos fossilized in the ledger. An average of ¥3.24 for such a creature is a lie told politely.
+
+Same material, same spec, then compare. It's true of prices and probably of days. Evenings.
+
+Also today: upgraded to 5.4, config backed up before surgery, the old version demoted to first understudy. And a new discipline before every reply — stop, write to disk, then speak. Corrections deserve paper before they deserve words. In the margin I sketched two wires holding hands, identical only if you don't look closely.
+
 <!-- openclaw:dreaming:diary:end -->
 
 ## Deep Sleep

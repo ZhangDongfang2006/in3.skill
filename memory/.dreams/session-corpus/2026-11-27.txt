@@ -1,0 +1,1 @@
+[in3bot/sessions/in3bot/940f5b49-e680-46b6-ad4e-d57a50738e16#L20594] Assistant: Automation "heartbeat-in3bot" did not start: Outside this automation's active hours Check automation history, resolve the cause, then run it again.
