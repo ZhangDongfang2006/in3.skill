@@ -430,6 +430,30 @@ def is_nondup(a, b):
     for w1, w2 in dir_pos_pairs:
         if (w1 in ta and w2 in tb) or (w2 in ta and w1 in tb):
             return True, f'方向/位置不同: {w1} vs {w2}'
+    # --- 规则 #3c: 名称单边带开向/规格限定 = 非重复（Dongfang 2026-11-28 人工反馈确认）---
+    # 「706大门锁/右开」vs「706大门锁」锁体描述相同，但是不同物料；旧逻辑因一边无方向词而送人工，现直接判非重复
+    _open_words = ['左开', '右开', '上开', '下开']
+    _oa = [w for w in _open_words if w in na]
+    _ob = [w for w in _open_words if w in nb]
+    if bool(_oa) != bool(_ob) and '锁' in na and '锁' in nb:
+        return True, f'名称开向标注不同: {" ".join(_oa) or "无"} vs {" ".join(_ob) or "无"}'
+    # --- 规则 #3d: 「1/2操作机构」(1/2 抽屉用) vs 普通操作机构 = 非重复（Dongfang 2026-11-28 人工反馈确认）---
+    _half = re.compile(r'(?:^|[^\d.])(1/2|1/4|1/2K)\s*(?:操作机构|机构|抽屉)')
+    if (_half.search(na) and not _half.search(nb) and '操作机构' in na and '操作机构' in nb) or \
+       (_half.search(nb) and not _half.search(na) and '操作机构' in nb and '操作机构' in na):
+        return True, '名称单边带 1/2 等抽屉规格限定'
+    # --- 规则 #3e: 保护测控装置按保护对象分类，型号参数相同也是不同物料（Dongfang 2026-11-28 人工反馈确认）---
+    # PMC-851X 四个编码硬件型号相同、内部软件不同：电动机/线路/变压器/电容器 保护测控装置互不为重复
+    if '保护测控' in na and '保护测控' in nb and na != nb:
+        return True, f'保护测控装置保护对象不同: {na} vs {nb}'
+
+    # --- 规则 #3f: 端子类型号前缀 D- 单边存在 = 非重复（Dongfang 2026-11-28 人工反馈确认）---
+    # 菲尼克斯 D-URTK 是电流端子挡板，URTK/S 是电流端子：D- 前缀不是命名格式差异而是另一个物料
+    # （型号 token 归一化会丢掉前导 D-，导致两者被当成同型号，故在此单独拦）
+    _dpfx = re.compile(r'(?:^|[\s/，,])(D-)[A-Z]{2,}', re.I)
+    _da, _db = bool(_dpfx.search(da)), bool(_dpfx.search(db))
+    if _da != _db and any(k in na + nb for k in ('端子', '挡板')):
+        return True, '型号前缀不同: D- 前缀单边存在'
 
     # --- 规则 #3b: AC vs DC 电压类型不同 = 非重复 ---
     ac_dc_a = set(re.findall(r'(AC|DC)\d+[Vv]', ta))
@@ -492,6 +516,11 @@ def is_nondup(a, b):
         return True, '明装 vs 嵌入式'
     if ('暗装' in ta and '嵌入式' in tb) or ('嵌入式' in ta and '暗装' in tb):
         return True, '暗装 vs 嵌入式'
+    # --- 规则 #8b: 安装姿态互斥 = 非重复（Dongfang 2026-11-28 人工反馈确认）---
+    # FZN25 「倒装左操」vs「侧装左操」是两种物料，不要再送人工确认
+    for w1, w2 in (('倒装', '侧装'), ('正装', '侧装'), ('立式', '卧式')):
+        if (w1 in ta and w2 in tb) or (w2 in ta and w1 in tb):
+            return True, f'安装姿态不同: {w1} vs {w2}'
     install_kw = ['暗装', '户外', '户外型', '户外架', '壁挂', '落地', '嵌墙', '挂墙', '明装', '嵌入式']
     inst_a = set(k for k in install_kw if k in na)
     inst_b = set(k for k in install_kw if k in nb)
